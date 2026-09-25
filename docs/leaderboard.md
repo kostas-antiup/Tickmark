@@ -21,27 +21,39 @@ share a rank.
 
 | # | Agent | Interface | Real models | Right numbers | Checks passed | Values right | Formulas | Traceable | Time per case |
 |---:|---|---|---:|---:|---:|---:|---:|---:|---:|
+| 1 | Claude Opus 5.5 | Coding agent · Claude Code | **3 / 3** | 3 / 3 | 100% | 100% | 100% | 100% | 80 s |
+| 1 | Claude Sonnet 5 | Coding agent · Claude Code | **3 / 3** | 3 / 3 | 100% | 100% | 100% | 100% | 146 s |
 | 1 | Nemotron 3 Ultra | Chat API · OpenRouter (free) | **3 / 3** | 3 / 3 | 100% | 100% | 100% | 100% | 24 s |
 | 1 | OpenCode · GLM-5.2 | Coding agent · OpenCode CLI | **3 / 3** | 3 / 3 | 100% | 100% | 100% | 100% | 90 s |
-| 3 | Nemotron 3 Super | Chat API · OpenRouter (free) | **2 / 3** | 2 / 3 | 90% | 98% | 100% | 100% | 36 s |
-| 4 | Ling 3.0 Flash Fin | Chat API · OpenRouter (free) | **2 / 3** | 2 / 3 | 86% | 90% | 100% | 100% | 9 s |
-| 4 | Nex N2.5 Pro | Chat API · OpenRouter (free) | **2 / 3** | 2 / 3 | 86% | 83% | 100% | 100% | 137 s |
-| 6 | Qwen 2.5 7B | Chat API · Ollama (local) | **0 / 3** | 0 / 3 | 29% | 3% | 62% | 44% | 11 s |
+| 1 | Qwen3.8 27B | Chat API · OpenRouter (free) | **3 / 3** | 3 / 3 | 100% | 100% | 100% | 100% | 343 s |
+| 6 | Nemotron 3 Super | Chat API · OpenRouter (free) | **2 / 3** | 2 / 3 | 90% | 98% | 100% | 100% | 36 s |
+| 7 | Ling 3.0 Flash Fin | Chat API · OpenRouter (free) | **2 / 3** | 2 / 3 | 86% | 90% | 100% | 100% | 9 s |
+| 7 | Nex N2.5 Pro | Chat API · OpenRouter (free) | **2 / 3** | 2 / 3 | 86% | 83% | 100% | 100% | 137 s |
+| 9 | Claude Haiku 4.5 | Coding agent · Claude Code | **1 / 3** | 1 / 3 | 71% | 71% | 100% | 100% | 34 s |
+| 10 | Qwen 2.5 7B | Chat API · Ollama (local) | **0 / 3** | 0 / 3 | 29% | 3% | 62% | 44% | 11 s |
 
 | Agent | Engine | Date | Run |
 |---|---|---|---|
+| Claude Opus 5.5 | excel | 2026-09-25 | `claude-subagents` |
+| Claude Sonnet 5 | excel | 2026-09-25 | `claude-subagents` |
 | Nemotron 3 Ultra | excel | 2026-09-25 | `openrouter-pilot` |
 | OpenCode · GLM-5.2 | libreoffice | 2026-09-20 | `opencode-real-agent-suite-clarified` |
+| Qwen3.8 27B | excel | 2026-09-25 | `openrouter-pilot` |
 | Nemotron 3 Super | excel | 2026-09-25 | `openrouter-pilot` |
 | Ling 3.0 Flash Fin | excel | 2026-09-25 | `openrouter-pilot-b` |
 | Nex N2.5 Pro | excel | 2026-09-25 | `openrouter-pilot-b` |
+| Claude Haiku 4.5 | excel | 2026-09-25 | `claude-subagents` |
 | Qwen 2.5 7B | excel | 2026-09-25 | `qwen2.5-7b` |
 
+- **Claude Opus 5.5**: Anthropic frontier model, run as a Claude Code subagent with a fresh context in an isolated folder (no repo access); its workbook was graded like any other.
+- **Claude Sonnet 5**: Anthropic frontier model, run as a Claude Code subagent with a fresh context in an isolated folder (no repo access).
 - **Nemotron 3 Ultra**: NVIDIA Nemotron 3 Ultra 550B (A55B), openrouter:nvidia/nemotron-3-ultra-550b-a55b:free.
 - **OpenCode · GLM-5.2**: Run by the AAI Labs team through a paid OpenCode Zen account.
+- **Qwen3.8 27B**: Alibaba Qwen, openrouter:qwen/qwen3.8-27b:free. Free-tier rate limits inflated its time per case.
 - **Nemotron 3 Super**: NVIDIA Nemotron 3 Super 120B (A12B), openrouter:nvidia/nemotron-3-super-120b-a12b:free.
 - **Ling 3.0 Flash Fin**: inclusionAI's finance-tuned model, openrouter:inclusionai/ling-3.0-flash-fin:free.
 - **Nex N2.5 Pro**: Nex AGI, openrouter:nex-agi/nex-n2.5-pro:free.
+- **Claude Haiku 4.5**: Anthropic's small model, run the same way as Opus and Sonnet. Its formulas were live but wrong in two places: on 02_01 it added growth rates that the workbook's note says compound, and on 14_07 its loss-to-lease charged market rent on vacant units too, so the rent total stopped responding to the unit count.
 - **Qwen 2.5 7B**: Runs on a laptop GPU at no cost. On all 35 cases: 0 real models, 50% of target cells held formulas, 2% of values were right.
 
 ## Add an agent

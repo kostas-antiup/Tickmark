@@ -24,8 +24,8 @@ authors:
   - given-names: Ugnė
     family-names: Antanaitytė
     affiliation: AAI Labs
-repository-code: "https://github.com/kostas-antiup/tickmark"
-url: "https://github.com/kostas-antiup/tickmark"
+repository-code: "https://github.com/kostas-antiup/Tickmark"
+url: "https://github.com/kostas-antiup/Tickmark"
 license: MIT
 version: 0.1.0
 date-released: "2026-09-25"

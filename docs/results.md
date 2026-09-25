@@ -95,12 +95,40 @@ code. Graded with Excel on 25 September 2026.
 | `nvidia/nemotron-3-super-120b-a12b:free` | fail | pass | pass | 2 / 3 |
 | `inclusionai/ling-3.0-flash-fin:free` | fail | pass | pass | 2 / 3 |
 | `nex-agi/nex-n2.5-pro:free` | pass | pass | fail | 2 / 3 |
+| `qwen/qwen3.8-27b:free` | pass | pass | pass | 3 / 3 |
 
 Not on the leaderboard yet: `z-ai/glm-5.2:free` (1 pass, 1 fail, 1 case blocked by rate
-limits), `qwen/qwen3.8-27b:free` (1 pass, 2 cases blocked) and `google/gemma-4-31b-it:free`
-(all 3 blocked). The free pool is shared and often busy; re-running the same `--run-id`
-retries only the blocked cases. `thinkingmachines/inkling:free` only serves coding-agent
-apps, so it cannot run in chat mode.
+limits) and `google/gemma-4-31b-it:free` (all 3 blocked). The free pool is shared and often
+busy; re-running the same `--run-id` retries only the blocked cases. Qwen3.8 needed several
+such passes, which is why its median time per case is 343 s.
+`thinkingmachines/inkling:free` only serves coding-agent apps, so it cannot run in chat mode.
+
+### Claude Opus 5.5, Sonnet 5 and Haiku 4.5 (pilot)
+
+Each model ran as a Claude Code subagent with a fresh context: no conversation history and
+no knowledge of Tickmark. The prompt was the same for every run: complete `TASK.md` in this
+folder, use Python with openpyxl, save `output.xlsx`, and read nothing outside the folder.
+
+| Setting | Value |
+|---|---|
+| Agent | Claude Code subagent, model set per run |
+| Workbook editing | Python with openpyxl |
+| Isolation | one temporary folder per case, outside the repository, with only `TASK.md` and `input.xlsx`; no web access |
+| Engine | Excel |
+
+| Model | `02_01` | `06_18` | `14_07` | Real models | Median time |
+|---|---|---|---|---:|---:|
+| Claude Opus 5.5 | pass | pass | pass | 3 / 3 | 80 s |
+| Claude Sonnet 5 | pass | pass | pass | 3 / 3 | 146 s |
+| Claude Haiku 4.5 | fail | pass | fail | 1 / 3 | 34 s |
+
+The run transcripts show no file access outside each case folder. The workbooks were graded
+as `manual` agents, like any workbook produced outside the runner. Haiku's formulas were
+live but wrong in two places. On `02_01` it added growth rates that the workbook's own note
+says compound, so the growth rates and the revenue forecast came out slightly low. On
+`14_07` its loss-to-lease charged market rent on every unit, not only the occupied ones.
+The loss came out about 3.5 times too large, and the unit count cancelled out of the total:
+when the check changed the Studio count, `G20` did not move.
 
 ### OpenCode with GLM-5.2 (pilot)
 

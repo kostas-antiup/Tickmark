@@ -35,8 +35,8 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/kostas-antiup/tickmark"
-Issues = "https://github.com/kostas-antiup/tickmark/issues"
+Repository = "https://github.com/kostas-antiup/Tickmark"
+Issues = "https://github.com/kostas-antiup/Tickmark/issues"
 
 [project.optional-dependencies]
 audit = [
