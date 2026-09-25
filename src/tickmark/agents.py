@@ -404,9 +404,50 @@ def build_agent(name: str, settings: Mapping[str, Any]) -> Agent:
 def load_agents(config: Path, names: Sequence[str] | None = None) -> list[Agent]:
     """Build agents from a TOML file with one ``[agents.<name>]`` table per agent."""
 
-    table = tomllib.loads(config.read_text(encoding="utf-8")).get("agents", {})
+    table = load_agent_table(config)
     wanted = list(names) if names else list(table)
     unknown = [name for name in wanted if name not in table]
     if unknown:
         raise ValueError(f"unknown agent(s) {unknown}; configured: {sorted(table)}")
     return [build_agent(name, table[name]) for name in wanted]
+
+
+def load_agent_table(config: Path) -> dict[str, dict[str, Any]]:
+    """The ``[agents.<name>]`` tables of a config file, by agent name."""
+
+    return tomllib.loads(config.read_text(encoding="utf-8")).get("agents", {})
+
+
+@dataclass(frozen=True)
+class Readiness:
+    """Whether an agent can start on this machine; ``setup`` says what to do if not."""
+
+    ready: bool
+    detail: str
+    setup: str | None = None
+
+
+def check_agent(settings: Mapping[str, Any]) -> Readiness:
+    """Check an ``[agents.<name>]`` table without running the agent.
+
+    A CLI agent needs its executable (on PATH or a fallback path) and a chat agent the
+    API key named by ``api_key_env``, if any. Whether a CLI is signed in only shows when
+    it runs, so ``setup`` mentions the sign-in step too.
+    """
+
+    setup = settings.get("setup")
+    kind = settings.get("type")
+    if kind == "cli":
+        program = (settings.get("command") or ["?"])[0]
+        found = resolve_executable(program, settings.get("fallback_paths", []))
+        if found is None:
+            return Readiness(False, f"{program} not found", setup)
+        return Readiness(True, found, setup)
+    if kind == "chat":
+        key = settings.get("api_key_env")
+        if key and not os.environ.get(key):
+            return Readiness(False, f"{key} is not set", setup)
+        return Readiness(True, f"{settings.get('model')} at {settings.get('base_url')}", setup)
+    if kind == "manual":
+        return Readiness(True, f"you solve {TASK_NAME} in a chat UI", setup)
+    return Readiness(False, f"unknown type {kind!r} (expected cli, chat or manual)", setup)

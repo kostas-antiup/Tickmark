@@ -22,22 +22,23 @@ input scenarios for every case.
 
 `generate_malformed_outputs.py` breaks each reference model in seven controlled ways,
 245 workbooks in total. Each variant is graded like an agent submission, and each
-existing grader's rule is applied to the same recalculated file.
+existing grader's rule is applied to the same recalculated file. A workbook is caught when
+the grader fails it.
 
 | Variant | What changes | SpreadsheetBench rule | SheetCopilot rule | Tickmark |
 |---|---|---:|---:|---:|
-| `hardcoded_final` | final output pasted as its correct value | 35 / 35 | 35 / 35 | 0 / 35 |
-| `hardcoded_half` | half of the targets pasted as values | 35 / 35 | 35 / 35 | 0 / 35 |
-| `hardcoded_all` | every target pasted as a value | 35 / 35 | 35 / 35 | 0 / 35 |
-| `hardcoded_intermediate` | one formula feeding the final output pasted as a value | 35 / 35 | 35 / 35 | 0 / 35 |
-| `fake_formula_final` | final output written as a constant formula, e.g. `=9080487` | 35 / 35 | 35 / 35 | 0 / 35 |
-| `wrong_formula_final` | final formula keeps its references but is 1% (plus one) too high | 0 / 35 | 0 / 35 | 0 / 35 |
-| `broken_reference_final` | final output points to a sheet that does not exist | 0 / 35 | 0 / 35 | 0 / 35 |
-| **All** | | **175 / 245** | **175 / 245** | **0 / 245** |
+| `hardcoded_final` | final output pasted as its correct value | 0 / 35 | 0 / 35 | 35 / 35 |
+| `hardcoded_half` | half of the targets pasted as values | 0 / 35 | 0 / 35 | 35 / 35 |
+| `hardcoded_all` | every target pasted as a value | 0 / 35 | 0 / 35 | 35 / 35 |
+| `hardcoded_intermediate` | one formula feeding the final output pasted as a value | 0 / 35 | 0 / 35 | 35 / 35 |
+| `fake_formula_final` | final output written as a constant formula, e.g. `=9080487` | 0 / 35 | 0 / 35 | 35 / 35 |
+| `wrong_formula_final` | final formula keeps its references but is 1% (plus one) too high | 35 / 35 | 35 / 35 | 35 / 35 |
+| `broken_reference_final` | final output points to a sheet that does not exist | 35 / 35 | 35 / 35 | 35 / 35 |
+| **All caught** | | **70 / 245** | **70 / 245** | **245 / 245** |
 
-The existing rules accept every variant whose numbers stay right; Tickmark accepts none.
-The disagreement runs one way only: no workbook fails an existing rule and passes
-Tickmark. Each variant's manifest also predicts its value, formula-coverage and
+The existing rules catch only the variants with wrong numbers and miss all 175 whose
+numbers stay right; Tickmark catches all 245. The disagreement runs one way only: no
+workbook is caught by an existing rule and missed by Tickmark. Each variant's manifest also predicts its value, formula-coverage and
 traceability scores; all 245 reports matched those predictions on all three scores
 (`evaluate_malformed_results.py`). Grading the 245 workbooks took 12 min 12 s with Excel.
 
@@ -58,7 +59,7 @@ RentRoll!G20  =C20+D20+E20+1161600
 | No hardcoded values, no fake formulas | pass |
 | Input change (`C7` +10%) | pass: `G20` moves exactly as the reference does |
 | Perturbation | **fail**: `G20` diverges from the reference in the up, down, mixed and switches scenarios |
-| SpreadsheetBench rule / SheetCopilot rule | pass / pass |
+| SpreadsheetBench rule / SheetCopilot rule | both pass the workbook, so both miss the constant |
 
 `1161600` is the 3-Bed column total (`F20`) pasted as a number. Changing a Studio input
 still moves `G20` correctly, which is why a single input-change test is not enough; the

@@ -25,16 +25,17 @@ verdict.
 We broke each of the 35 reference models in seven ways, from a pasted final answer to a
 formula that is 1% off, and graded all 245 workbooks with each benchmark's rule:
 
-| Grader | Broken workbooks accepted | Reference workbooks accepted |
+| Grader | Broken workbooks caught | Correct models accepted |
 |---|---:|---:|
-| SpreadsheetBench rule | 175 / 245 | 35 / 35 |
-| SheetCopilot rule | 175 / 245 | 35 / 35 |
-| **Tickmark** | **0 / 245** | **35 / 35** |
+| SpreadsheetBench rule | 70 / 245 (29%) | 35 / 35 |
+| SheetCopilot rule | 70 / 245 (29%) | 35 / 35 |
+| **Tickmark** | **245 / 245 (100%)** | **35 / 35** |
 
-The 175 are every variant whose numbers stay right: pasted answers (final, half or all
-targets, or one intermediate) and formula-shaped constants such as `=9080487`. Both rules
-are reproduced from their upstream code in [`baselines.py`](src/tickmark/baselines.py).
-Recalculated in Microsoft Excel; [reproduce it](docs/results.md#reproduce).
+The existing rules catch only the 70 workbooks with wrong numbers. They miss all 175 whose
+numbers stay right: pasted answers (final, half or all targets, or one intermediate) and
+formula-shaped constants such as `=9080487`. Both rules are reproduced from their upstream
+code in [`baselines.py`](src/tickmark/baselines.py). Recalculated in Microsoft Excel;
+[reproduce it](docs/results.md#reproduce).
 
 ### One formula, three verdicts
 
@@ -45,9 +46,9 @@ is a formula, and every formula traces back to the inputs:
 RentRoll!G20  =C20+D20+E20+1161600        9,080,487   matches the reference
 ```
 
-`1161600` is the 3-Bed total, pasted where `F20` belongs. Value-only graders accept the
-workbook. Tickmark changes the inputs, sees `G20` stop matching the reference model, and with
-`--sensitivity` names the five 3-Bed inputs the cell ignores. Try it:
+`1161600` is the 3-Bed total, pasted where `F20` belongs. Value-only graders miss it.
+Tickmark catches it: it changes the inputs, sees `G20` stop matching the reference model, and
+with `--sensitivity` names the five 3-Bed inputs the cell ignores. Try it:
 
 ```bash
 uv run python scripts/run_benchmark.py --case data/cases/14_07 --workbook examples/14_07-hidden-constant.xlsx --sensitivity
@@ -106,9 +107,17 @@ Reports are written to `results/` as JSON. Choose the engine with
 
 ## Run an agent
 
+Three steps. [docs/agents.md](docs/agents.md) has install and sign-in steps for every agent.
+
 ```bash
+# 1. See which agents are ready on this machine, and what each one still needs
 uv run python scripts/run_agents.py --list
-uv run python scripts/run_agents.py --agents claude-code codex --cases data/cases --run-id pilot
+
+# 2. Set one up. The quickest free option runs locally, no account needed:
+ollama pull qwen2.5:7b
+
+# 3. Run the three-case pilot, then open results/runs/first-run/report.html
+uv run python scripts/run_real_agent_suite.py --agents ollama-qwen --run-id first-run
 ```
 
 | Type | How the agent works | Configured |
@@ -118,9 +127,10 @@ uv run python scripts/run_agents.py --agents claude-code codex --cases data/case
 | `manual` | You solve `TASK.md` in a chat UI and save `output.xlsx` back into the run folder | ChatGPT, Excel Copilot |
 
 Agents live in [`configs/agents.toml`](configs/agents.toml); API keys come from environment
-variables named there. Every run writes a report per case, `summary.md`, and a
-self-contained `report.html` that puts value-only grading next to Tickmark's verdict. See
-[docs/agents.md](docs/agents.md).
+variables named there, and a run checks that every agent can start before it begins. Every
+run writes a report per case, `summary.md`, and a self-contained `report.html` that puts
+value-only grading next to Tickmark's verdict. Add any CLI agent or OpenAI-compatible model
+with one table ([how](docs/agents.md#add-your-own-agent)).
 
 ## The cases
 
@@ -155,9 +165,9 @@ before inclusion. The agent sees only `input.xlsx` and the instruction; `golden.
 | | SpreadsheetBench | SheetCopilot | BlueFin | **Tickmark** |
 |---|---|---|---|---|
 | What is graded | Cell values in the answer range | Checklist of values and formatting | 3,225 rubric items | Values, formulas and their lineage |
-| Grader | Deterministic | Deterministic | LLM agent judge | Deterministic, no API calls |
-| Pasted correct answers | Accepted | Accepted | Caught where a rubric item covers it | Always rejected |
-| Changed inputs | Not tested¹ | Not tested | Hand-written checks on chosen cells | Every input and every target, against the reference under the same inputs |
+| Grader | Deterministic | Deterministic | LLM agent judge | Deterministic, zero API cost |
+| Catches pasted correct answers | No | No | Where a rubric item covers it | **Yes, always** |
+| Re-tests with new inputs | No¹ | No | Hand-written checks on chosen cells | **Every input and every target, against the reference** |
 
 ¹ SpreadsheetBench re-runs code solutions on extra test spreadsheets. For agents that edit
 the workbook directly, its rule compares the values in the delivered file.
@@ -171,7 +181,7 @@ on SheetCopilot examples, graded against their checklists
 | Run | Result |
 |---|---|
 | Reference self-test, 35 cases | 35 / 35 pass, Excel and LibreOffice |
-| Broken workbooks, 245 | 0 / 245 pass; each fails with the scores its manifest predicts |
+| Broken workbooks, 245 | 245 / 245 caught, each with the scores its manifest predicts |
 | OpenCode with GLM-5.2, pilot of 3 cases | 3 / 3 pass every check |
 
 Commands, timings and details: [docs/results.md](docs/results.md).

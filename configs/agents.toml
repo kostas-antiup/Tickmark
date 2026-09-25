@@ -8,6 +8,7 @@
 #   type = "manual"  a person solves TASK.md in a chat UI and saves output.xlsx into
 #                    results/runs/<run>/<agent>/<case>/; re-run to grade it.
 #
+# `setup` is shown by `run_agents.py --list` for agents that are not ready yet.
 # Never put API keys in this file: `api_key_env` names the environment variable.
 # Model ids below are examples; check each provider's current model list.
 
@@ -15,6 +16,7 @@
 
 [agents.claude-code]
 type = "cli"
+setup = "npm install -g @anthropic-ai/claude-code (or use the copy bundled with the Claude desktop app), then run `claude` once and type /login"
 # Headless Claude Code; tools limited to file edits and Python (e.g. openpyxl).
 command = [
     "claude", "-p", "{prompt}",
@@ -30,6 +32,7 @@ timeout = 900
 
 [agents.gemini-cli]
 type = "cli"
+setup = "npm install -g @google/gemini-cli, then run `gemini` once to sign in with Google, or set GEMINI_API_KEY"
 # Google's Gemini CLI (npm install -g @google/gemini-cli); needs GEMINI_API_KEY or a
 # Google login. --yolo auto-approves its tool calls inside the task folder.
 command = ["gemini", "--yolo", "-p", "{prompt}"]
@@ -37,6 +40,7 @@ timeout = 900
 
 [agents.codex]
 type = "cli"
+setup = "npm install -g @openai/codex, then run `codex` once to sign in with ChatGPT, or set OPENAI_API_KEY"
 # OpenAI Codex CLI in non-interactive mode. The benchmark already isolates each
 # case in a temporary folder containing only input.xlsx and TASK.md.
 command = [
@@ -57,6 +61,7 @@ timeout = 900
 
 [agents.opencode]
 type = "cli"
+setup = "npm install -g opencode-ai, then `opencode auth login` with an OpenCode Zen account (model opencode/glm-5.2)"
 # Paid OpenCode Zen account. The inline config keeps benchmark runs focused on
 # the local workbook: no web access, subagents or files outside the isolated
 # case directory. Python remains available for editing the workbook with
@@ -105,6 +110,7 @@ OPENCODE_CONFIG_CONTENT = '''
 
 [agents.gemini-flash]
 type = "chat"
+setup = "create a free API key at https://aistudio.google.com/app/apikey and set GEMINI_API_KEY"
 # Free tier available with an API key from Google AI Studio.
 base_url = "https://generativelanguage.googleapis.com/v1beta/openai"
 model = "gemini-2.5-flash"
@@ -112,12 +118,14 @@ api_key_env = "GEMINI_API_KEY"
 
 [agents.gemini-pro]
 type = "chat"
+setup = "create an API key at https://aistudio.google.com/app/apikey and set GEMINI_API_KEY"
 base_url = "https://generativelanguage.googleapis.com/v1beta/openai"
 model = "gemini-2.5-pro"
 api_key_env = "GEMINI_API_KEY"
 
 [agents.openrouter-free]
 type = "chat"
+setup = "create an API key at https://openrouter.ai/keys and set OPENROUTER_API_KEY"
 # OpenRouter lists free models with a ":free" suffix.
 base_url = "https://openrouter.ai/api/v1"
 model = "meta-llama/llama-3.3-70b-instruct:free"
@@ -125,12 +133,14 @@ api_key_env = "OPENROUTER_API_KEY"
 
 [agents.groq-llama]
 type = "chat"
+setup = "create an API key at https://console.groq.com/keys and set GROQ_API_KEY"
 base_url = "https://api.groq.com/openai/v1"
 model = "llama-3.3-70b-versatile"
 api_key_env = "GROQ_API_KEY"
 
 [agents.ollama-qwen]
 type = "chat"
+setup = "install Ollama from https://ollama.com/download, then `ollama pull qwen2.5:7b` (about 4.7 GB)"
 # Local and free: `ollama pull qwen2.5:7b` first. No API key needed.
 base_url = "http://localhost:11434/v1"
 model = "qwen2.5:7b"
@@ -140,6 +150,8 @@ timeout = 1800
 
 [agents.chatgpt-manual]
 type = "manual"
+setup = "none: give TASK.md and input.xlsx from the run folder to ChatGPT, save its workbook there as output.xlsx, then run the same command again"
 
 [agents.excel-copilot-manual]
 type = "manual"
+setup = "none: open input.xlsx from the run folder in Excel, follow TASK.md with Copilot, save as output.xlsx there, then run the same command again"

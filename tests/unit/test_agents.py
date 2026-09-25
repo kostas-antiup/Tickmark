@@ -2,6 +2,7 @@ import json
 import sys
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 
 import openpyxl
 import pytest
@@ -16,9 +17,13 @@ from tickmark.agents import (
     ChatAgent,
     CliAgent,
     ManualAgent,
+    check_agent,
+    load_agent_table,
     load_agents,
     task_text,
 )
+
+CONFIG = Path(__file__).resolve().parents[2] / "configs" / "agents.toml"
 
 
 def _task(tmp_path) -> AgentTask:
@@ -258,3 +263,50 @@ def test_when_config_is_loaded_then_agents_of_each_type_are_built(tmp_path) -> N
         assert_that([agent.kind for agent in context.agents], equal_to(["cli", "chat", "manual"]))
         with pytest.raises(ValueError, match="unknown agent"):
             load_agents(context.config, ["nobody"])
+
+
+@pytest.mark.parametrize(("program", "ready"), [(sys.executable, True), ("no-such-agent", False)])
+def test_when_cli_agent_is_checked_then_its_executable_decides(program, ready) -> None:
+    with given() as context:
+        context.settings = {"type": "cli", "command": [program, "{prompt}"], "setup": "install"}
+
+    with when():
+        context.status = check_agent(context.settings)
+
+    with then():
+        assert_that(context.status.ready, equal_to(ready))
+        assert_that(context.status.setup, equal_to("install"))
+        if not ready:
+            assert_that(context.status.detail, equal_to("no-such-agent not found"))
+
+
+@pytest.mark.parametrize(("key", "ready"), [("secret", True), (None, False)])
+def test_when_chat_agent_is_checked_then_its_api_key_decides(monkeypatch, key, ready) -> None:
+    with given() as context:
+        if key:
+            monkeypatch.setenv("TICKMARK_TEST_KEY", key)
+        else:
+            monkeypatch.delenv("TICKMARK_TEST_KEY", raising=False)
+        context.settings = {
+            "type": "chat",
+            "base_url": "http://localhost:1/v1",
+            "model": "m",
+            "api_key_env": "TICKMARK_TEST_KEY",
+        }
+
+    with when():
+        context.status = check_agent(context.settings)
+
+    with then():
+        assert_that(context.status.ready, equal_to(ready))
+        if not ready:
+            assert_that(context.status.detail, equal_to("TICKMARK_TEST_KEY is not set"))
+
+
+def test_when_shipped_config_is_read_then_every_agent_has_setup_steps() -> None:
+    with when():
+        context_table = load_agent_table(CONFIG)
+
+    with then():
+        missing = [name for name, settings in context_table.items() if not settings.get("setup")]
+        assert_that(missing, equal_to([]))

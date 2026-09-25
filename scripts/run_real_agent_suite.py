@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Run a small real-agent benchmark suite and compare the graded results.
 
-Defaults to the Codex CLI agent on three representative cases. Pass more agents
-or cases when you want a fuller comparison.
+Runs the given agents (default: Codex CLI) on three representative cases and grades
+them with the first available engine. Pass more agents or cases for a fuller comparison.
 """
 
 from __future__ import annotations
@@ -27,8 +27,8 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
     parser.add_argument(
         "--engine",
         choices=("auto", "excel", "libreoffice", "cached"),
-        default="libreoffice",
-        help="recalculation engine for grading",
+        default="auto",
+        help="recalculation engine for grading (default: auto = excel, else libreoffice)",
     )
     parser.add_argument("--rerun", action="store_true", help="redo already-graded cases")
     return parser.parse_args(argv)
