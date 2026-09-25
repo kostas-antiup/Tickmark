@@ -1,0 +1,97 @@
+{
+  "id": "06_21",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "06_equity_forecast",
+  "domain": "equity_forecast",
+  "tier": "A",
+  "sheets": [
+    "WorkingCapital"
+  ],
+  "primary_sheet": "WorkingCapital",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in WorkingCapital!E19:G21, WorkingCapital!E23:G23, WorkingCapital!E27:G29, WorkingCapital!E31:G32. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'WorkingCapital'!B2:G34",
+  "target_cells": [
+    "WorkingCapital!E19:G21",
+    "WorkingCapital!E23:G23",
+    "WorkingCapital!E27:G29",
+    "WorkingCapital!E31:G32"
+  ],
+  "final_output": "WorkingCapital!F32",
+  "final_output_label": "Cash Flow Impact (use of cash) / 2025E",
+  "key_outputs": [
+    "WorkingCapital!F32",
+    "WorkingCapital!G32",
+    "WorkingCapital!E32",
+    "WorkingCapital!E23"
+  ],
+  "input_cells": [
+    "WorkingCapital!C10:G11",
+    "WorkingCapital!C14:G16",
+    "WorkingCapital!C19:D21",
+    "WorkingCapital!C23:D23",
+    "WorkingCapital!D27:D29",
+    "WorkingCapital!D31:D32"
+  ],
+  "golden_input_cells": [
+    "WorkingCapital!E10:G11",
+    "WorkingCapital!E14:G16",
+    "WorkingCapital!D19:D21"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "WorkingCapital!F32": 98.6712328767126,
+    "WorkingCapital!G32": 77.7534246575342,
+    "WorkingCapital!E32": 70.6575342465753,
+    "WorkingCapital!E23": 678.657534246575
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "WorkingCapital!E10",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 10236.0,
+    "perturbed_value": 11259.6,
+    "observed_output": "WorkingCapital!F32",
+    "output_before": 98.67123287671257,
+    "output_after_in_golden": 42.58356164383588,
+    "expected": "WorkingCapital!F32 must change"
+  },
+  "stats": {
+    "n_target_cells": 27,
+    "n_input_cells": 38,
+    "n_golden_input_cells": 18,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.407,
+    "key_outputs_cover_targets": 0.926,
+    "functions_used": [],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 0
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/06_equity_forecast/06_21_input.xlsx",
+    "golden": "Template/spreadsheet/06_equity_forecast/06_21_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "27/27",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

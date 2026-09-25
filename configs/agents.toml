@@ -1,0 +1,145 @@
+# Agents available to scripts/run_agents.py. One [agents.<name>] table per agent.
+#
+#   type = "cli"     command-line coding agent run in an empty folder holding only
+#                    input.xlsx and TASK.md; "{prompt}" becomes a one-line prompt that
+#                    points at TASK.md. The agent must save output.xlsx.
+#   type = "chat"    any OpenAI-compatible /chat/completions API. The model gets the
+#                    workbook as text and replies with JSON cell edits.
+#   type = "manual"  a person solves TASK.md in a chat UI and saves output.xlsx into
+#                    results/runs/<run>/<agent>/<case>/; re-run to grade it.
+#
+# Never put API keys in this file: `api_key_env` names the environment variable.
+# Model ids below are examples; check each provider's current model list.
+
+# --- Command-line coding agents --------------------------------------------------
+
+[agents.claude-code]
+type = "cli"
+# Headless Claude Code; tools limited to file edits and Python (e.g. openpyxl).
+command = [
+    "claude", "-p", "{prompt}",
+    "--output-format", "json",
+    "--no-session-persistence",
+    "--permission-mode", "dontAsk",
+    "--allowedTools", "Read", "Write", "Edit", "Glob", "Grep",
+    "Bash(python:*)", "Bash(python3:*)", "Bash(py:*)",
+]
+# The Claude desktop app bundles Claude Code outside PATH; newest version wins.
+fallback_paths = ["~/AppData/Roaming/Claude/claude-code/*/claude.exe"]
+timeout = 900
+
+[agents.gemini-cli]
+type = "cli"
+# Google's Gemini CLI (npm install -g @google/gemini-cli); needs GEMINI_API_KEY or a
+# Google login. --yolo auto-approves its tool calls inside the task folder.
+command = ["gemini", "--yolo", "-p", "{prompt}"]
+timeout = 900
+
+[agents.codex]
+type = "cli"
+# OpenAI Codex CLI in non-interactive mode. The benchmark already isolates each
+# case in a temporary folder containing only input.xlsx and TASK.md.
+command = [
+    "codex", "exec",
+    "--skip-git-repo-check",
+    # Avoid Windows sandbox ACLs that make output.xlsx unreadable to the runner.
+    "--dangerously-bypass-approvals-and-sandbox",
+    "--ephemeral",
+    "{prompt}",
+]
+# Standalone Codex installs to %LOCALAPPDATA%; the VS Code/ChatGPT extension
+# also bundles codex.exe outside PATH on some Windows setups.
+fallback_paths = [
+    "~/AppData/Local/Programs/OpenAI/Codex/bin/codex.exe",
+    "~/.vscode/extensions/openai.chatgpt-*/bin/windows-x86_64/codex.exe",
+]
+timeout = 900
+
+[agents.opencode]
+type = "cli"
+# Paid OpenCode Zen account. The inline config keeps benchmark runs focused on
+# the local workbook: no web access, subagents or files outside the isolated
+# case directory. Python remains available for editing the workbook with
+# openpyxl from the uv environment that launches the suite.
+command = [
+    "opencode", "run",
+    "--pure",
+    "--auto",
+    "--model", "opencode/glm-5.2",
+    "--format", "json",
+    "{prompt} Work only in the current directory. Use Python with openpyxl to edit the workbook. Prioritize creating output.xlsx before optional analysis, then verify that the file exists. Do not use web tools, Excel, LibreOffice, or stop system processes.",
+]
+timeout = 900
+
+[agents.opencode.env]
+OPENCODE_DISABLE_AUTOUPDATE = "true"
+OPENCODE_CONFIG_CONTENT = '''
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "read": "allow",
+    "edit": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "bash": {
+      "*": "deny",
+      "python": "allow",
+      "python *": "allow",
+      "python3": "allow",
+      "python3 *": "allow",
+      "py": "allow",
+      "py *": "allow",
+      "uv run python *": "allow"
+    },
+    "task": "deny",
+    "external_directory": "deny",
+    "webfetch": "deny",
+    "websearch": "deny",
+    "question": "deny"
+  }
+}
+'''
+
+# --- Chat models over OpenAI-compatible APIs --------------------------------------
+
+[agents.gemini-flash]
+type = "chat"
+# Free tier available with an API key from Google AI Studio.
+base_url = "https://generativelanguage.googleapis.com/v1beta/openai"
+model = "gemini-2.5-flash"
+api_key_env = "GEMINI_API_KEY"
+
+[agents.gemini-pro]
+type = "chat"
+base_url = "https://generativelanguage.googleapis.com/v1beta/openai"
+model = "gemini-2.5-pro"
+api_key_env = "GEMINI_API_KEY"
+
+[agents.openrouter-free]
+type = "chat"
+# OpenRouter lists free models with a ":free" suffix.
+base_url = "https://openrouter.ai/api/v1"
+model = "meta-llama/llama-3.3-70b-instruct:free"
+api_key_env = "OPENROUTER_API_KEY"
+
+[agents.groq-llama]
+type = "chat"
+base_url = "https://api.groq.com/openai/v1"
+model = "llama-3.3-70b-versatile"
+api_key_env = "GROQ_API_KEY"
+
+[agents.ollama-qwen]
+type = "chat"
+# Local and free: `ollama pull qwen2.5:7b` first. No API key needed.
+base_url = "http://localhost:11434/v1"
+model = "qwen2.5:7b"
+timeout = 1800
+
+# --- People using chat UIs --------------------------------------------------------
+
+[agents.chatgpt-manual]
+type = "manual"
+
+[agents.excel-copilot-manual]
+type = "manual"

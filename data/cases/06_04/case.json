@@ -1,0 +1,102 @@
+{
+  "id": "06_04",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "06_equity_forecast",
+  "domain": "equity_forecast",
+  "tier": "A",
+  "sheets": [
+    "DrugRevenue",
+    "SharedData"
+  ],
+  "primary_sheet": "DrugRevenue",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in DrugRevenue!H7:J9, DrugRevenue!D11:J11, DrugRevenue!H14:J14, DrugRevenue!D17:J17. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'DrugRevenue'!B2:J17,'SharedData'!B2:D9",
+  "target_cells": [
+    "DrugRevenue!H7:J9",
+    "DrugRevenue!D11:J11",
+    "DrugRevenue!H14:J14",
+    "DrugRevenue!D17:J17"
+  ],
+  "final_output": "DrugRevenue!J17",
+  "final_output_label": "Total Vexira Revenue / FY2027",
+  "key_outputs": [
+    "DrugRevenue!J17",
+    "DrugRevenue!D17",
+    "DrugRevenue!E17",
+    "DrugRevenue!F17",
+    "DrugRevenue!G17",
+    "DrugRevenue!H17"
+  ],
+  "input_cells": [
+    "SharedData!D4",
+    "SharedData!D8:D9",
+    "DrugRevenue!D7:G9",
+    "DrugRevenue!D14:G14"
+  ],
+  "golden_input_cells": [
+    "SharedData!D8:D9",
+    "DrugRevenue!D7:G9",
+    "DrugRevenue!D14:G14"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "DrugRevenue!J17": 10063.632796,
+    "DrugRevenue!D17": 1299,
+    "DrugRevenue!E17": 1659,
+    "DrugRevenue!F17": 1867,
+    "DrugRevenue!G17": 2098,
+    "DrugRevenue!H17": 6923
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "SharedData!D8",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 0.234,
+    "perturbed_value": 0.2574,
+    "observed_output": "DrugRevenue!J17",
+    "output_before": 10063.632795999998,
+    "output_after_in_golden": 10254.4666756,
+    "expected": "DrugRevenue!J17 must change"
+  },
+  "stats": {
+    "n_target_cells": 26,
+    "n_input_cells": 19,
+    "n_golden_input_cells": 18,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.538,
+    "key_outputs_cover_targets": 0.923,
+    "functions_used": [
+      "SUM"
+    ],
+    "multi_sheet": true,
+    "cross_sheet_target_formulas": 8,
+    "array_formula_targets": 0
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/06_equity_forecast/06_04_input.xlsx",
+    "golden": "Template/spreadsheet/06_equity_forecast/06_04_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "26/26",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

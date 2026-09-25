@@ -1,0 +1,1972 @@
+{
+  "criteria": {
+    "hard_requirements": [
+      "Target cells = cells blank in input.xlsx and filled in golden.xlsx.",
+      "Input identical to golden outside the targets (no planted hardcodes, no edits).",
+      "Every golden target is a live formula (golden passes its own formula-coverage check), except tier-B cells the golden fixes at 0.",
+      "Every golden target formula traces through formulas to numeric input constants; no circular references, no direct references to empty cells.",
+      "Golden has cached values for every target; no error values.",
+      "No iterative (IRR/XIRR/RATE) or volatile functions in the target chain.",
+      "Assumptions used by golden formulas exist as input cells or are stated on the sheet (e.g. '3% of EGR' in a label, 'use 90 days' note).",
+      "Final output has a non-zero value and responds to an input change."
+    ],
+    "verification": "Every selected golden was recalculated in Microsoft Excel (COM); all target values matched the cached values, and a +10% change to one input changed the final output (recorded in case.json)."
+  },
+  "summary": {
+    "template_tasks_scanned": 97,
+    "selected_tier_A": 32,
+    "selected_tier_B": 3,
+    "trap_candidates": 3,
+    "excluded": 59
+  },
+  "other_categories": {
+    "Visualization": "Excluded: 24 chart-creation tasks graded by rubric, not formula models.",
+    "Debugging": "Excluded: 100 'audit and fix this file' tasks on large multi-sheet workbooks; the target is repairing existing cells, not building a formula chain from blanks.",
+    "Financial_Model": {
+      "decision": "Deferred, not rejected: 100 tasks over 20 full multi-sheet models (5 input variants share one golden). Some are structurally clean (e.g. 01_01, 15_04: all blank targets are formulas, no other diffs), but they have 8-25 sheets, thousands of formulas, targets spread across sheets and long multi-part instructions (3 of 100 ask for a hardcoded value). Good candidates for a later 'hard' tier once the evaluator handles multi-sheet models; too large for the first flow.",
+      "sample_diff_check": [
+        {
+          "id": "01_01",
+          "sheets": 25,
+          "golden_formulas": 4025,
+          "blank_targets": 82,
+          "targets_formula": 82,
+          "targets_hardcoded_numbers": 0,
+          "input_differs_elsewhere": 0,
+          "mentions_hardcode": true,
+          "instruction_chars": 1029
+        },
+        {
+          "id": "05_03",
+          "sheets": 12,
+          "golden_formulas": 25635,
+          "blank_targets": 340,
+          "targets_formula": 321,
+          "targets_hardcoded_numbers": 19,
+          "input_differs_elsewhere": 39,
+          "mentions_hardcode": false,
+          "instruction_chars": 656
+        },
+        {
+          "id": "10_02",
+          "sheets": 8,
+          "golden_formulas": 73280,
+          "blank_targets": 51,
+          "targets_formula": 51,
+          "targets_hardcoded_numbers": 0,
+          "input_differs_elsewhere": 372,
+          "mentions_hardcode": false,
+          "instruction_chars": 728
+        },
+        {
+          "id": "15_04",
+          "sheets": 9,
+          "golden_formulas": 8940,
+          "blank_targets": 1033,
+          "targets_formula": 1033,
+          "targets_hardcoded_numbers": 0,
+          "input_differs_elsewhere": 0,
+          "mentions_hardcode": true,
+          "instruction_chars": 796
+        },
+        {
+          "id": "20_05",
+          "sheets": 12,
+          "golden_formulas": 17304,
+          "blank_targets": 172,
+          "targets_formula": 172,
+          "targets_hardcoded_numbers": 0,
+          "input_differs_elsewhere": 25,
+          "mentions_hardcode": false,
+          "instruction_chars": 752
+        }
+      ],
+      "note": "A full dependency-trace scan of this category was started and stopped: too slow on models of this size. The sample above is a plain input-vs-golden diff."
+    }
+  },
+  "template_decisions": [
+    {
+      "id": "01_01",
+      "family": "01_bond_accounting",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 4 of 111 target cells as numbers (the golden itself would fail formula coverage).",
+        "Targets use iterative functions (IRR)."
+      ],
+      "metrics": {
+        "n_fill": 111,
+        "n_fill_formula": 107,
+        "n_fill_numeric_const": 4,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "01_02",
+      "family": "01_bond_accounting",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 8 of 69 target cells as numbers (the golden itself would fail formula coverage).",
+        "7 golden target formulas do not trace to any input constant.",
+        "Targets use iterative functions (IRR)."
+      ],
+      "metrics": {
+        "n_fill": 69,
+        "n_fill_formula": 61,
+        "n_fill_numeric_const": 8,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 7,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 3
+      }
+    },
+    {
+      "id": "01_03",
+      "family": "01_bond_accounting",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 2 of 61 target cells as numbers (the golden itself would fail formula coverage).",
+        "Targets use iterative functions (IRR)."
+      ],
+      "metrics": {
+        "n_fill": 61,
+        "n_fill_formula": 59,
+        "n_fill_numeric_const": 2,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "01_04",
+      "family": "01_bond_accounting",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 6 of 137 target cells as numbers (the golden itself would fail formula coverage).",
+        "Golden formulas reference 12 empty cells directly.",
+        "Targets use iterative functions (IRR)."
+      ],
+      "metrics": {
+        "n_fill": 137,
+        "n_fill_formula": 131,
+        "n_fill_numeric_const": 6,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "01_05",
+      "family": "01_bond_accounting",
+      "status": "excluded",
+      "reasons": [
+        "Golden target cells are all hardcoded numbers (113); no formula model to trace."
+      ],
+      "metrics": {
+        "n_fill": 113,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 113,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "01_06",
+      "family": "01_bond_accounting",
+      "status": "excluded",
+      "reasons": [
+        "22 golden target formulas do not trace to any input constant.",
+        "Targets use iterative functions (IRR)."
+      ],
+      "metrics": {
+        "n_fill": 160,
+        "n_fill_formula": 160,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 22,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 1
+      }
+    },
+    {
+      "id": "01_07",
+      "family": "01_bond_accounting",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 9 of 126 target cells as numbers (the golden itself would fail formula coverage).",
+        "Input differs from golden outside the blank targets in 1 cells.",
+        "Golden formulas reference 3 empty cells directly."
+      ],
+      "metrics": {
+        "n_fill": 126,
+        "n_fill_formula": 117,
+        "n_fill_numeric_const": 9,
+        "n_diff": 1,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "01_08",
+      "family": "01_bond_accounting",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 21 of 84 target cells as numbers (the golden itself would fail formula coverage).",
+        "Targets use iterative functions (IRR)."
+      ],
+      "metrics": {
+        "n_fill": 84,
+        "n_fill_formula": 63,
+        "n_fill_numeric_const": 21,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "01_09",
+      "family": "01_bond_accounting",
+      "status": "excluded",
+      "reasons": [
+        "Input differs from golden outside the blank targets in 1 cells.",
+        "3 golden target formulas do not trace to any input constant.",
+        "Golden formulas reference 6 empty cells directly.",
+        "Targets use iterative functions (IRR)."
+      ],
+      "metrics": {
+        "n_fill": 73,
+        "n_fill_formula": 73,
+        "n_fill_numeric_const": 0,
+        "n_diff": 1,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 3,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "02_01",
+      "family": "02_cash_sweep",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 27,
+        "n_fill_formula": 27,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "02_02",
+      "family": "02_cash_sweep",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 85 of 115 target cells as numbers (the golden itself would fail formula coverage).",
+        "Golden removes 5 cells that exist in the input."
+      ],
+      "metrics": {
+        "n_fill": 115,
+        "n_fill_formula": 30,
+        "n_fill_numeric_const": 85,
+        "n_diff": 0,
+        "n_removed": 5,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "02_03",
+      "family": "02_cash_sweep",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 49,
+        "n_fill_formula": 49,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "02_04",
+      "family": "02_cash_sweep",
+      "status": "excluded_trap_candidate",
+      "reasons": [
+        "Input B10 holds a hardcoded -800 that the golden replaces with =-MIN(B6,B9).",
+        "Could become a separate 'repair the planted hardcode' task later."
+      ],
+      "metrics": {
+        "n_fill": 45,
+        "n_fill_formula": 45,
+        "n_fill_numeric_const": 0,
+        "n_diff": 1,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "02_05",
+      "family": "02_cash_sweep",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 72,
+        "n_fill_formula": 72,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "02_06",
+      "family": "02_cash_sweep",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 64,
+        "n_fill_formula": 64,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 4
+      }
+    },
+    {
+      "id": "03_01",
+      "family": "03_consolidation",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 2 of 52 target cells as numbers (the golden itself would fail formula coverage).",
+        "5 golden target formulas do not trace to any input constant."
+      ],
+      "metrics": {
+        "n_fill": 52,
+        "n_fill_formula": 50,
+        "n_fill_numeric_const": 2,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 5,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 3
+      }
+    },
+    {
+      "id": "03_02",
+      "family": "03_consolidation",
+      "status": "excluded",
+      "reasons": [
+        "Golden target cells are all hardcoded numbers (48); no formula model to trace."
+      ],
+      "metrics": {
+        "n_fill": 48,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 48,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "03_03",
+      "family": "03_consolidation",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 11 of 59 target cells as numbers (the golden itself would fail formula coverage).",
+        "Golden formulas reference 1 empty cells directly."
+      ],
+      "metrics": {
+        "n_fill": 59,
+        "n_fill_formula": 48,
+        "n_fill_numeric_const": 11,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 2
+      }
+    },
+    {
+      "id": "03_04",
+      "family": "03_consolidation",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 8 of 51 target cells as numbers (the golden itself would fail formula coverage)."
+      ],
+      "metrics": {
+        "n_fill": 51,
+        "n_fill_formula": 43,
+        "n_fill_numeric_const": 8,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "04_03",
+      "family": "04_dcf_valuation",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 42 of 43 target cells as numbers (the golden itself would fail formula coverage)."
+      ],
+      "metrics": {
+        "n_fill": 43,
+        "n_fill_formula": 1,
+        "n_fill_numeric_const": 42,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "04_04",
+      "family": "04_dcf_valuation",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 36,
+        "n_fill_formula": 36,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "05_01",
+      "family": "05_deferred_tax",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 8 of 65 target cells as numbers (the golden itself would fail formula coverage)."
+      ],
+      "metrics": {
+        "n_fill": 65,
+        "n_fill_formula": 57,
+        "n_fill_numeric_const": 8,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "05_02",
+      "family": "05_deferred_tax",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 3 of 54 target cells as numbers (the golden itself would fail formula coverage)."
+      ],
+      "metrics": {
+        "n_fill": 54,
+        "n_fill_formula": 51,
+        "n_fill_numeric_const": 3,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 9
+      }
+    },
+    {
+      "id": "06_01",
+      "family": "06_equity_forecast",
+      "status": "excluded",
+      "reasons": [
+        "6 golden target formulas do not trace to any input constant."
+      ],
+      "metrics": {
+        "n_fill": 40,
+        "n_fill_formula": 40,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 6,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_02",
+      "family": "06_equity_forecast",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 44,
+        "n_fill_formula": 44,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_03",
+      "family": "06_equity_forecast",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 127,
+        "n_fill_formula": 127,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_04",
+      "family": "06_equity_forecast",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 26,
+        "n_fill_formula": 26,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_05",
+      "family": "06_equity_forecast",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 24,
+        "n_fill_formula": 24,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 12
+      }
+    },
+    {
+      "id": "06_06",
+      "family": "06_equity_forecast",
+      "status": "excluded",
+      "reasons": [
+        "Golden target cells are all hardcoded numbers (61); no formula model to trace.",
+        "Golden removes 10 cells that exist in the input."
+      ],
+      "metrics": {
+        "n_fill": 61,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 61,
+        "n_diff": 0,
+        "n_removed": 10,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_07",
+      "family": "06_equity_forecast",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 2 of 161 target cells as numbers (the golden itself would fail formula coverage)."
+      ],
+      "metrics": {
+        "n_fill": 161,
+        "n_fill_formula": 159,
+        "n_fill_numeric_const": 2,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_08",
+      "family": "06_equity_forecast",
+      "status": "excluded_trap_candidate",
+      "reasons": [
+        "Input D20 holds a hardcoded -816.16 that the golden replaces with =-(D15-C15).",
+        "Could become a separate 'repair the planted hardcode' task later."
+      ],
+      "metrics": {
+        "n_fill": 35,
+        "n_fill_formula": 35,
+        "n_fill_numeric_const": 0,
+        "n_diff": 1,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_09",
+      "family": "06_equity_forecast",
+      "status": "excluded",
+      "reasons": [
+        "Golden removes 3 cells that exist in the input."
+      ],
+      "metrics": {
+        "n_fill": 70,
+        "n_fill_formula": 70,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 3,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_11",
+      "family": "06_equity_forecast",
+      "status": "excluded",
+      "reasons": [
+        "Input differs from golden outside the blank targets in 5 cells."
+      ],
+      "metrics": {
+        "n_fill": 24,
+        "n_fill_formula": 24,
+        "n_fill_numeric_const": 0,
+        "n_diff": 5,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 4
+      }
+    },
+    {
+      "id": "06_12",
+      "family": "06_equity_forecast",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 30,
+        "n_fill_formula": 30,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_13",
+      "family": "06_equity_forecast",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 127,
+        "n_fill_formula": 127,
+        "n_fill_numeric_const": 0,
+        "n_diff": 1,
+        "n_removed": 1,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_14",
+      "family": "06_equity_forecast",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 6 growth-rate target cells as numbers (e.g. D19, H19).",
+        "Golden hardcodes 6 of 66 target cells as numbers (the golden itself would fail formula coverage)."
+      ],
+      "metrics": {
+        "n_fill": 66,
+        "n_fill_formula": 60,
+        "n_fill_numeric_const": 6,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_15",
+      "family": "06_equity_forecast",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 41,
+        "n_fill_formula": 41,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 18
+      }
+    },
+    {
+      "id": "06_16",
+      "family": "06_equity_forecast",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 15 of 48 target cells as numbers (the golden itself would fail formula coverage)."
+      ],
+      "metrics": {
+        "n_fill": 48,
+        "n_fill_formula": 33,
+        "n_fill_numeric_const": 15,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_17",
+      "family": "06_equity_forecast",
+      "status": "excluded",
+      "reasons": [
+        "Golden target cells are all hardcoded numbers (46); no formula model to trace."
+      ],
+      "metrics": {
+        "n_fill": 46,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 46,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_18",
+      "family": "06_equity_forecast",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 20,
+        "n_fill_formula": 20,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 12
+      }
+    },
+    {
+      "id": "06_19",
+      "family": "06_equity_forecast",
+      "status": "excluded",
+      "reasons": [
+        "Input differs from golden outside the blank targets in 8 cells."
+      ],
+      "metrics": {
+        "n_fill": 99,
+        "n_fill_formula": 99,
+        "n_fill_numeric_const": 0,
+        "n_diff": 8,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_20",
+      "family": "06_equity_forecast",
+      "status": "excluded",
+      "reasons": [
+        "Golden target cells are all hardcoded numbers (64); no formula model to trace."
+      ],
+      "metrics": {
+        "n_fill": 64,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 64,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_21",
+      "family": "06_equity_forecast",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 27,
+        "n_fill_formula": 27,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_22",
+      "family": "06_equity_forecast",
+      "status": "excluded",
+      "reasons": [
+        "Input differs from golden outside the blank targets in 10 cells."
+      ],
+      "metrics": {
+        "n_fill": 42,
+        "n_fill_formula": 42,
+        "n_fill_numeric_const": 0,
+        "n_diff": 10,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_23",
+      "family": "06_equity_forecast",
+      "status": "selected_tier_B",
+      "reasons": [
+        "First forecast column has no prior period; golden enters 0 for the changes."
+      ],
+      "metrics": {
+        "n_fill": 55,
+        "n_fill_formula": 52,
+        "n_fill_numeric_const": 3,
+        "n_diff": 0,
+        "n_removed": 1,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_24",
+      "family": "06_equity_forecast",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 39,
+        "n_fill_formula": 39,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "06_25",
+      "family": "06_equity_forecast",
+      "status": "excluded",
+      "reasons": [
+        "Golden target cells are all hardcoded numbers (55); no formula model to trace.",
+        "Input differs from golden outside the blank targets in 1 cells."
+      ],
+      "metrics": {
+        "n_fill": 55,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 55,
+        "n_diff": 1,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "07_01",
+      "family": "07_equity_method",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 40 of 58 target cells as numbers (the golden itself would fail formula coverage).",
+        "Golden formulas reference 3 empty cells directly."
+      ],
+      "metrics": {
+        "n_fill": 58,
+        "n_fill_formula": 18,
+        "n_fill_numeric_const": 40,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "07_02",
+      "family": "07_equity_method",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 10 of 54 target cells as numbers (the golden itself would fail formula coverage).",
+        "Golden removes 1 cells that exist in the input.",
+        "1 golden target formulas do not trace to any input constant."
+      ],
+      "metrics": {
+        "n_fill": 54,
+        "n_fill_formula": 44,
+        "n_fill_numeric_const": 10,
+        "n_diff": 0,
+        "n_removed": 1,
+        "n_untraced_fill_formulas": 1,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "07_03",
+      "family": "07_equity_method",
+      "status": "excluded",
+      "reasons": [
+        "No blank target cells: the task edits 58 existing cells instead of filling blanks."
+      ],
+      "metrics": {
+        "n_fill": 0,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 0,
+        "n_diff": 58,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "08_01",
+      "family": "08_fin_model_basics",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 40,
+        "n_fill_formula": 40,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "08_02",
+      "family": "08_fin_model_basics",
+      "status": "excluded",
+      "reasons": [
+        "Golden target cells are all hardcoded numbers (97); no formula model to trace."
+      ],
+      "metrics": {
+        "n_fill": 97,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 97,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "08_03",
+      "family": "08_fin_model_basics",
+      "status": "excluded_trap_candidate",
+      "reasons": [
+        "Input C9 holds a hardcoded -26757.5 that the golden replaces with =-C31*C8.",
+        "Could become a separate 'repair the planted hardcode' task later."
+      ],
+      "metrics": {
+        "n_fill": 59,
+        "n_fill_formula": 59,
+        "n_fill_numeric_const": 0,
+        "n_diff": 1,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "09_01",
+      "family": "09_lbo_model",
+      "status": "excluded",
+      "reasons": [
+        "Golden target cells are all hardcoded numbers (107); no formula model to trace."
+      ],
+      "metrics": {
+        "n_fill": 107,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 107,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "09_02",
+      "family": "09_lbo_model",
+      "status": "excluded",
+      "reasons": [],
+      "metrics": {
+        "n_fill": 198,
+        "n_fill_formula": 198,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "09_03",
+      "family": "09_lbo_model",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 73,
+        "n_fill_formula": 73,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "09_04",
+      "family": "09_lbo_model",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 97,
+        "n_fill_formula": 97,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "10_01",
+      "family": "10_ma_analysis",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 25,
+        "n_fill_formula": 25,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "10_02",
+      "family": "10_ma_analysis",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 27,
+        "n_fill_formula": 27,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "11_01",
+      "family": "11_ma_model",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 49,
+        "n_fill_formula": 49,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "11_02",
+      "family": "11_ma_model",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 48,
+        "n_fill_formula": 48,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "11_03",
+      "family": "11_ma_model",
+      "status": "excluded",
+      "reasons": [
+        "Golden target cells are all hardcoded numbers (33); no formula model to trace.",
+        "Golden removes 1 cells that exist in the input."
+      ],
+      "metrics": {
+        "n_fill": 33,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 33,
+        "n_diff": 0,
+        "n_removed": 1,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "11_04",
+      "family": "11_ma_model",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 28,
+        "n_fill_formula": 28,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "12_01",
+      "family": "12_net_op_loss",
+      "status": "excluded",
+      "reasons": [
+        "Golden target cells are all hardcoded numbers (126); no formula model to trace."
+      ],
+      "metrics": {
+        "n_fill": 126,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 126,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "13_01",
+      "family": "13_nonrecurring",
+      "status": "excluded",
+      "reasons": [
+        "Golden target cells are all hardcoded numbers (147); no formula model to trace.",
+        "Input differs from golden outside the blank targets in 8 cells."
+      ],
+      "metrics": {
+        "n_fill": 147,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 147,
+        "n_diff": 8,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "13_02",
+      "family": "13_nonrecurring",
+      "status": "excluded",
+      "reasons": [
+        "Input differs from golden outside the blank targets in 6 cells.",
+        "Golden removes 5 cells that exist in the input."
+      ],
+      "metrics": {
+        "n_fill": 68,
+        "n_fill_formula": 68,
+        "n_fill_numeric_const": 0,
+        "n_diff": 6,
+        "n_removed": 5,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 6
+      }
+    },
+    {
+      "id": "13_03",
+      "family": "13_nonrecurring",
+      "status": "excluded",
+      "reasons": [
+        "Adjustment amounts ($25, $32, ...) exist only in text notes; the golden embeds them as literals inside formulas, so a fully traceable answer is impossible without adding input cells."
+      ],
+      "metrics": {
+        "n_fill": 83,
+        "n_fill_formula": 83,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 6
+      }
+    },
+    {
+      "id": "13_04",
+      "family": "13_nonrecurring",
+      "status": "excluded",
+      "reasons": [
+        "Golden removes 1 cells that exist in the input.",
+        "5 golden target formulas do not trace to any input constant."
+      ],
+      "metrics": {
+        "n_fill": 71,
+        "n_fill_formula": 71,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 1,
+        "n_untraced_fill_formulas": 5,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 5
+      }
+    },
+    {
+      "id": "13_05",
+      "family": "13_nonrecurring",
+      "status": "excluded",
+      "reasons": [
+        "Adjustment amounts ($22, $28, $18) exist only in text notes; the golden embeds them as literals inside formulas. Also hardcodes 0 for first-period growth (C21).",
+        "Golden hardcodes 1 of 75 target cells as numbers (the golden itself would fail formula coverage)."
+      ],
+      "metrics": {
+        "n_fill": 75,
+        "n_fill_formula": 74,
+        "n_fill_numeric_const": 1,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 3
+      }
+    },
+    {
+      "id": "13_06",
+      "family": "13_nonrecurring",
+      "status": "selected_tier_B",
+      "reasons": [
+        "Instruction says 'Enter 0% for 2020 revenue growth'."
+      ],
+      "metrics": {
+        "n_fill": 74,
+        "n_fill_formula": 73,
+        "n_fill_numeric_const": 1,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "13_07",
+      "family": "13_nonrecurring",
+      "status": "excluded",
+      "reasons": [
+        "Golden target cells are all hardcoded numbers (77); no formula model to trace.",
+        "Input differs from golden outside the blank targets in 13 cells.",
+        "Golden removes 1 cells that exist in the input."
+      ],
+      "metrics": {
+        "n_fill": 77,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 77,
+        "n_diff": 13,
+        "n_removed": 1,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "13_08",
+      "family": "13_nonrecurring",
+      "status": "excluded",
+      "reasons": [
+        "Golden target cells are all hardcoded numbers (72); no formula model to trace."
+      ],
+      "metrics": {
+        "n_fill": 72,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 72,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "14_01",
+      "family": "14_re_dcf",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 1 of 132 target cells as numbers (the golden itself would fail formula coverage).",
+        "Targets use iterative functions (IRR)."
+      ],
+      "metrics": {
+        "n_fill": 132,
+        "n_fill_formula": 131,
+        "n_fill_numeric_const": 1,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "14_02",
+      "family": "14_re_dcf",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 83,
+        "n_fill_formula": 83,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "14_03",
+      "family": "14_re_dcf",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 55,
+        "n_fill_formula": 55,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 4
+      }
+    },
+    {
+      "id": "14_04",
+      "family": "14_re_dcf",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 71,
+        "n_fill_formula": 71,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "14_05",
+      "family": "14_re_dcf",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 65,
+        "n_fill_formula": 65,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "14_06",
+      "family": "14_re_dcf",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 42,
+        "n_fill_formula": 42,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "14_07",
+      "family": "14_re_dcf",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 20,
+        "n_fill_formula": 20,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "14_08",
+      "family": "14_re_dcf",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 141,
+        "n_fill_formula": 141,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "14_09",
+      "family": "14_re_dcf",
+      "status": "selected_tier_B",
+      "reasons": [
+        "Instruction says 'Concessions are 0% in Years 3-5'."
+      ],
+      "metrics": {
+        "n_fill": 72,
+        "n_fill_formula": 69,
+        "n_fill_numeric_const": 3,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "15_01",
+      "family": "15_re_debt",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 1.03 in the DSCR formulas instead of referencing the NOI growth input (C17 = 3%); changing the input would not change the golden output."
+      ],
+      "metrics": {
+        "n_fill": 21,
+        "n_fill_formula": 21,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 2
+      }
+    },
+    {
+      "id": "15_02",
+      "family": "15_re_debt",
+      "status": "excluded",
+      "reasons": [
+        "Golden target cells are all hardcoded numbers (44); no formula model to trace.",
+        "Golden removes 2 cells that exist in the input."
+      ],
+      "metrics": {
+        "n_fill": 44,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 44,
+        "n_diff": 0,
+        "n_removed": 2,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "15_03",
+      "family": "15_re_debt",
+      "status": "excluded",
+      "reasons": [
+        "No blank target cells: the task edits 17 existing cells instead of filling blanks."
+      ],
+      "metrics": {
+        "n_fill": 0,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 0,
+        "n_diff": 17,
+        "n_removed": 4,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "15_04",
+      "family": "15_re_debt",
+      "status": "excluded",
+      "reasons": [
+        "No blank target cells: the task edits 15 existing cells instead of filling blanks."
+      ],
+      "metrics": {
+        "n_fill": 0,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 0,
+        "n_diff": 15,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "16_01",
+      "family": "16_re_direct_cap",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 35,
+        "n_fill_formula": 35,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "16_02",
+      "family": "16_re_direct_cap",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 1 of 18 target cells as numbers (the golden itself would fail formula coverage).",
+        "Input differs from golden outside the blank targets in 4 cells."
+      ],
+      "metrics": {
+        "n_fill": 18,
+        "n_fill_formula": 17,
+        "n_fill_numeric_const": 1,
+        "n_diff": 4,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "16_03",
+      "family": "16_re_direct_cap",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 25 of 32 target cells as numbers (the golden itself would fail formula coverage)."
+      ],
+      "metrics": {
+        "n_fill": 32,
+        "n_fill_formula": 7,
+        "n_fill_numeric_const": 25,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "16_04",
+      "family": "16_re_direct_cap",
+      "status": "selected_tier_A",
+      "reasons": [
+        "Meets all selection criteria."
+      ],
+      "metrics": {
+        "n_fill": 28,
+        "n_fill_formula": 28,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "16_05",
+      "family": "16_re_direct_cap",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 40 of 49 target cells as numbers (the golden itself would fail formula coverage)."
+      ],
+      "metrics": {
+        "n_fill": 49,
+        "n_fill_formula": 9,
+        "n_fill_numeric_const": 40,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 2
+      }
+    },
+    {
+      "id": "16_06",
+      "family": "16_re_direct_cap",
+      "status": "excluded",
+      "reasons": [
+        "1 golden target formulas do not trace to any input constant.",
+        "Golden contains circular references."
+      ],
+      "metrics": {
+        "n_fill": 73,
+        "n_fill_formula": 73,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 1,
+        "n_cycle_nodes": 1,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 12
+      }
+    },
+    {
+      "id": "16_07",
+      "family": "16_re_direct_cap",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 9 of 121 target cells as numbers (the golden itself would fail formula coverage).",
+        "1 golden target formulas do not trace to any input constant."
+      ],
+      "metrics": {
+        "n_fill": 121,
+        "n_fill_formula": 112,
+        "n_fill_numeric_const": 9,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 1,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 22
+      }
+    },
+    {
+      "id": "16_08",
+      "family": "16_re_direct_cap",
+      "status": "excluded",
+      "reasons": [
+        "No blank target cells: the task edits 50 existing cells instead of filling blanks."
+      ],
+      "metrics": {
+        "n_fill": 0,
+        "n_fill_formula": 0,
+        "n_fill_numeric_const": 0,
+        "n_diff": 50,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 0
+      }
+    },
+    {
+      "id": "16_09",
+      "family": "16_re_direct_cap",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 1 of 52 target cells as numbers (the golden itself would fail formula coverage).",
+        "1 golden target formulas do not trace to any input constant."
+      ],
+      "metrics": {
+        "n_fill": 52,
+        "n_fill_formula": 50,
+        "n_fill_numeric_const": 1,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 1,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 12
+      }
+    },
+    {
+      "id": "16_10",
+      "family": "16_re_direct_cap",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 5 of 50 target cells as numbers (the golden itself would fail formula coverage).",
+        "Input differs from golden outside the blank targets in 1 cells.",
+        "Golden removes 3 cells that exist in the input.",
+        "1 golden target formulas do not trace to any input constant."
+      ],
+      "metrics": {
+        "n_fill": 50,
+        "n_fill_formula": 45,
+        "n_fill_numeric_const": 5,
+        "n_diff": 1,
+        "n_removed": 3,
+        "n_untraced_fill_formulas": 1,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 12
+      }
+    },
+    {
+      "id": "16_11",
+      "family": "16_re_direct_cap",
+      "status": "excluded",
+      "reasons": [
+        "Golden hardcodes 4 of 59 target cells as numbers (the golden itself would fail formula coverage)."
+      ],
+      "metrics": {
+        "n_fill": 59,
+        "n_fill_formula": 55,
+        "n_fill_numeric_const": 4,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 0,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 6
+      }
+    },
+    {
+      "id": "16_12",
+      "family": "16_re_direct_cap",
+      "status": "excluded",
+      "reasons": [
+        "Golden contains an embedded-constant formula (Valuation!D37 = 95000000*0.92*0.0175) that does not trace to input cells.",
+        "1 golden target formulas do not trace to any input constant."
+      ],
+      "metrics": {
+        "n_fill": 48,
+        "n_fill_formula": 48,
+        "n_fill_numeric_const": 0,
+        "n_diff": 0,
+        "n_removed": 0,
+        "n_untraced_fill_formulas": 1,
+        "n_cycle_nodes": 0,
+        "n_no_cached_value": 0,
+        "n_fills_with_embedded_literals": 4
+      }
+    }
+  ]
+}

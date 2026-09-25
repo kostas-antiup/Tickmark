@@ -1,0 +1,96 @@
+{
+  "id": "14_07",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "14_re_dcf",
+  "domain": "re_dcf",
+  "tier": "A",
+  "sheets": [
+    "RentRoll"
+  ],
+  "primary_sheet": "RentRoll",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in RentRoll!C17:G20. This schedule reports annual amounts: Market Rent/Unit (row 10) and Leased Rent/Unit (row 12) are monthly per-unit inputs, so annual rent calculations must account for 12 months. For Vacancy Loss, use the row-16 values as the vacant-unit inputs despite the incorrect row label. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'RentRoll'!B2:G22",
+  "target_cells": [
+    "RentRoll!C17:G20"
+  ],
+  "final_output": "RentRoll!G20",
+  "final_output_label": "Net Rental Revenue / TOTAL",
+  "key_outputs": [
+    "RentRoll!G20",
+    "RentRoll!G17"
+  ],
+  "input_cells": [
+    "RentRoll!C7:F8",
+    "RentRoll!C10:F10",
+    "RentRoll!C12:F12",
+    "RentRoll!C14:F14",
+    "RentRoll!C16:F16"
+  ],
+  "golden_input_cells": [
+    "RentRoll!C7:F7",
+    "RentRoll!C10:F10",
+    "RentRoll!C12:F12",
+    "RentRoll!C14:F14",
+    "RentRoll!C16:F16"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "RentRoll!G20": 9080487,
+    "RentRoll!G17": 9775200
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "RentRoll!C7",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 58.0,
+    "perturbed_value": 63.800000000000004,
+    "observed_output": "RentRoll!G20",
+    "output_before": 9080487.0,
+    "output_after_in_golden": 9209247.0,
+    "expected": "RentRoll!G20 must change"
+  },
+  "stats": {
+    "n_target_cells": 20,
+    "n_input_cells": 24,
+    "n_golden_input_cells": 20,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.85,
+    "key_outputs_cover_targets": 0.9,
+    "functions_used": [
+      "SUM"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 0
+  },
+  "notes": [
+    "Row 16 label in the input reads 'FN: Express deductions as negative values' instead of 'Vacant Units'. The normalized task instruction identifies row 16 as the intended vacant-unit input, preventing a prompt ambiguity from changing the task semantics.",
+    "B4 contains =TODAY(); it is volatile but outside the target dependency chain."
+  ],
+  "source_paths": {
+    "input": "Template/spreadsheet/14_re_dcf/14_07_input.xlsx",
+    "golden": "Template/spreadsheet/14_re_dcf/14_07_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "20/20",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

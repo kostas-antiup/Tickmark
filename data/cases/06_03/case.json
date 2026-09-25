@@ -1,0 +1,102 @@
+{
+  "id": "06_03",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "06_equity_forecast",
+  "domain": "equity_forecast",
+  "tier": "A",
+  "sheets": [
+    "iPhone_Revenue_Build"
+  ],
+  "primary_sheet": "iPhone_Revenue_Build",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in iPhone_Revenue_Build!G11:J17, iPhone_Revenue_Build!G22:J27, iPhone_Revenue_Build!C37:J43, iPhone_Revenue_Build!G46:J46, iPhone_Revenue_Build!D47:J47, iPhone_Revenue_Build!C48:J48. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'iPhone_Revenue_Build'!B2:J48",
+  "target_cells": [
+    "iPhone_Revenue_Build!G11:J17",
+    "iPhone_Revenue_Build!G22:J27",
+    "iPhone_Revenue_Build!C37:J43",
+    "iPhone_Revenue_Build!G46:J46",
+    "iPhone_Revenue_Build!D47:J47",
+    "iPhone_Revenue_Build!C48:J48"
+  ],
+  "final_output": "iPhone_Revenue_Build!J46",
+  "final_output_label": "Total Revenue YoY Growth % / Q4'24",
+  "key_outputs": [
+    "iPhone_Revenue_Build!J46",
+    "iPhone_Revenue_Build!G46",
+    "iPhone_Revenue_Build!H46",
+    "iPhone_Revenue_Build!I46",
+    "iPhone_Revenue_Build!G48",
+    "iPhone_Revenue_Build!H48"
+  ],
+  "input_cells": [
+    "iPhone_Revenue_Build!C11:F16",
+    "iPhone_Revenue_Build!C22:F27",
+    "iPhone_Revenue_Build!G31:J32"
+  ],
+  "golden_input_cells": [
+    "iPhone_Revenue_Build!C11:F16",
+    "iPhone_Revenue_Build!C22:F27",
+    "iPhone_Revenue_Build!G31:J32"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "iPhone_Revenue_Build!J46": 0.442502106482937,
+    "iPhone_Revenue_Build!G46": 0.311997240436869,
+    "iPhone_Revenue_Build!H46": 0.436192627070842,
+    "iPhone_Revenue_Build!I46": 0.607363398563415,
+    "iPhone_Revenue_Build!G48": 886.551377952756,
+    "iPhone_Revenue_Build!H48": 873.253107283464
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "iPhone_Revenue_Build!G31",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 0.1,
+    "perturbed_value": 0.11000000000000001,
+    "observed_output": "iPhone_Revenue_Build!J46",
+    "output_before": 0.4425021064829371,
+    "output_after_in_golden": 0.45561576199641834,
+    "expected": "iPhone_Revenue_Build!J46 must change"
+  },
+  "stats": {
+    "n_target_cells": 127,
+    "n_input_cells": 56,
+    "n_golden_input_cells": 56,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.496,
+    "key_outputs_cover_targets": 0.882,
+    "functions_used": [
+      "SUM"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 0
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/06_equity_forecast/06_03_input.xlsx",
+    "golden": "Template/spreadsheet/06_equity_forecast/06_03_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "127/127",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

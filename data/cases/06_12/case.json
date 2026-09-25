@@ -1,0 +1,102 @@
+{
+  "id": "06_12",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "06_equity_forecast",
+  "domain": "equity_forecast",
+  "tier": "A",
+  "sheets": [
+    "CashFlow_Build"
+  ],
+  "primary_sheet": "CashFlow_Build",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in CashFlow_Build!I9:N9, CashFlow_Build!I11:N14. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'CashFlow_Build'!B2:N33",
+  "target_cells": [
+    "CashFlow_Build!I9:N9",
+    "CashFlow_Build!I11:N14"
+  ],
+  "final_output": "CashFlow_Build!M14",
+  "final_output_label": "Cash from Operations / 2025E",
+  "key_outputs": [
+    "CashFlow_Build!M14",
+    "CashFlow_Build!N14",
+    "CashFlow_Build!M9"
+  ],
+  "input_cells": [
+    "CashFlow_Build!C6",
+    "CashFlow_Build!H6",
+    "CashFlow_Build!C9:H9",
+    "CashFlow_Build!C10:N10",
+    "CashFlow_Build!C11:H14",
+    "CashFlow_Build!C18:C22",
+    "CashFlow_Build!B23",
+    "CashFlow_Build!C24:C25",
+    "CashFlow_Build!B26",
+    "CashFlow_Build!C27",
+    "CashFlow_Build!C29:C33"
+  ],
+  "golden_input_cells": [
+    "CashFlow_Build!D10:N10",
+    "CashFlow_Build!C18:C22",
+    "CashFlow_Build!C24:C25",
+    "CashFlow_Build!C27",
+    "CashFlow_Build!C29:C33"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "CashFlow_Build!M14": 203.000000000001,
+    "CashFlow_Build!N14": 2170,
+    "CashFlow_Build!M9": 4483
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "CashFlow_Build!D10",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 5000.0,
+    "perturbed_value": 5500.0,
+    "observed_output": "CashFlow_Build!M14",
+    "output_before": 203.0000000000009,
+    "output_after_in_golden": 278.0000000000009,
+    "expected": "CashFlow_Build!M14 must change"
+  },
+  "stats": {
+    "n_target_cells": 30,
+    "n_input_cells": 59,
+    "n_golden_input_cells": 24,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.7,
+    "key_outputs_cover_targets": 0.9,
+    "functions_used": [
+      "SUM"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 0
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/06_equity_forecast/06_12_input.xlsx",
+    "golden": "Template/spreadsheet/06_equity_forecast/06_12_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "30/30",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

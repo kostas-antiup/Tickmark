@@ -1,0 +1,113 @@
+{
+  "id": "14_09",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "14_re_dcf",
+  "domain": "re_dcf",
+  "tier": "B",
+  "sheets": [
+    "Revenue_Projection"
+  ],
+  "primary_sheet": "Revenue_Projection",
+  "instruction": "Concessions are 0% in Years 3–5. Fill in the empty cells in Revenue_Projection!D32:I33, Revenue_Projection!D34:E34, Revenue_Projection!I34, Revenue_Projection!D35:I35, Revenue_Projection!D38:I42, Revenue_Projection!D44:I46. Use live formulas that reference the existing input cells; do not hardcode calculated results. Values that the instruction explicitly fixes may be entered directly.",
+  "source_instruction": "Concessions are 0% in Years 3–5.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'Revenue_Projection'!B2:I46",
+  "target_cells": [
+    "Revenue_Projection!D32:I33",
+    "Revenue_Projection!D34:E34",
+    "Revenue_Projection!I34",
+    "Revenue_Projection!D35:I35",
+    "Revenue_Projection!D38:I42",
+    "Revenue_Projection!D44:I46"
+  ],
+  "final_output": "Revenue_Projection!I46",
+  "final_output_label": "Sum / Total",
+  "key_outputs": [
+    "Revenue_Projection!I46",
+    "Revenue_Projection!I32",
+    "Revenue_Projection!I33",
+    "Revenue_Projection!I34",
+    "Revenue_Projection!I35",
+    "Revenue_Projection!I38"
+  ],
+  "input_cells": [
+    "Revenue_Projection!C5:C8",
+    "Revenue_Projection!C11:C14",
+    "Revenue_Projection!C17:C24",
+    "Revenue_Projection!C27",
+    "Revenue_Projection!F34:H34"
+  ],
+  "golden_input_cells": [
+    "Revenue_Projection!C7",
+    "Revenue_Projection!C11:C14",
+    "Revenue_Projection!C17:C24",
+    "Revenue_Projection!C27",
+    "Revenue_Projection!F34:H34"
+  ],
+  "allowed_hardcoded_cells": [
+    {
+      "cells": [
+        "Revenue_Projection!F34:H34"
+      ],
+      "reason": "Instruction says 'Concessions are 0% in Years 3-5'."
+    }
+  ],
+  "expected_outputs": {
+    "Revenue_Projection!I46": 37207664.7929452,
+    "Revenue_Projection!I32": 36016212.9799512,
+    "Revenue_Projection!I33": -540243.194699268,
+    "Revenue_Projection!I34": -307040.625,
+    "Revenue_Projection!I35": 35168929.1602519,
+    "Revenue_Projection!I38": 977293.405413477
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "Revenue_Projection!C7",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 6750000.0,
+    "perturbed_value": 7425000.000000001,
+    "observed_output": "Revenue_Projection!I46",
+    "output_before": 37207664.79294514,
+    "output_after_in_golden": 40548713.06316908,
+    "expected": "Revenue_Projection!I46 must change"
+  },
+  "stats": {
+    "n_target_cells": 69,
+    "n_input_cells": 20,
+    "n_golden_input_cells": 17,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.841,
+    "key_outputs_cover_targets": 0.913,
+    "functions_used": [
+      "SUM"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 5
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/14_re_dcf/14_09_input.xlsx",
+    "golden": "Template/spreadsheet/14_re_dcf/14_09_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "69/69",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

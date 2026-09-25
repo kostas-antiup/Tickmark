@@ -1,0 +1,113 @@
+{
+  "id": "16_01",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "16_re_direct_cap",
+  "domain": "re_direct_cap",
+  "tier": "A",
+  "sheets": [
+    "DirectCap"
+  ],
+  "primary_sheet": "DirectCap",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in DirectCap!D10:D12, DirectCap!C13:D13, DirectCap!C15:C18, DirectCap!C19:D20, DirectCap!D21, DirectCap!C23:D23, DirectCap!D27:D33, DirectCap!C34:D34, DirectCap!C36:C37, DirectCap!D38, DirectCap!C39:D40, DirectCap!C42:D42, DirectCap!D46. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'DirectCap'!A2:D48",
+  "target_cells": [
+    "DirectCap!D10:D12",
+    "DirectCap!C13:D13",
+    "DirectCap!C15:C18",
+    "DirectCap!C19:D20",
+    "DirectCap!D21",
+    "DirectCap!C23:D23",
+    "DirectCap!D27:D33",
+    "DirectCap!C34:D34",
+    "DirectCap!C36:C37",
+    "DirectCap!D38",
+    "DirectCap!C39:D40",
+    "DirectCap!C42:D42",
+    "DirectCap!D46"
+  ],
+  "final_output": "DirectCap!D46",
+  "final_output_label": "Property Valuation / Annual Total",
+  "key_outputs": [
+    "DirectCap!D46",
+    "DirectCap!C20",
+    "DirectCap!C40"
+  ],
+  "input_cells": [
+    "DirectCap!C5:C6",
+    "DirectCap!C10:C12",
+    "DirectCap!D15:D18",
+    "DirectCap!C21",
+    "DirectCap!C27:C33",
+    "DirectCap!D36:D37",
+    "DirectCap!C38",
+    "DirectCap!C44"
+  ],
+  "golden_input_cells": [
+    "DirectCap!C5:C6",
+    "DirectCap!C10:C12",
+    "DirectCap!D15:D18",
+    "DirectCap!C21",
+    "DirectCap!C27:C33",
+    "DirectCap!D36:D37",
+    "DirectCap!C38",
+    "DirectCap!C44"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "DirectCap!D46": 176060983.333333,
+    "DirectCap!C20": 3.4800785634119,
+    "DirectCap!C40": 11845.1630555556
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "DirectCap!C5",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 450.0,
+    "perturbed_value": 495.00000000000006,
+    "observed_output": "DirectCap!D46",
+    "output_before": 176060983.33333334,
+    "output_after_in_golden": 196496076.90476197,
+    "expected": "DirectCap!D46 must change"
+  },
+  "stats": {
+    "n_target_cells": 35,
+    "n_input_cells": 21,
+    "n_golden_input_cells": 21,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.6,
+    "key_outputs_cover_targets": 0.943,
+    "functions_used": [
+      "SUM"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 0
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/16_re_direct_cap/16_01_input.xlsx",
+    "golden": "Template/spreadsheet/16_re_direct_cap/16_01_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "35/35",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

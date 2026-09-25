@@ -1,0 +1,105 @@
+{
+  "id": "14_03",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "14_re_dcf",
+  "domain": "re_dcf",
+  "tier": "A",
+  "sheets": [
+    "NOI_Projection"
+  ],
+  "primary_sheet": "NOI_Projection",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in NOI_Projection!G12:G14, NOI_Projection!C15:G16, NOI_Projection!G18:G20, NOI_Projection!C21:G23, NOI_Projection!C34:F38, NOI_Projection!C46:C49. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'NOI_Projection'!B2:G49",
+  "target_cells": [
+    "NOI_Projection!G12:G14",
+    "NOI_Projection!C15:G16",
+    "NOI_Projection!G18:G20",
+    "NOI_Projection!C21:G23",
+    "NOI_Projection!C34:F38",
+    "NOI_Projection!C46:C49"
+  ],
+  "final_output": "NOI_Projection!C49",
+  "final_output_label": "Net Sale Proceeds / Year 2",
+  "key_outputs": [
+    "NOI_Projection!C49",
+    "NOI_Projection!G23",
+    "NOI_Projection!C38",
+    "NOI_Projection!D38",
+    "NOI_Projection!E38"
+  ],
+  "input_cells": [
+    "NOI_Projection!C5:C6",
+    "NOI_Projection!C12:F14",
+    "NOI_Projection!C18:F20",
+    "NOI_Projection!C30:C32",
+    "NOI_Projection!C43:C44"
+  ],
+  "golden_input_cells": [
+    "NOI_Projection!C12:F14",
+    "NOI_Projection!C18:F20",
+    "NOI_Projection!C30:C32",
+    "NOI_Projection!C43:C44"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "NOI_Projection!C49": 67371399.2848124,
+    "NOI_Projection!G23": 4515178.55,
+    "NOI_Projection!C38": 4677346.51875,
+    "NOI_Projection!D38": 4845145.91887875,
+    "NOI_Projection!E38": 5018768.00759984
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "NOI_Projection!C12",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 1680000.0,
+    "perturbed_value": 1848000.0000000002,
+    "observed_output": "NOI_Projection!C49",
+    "output_before": 67371399.28481236,
+    "output_after_in_golden": 69661047.52080986,
+    "expected": "NOI_Projection!C49 must change"
+  },
+  "stats": {
+    "n_target_cells": 55,
+    "n_input_cells": 31,
+    "n_golden_input_cells": 29,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.655,
+    "key_outputs_cover_targets": 0.909,
+    "functions_used": [
+      "SUM"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 1
+  },
+  "notes": [
+    "The 3% property-management fee is stated only in the row label; the golden embeds 0.03 in the formula. Formulas still trace to input cells."
+  ],
+  "source_paths": {
+    "input": "Template/spreadsheet/14_re_dcf/14_03_input.xlsx",
+    "golden": "Template/spreadsheet/14_re_dcf/14_03_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "55/55",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

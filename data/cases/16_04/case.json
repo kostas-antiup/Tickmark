@@ -1,0 +1,89 @@
+{
+  "id": "16_04",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "16_re_direct_cap",
+  "domain": "re_direct_cap",
+  "tier": "A",
+  "sheets": [
+    "RentRoll"
+  ],
+  "primary_sheet": "RentRoll",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in RentRoll!L7:O13. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'RentRoll'!B2:O18",
+  "target_cells": [
+    "RentRoll!L7:O13"
+  ],
+  "final_output": "RentRoll!O13",
+  "final_output_label": "TOTALS / Net Rental Revenue (Annual)",
+  "key_outputs": [
+    "RentRoll!O13",
+    "RentRoll!L13"
+  ],
+  "input_cells": [
+    "RentRoll!C7:D12",
+    "RentRoll!F7:F12",
+    "RentRoll!I7:J12"
+  ],
+  "golden_input_cells": [
+    "RentRoll!C7:C12",
+    "RentRoll!F7:F12",
+    "RentRoll!I7:J12"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "RentRoll!O13": 12150480,
+    "RentRoll!L13": 13108080
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "RentRoll!F7",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 51.0,
+    "perturbed_value": 56.1,
+    "observed_output": "RentRoll!O13",
+    "output_before": 12150480.0,
+    "output_after_in_golden": 12249930.0,
+    "expected": "RentRoll!O13 must change"
+  },
+  "stats": {
+    "n_target_cells": 28,
+    "n_input_cells": 30,
+    "n_golden_input_cells": 24,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.893,
+    "key_outputs_cover_targets": 0.929,
+    "functions_used": [
+      "SUM"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 0
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/16_re_direct_cap/16_04_input.xlsx",
+    "golden": "Template/spreadsheet/16_re_direct_cap/16_04_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "28/28",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

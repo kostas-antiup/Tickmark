@@ -1,0 +1,96 @@
+{
+  "id": "14_05",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "14_re_dcf",
+  "domain": "re_dcf",
+  "tier": "A",
+  "sheets": [
+    "NOI_Projection"
+  ],
+  "primary_sheet": "NOI_Projection",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in NOI_Projection!C35:O39. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'NOI_Projection'!B2:O41",
+  "target_cells": [
+    "NOI_Projection!C35:O39"
+  ],
+  "final_output": "NOI_Projection!O39",
+  "final_output_label": "Year 5 / Net Operating Income",
+  "key_outputs": [
+    "NOI_Projection!O39",
+    "NOI_Projection!O35",
+    "NOI_Projection!O36",
+    "NOI_Projection!O37"
+  ],
+  "input_cells": [
+    "NOI_Projection!C6:C7",
+    "NOI_Projection!C10:C14",
+    "NOI_Projection!C17:C18",
+    "NOI_Projection!C22:C25",
+    "NOI_Projection!C28:C30"
+  ],
+  "golden_input_cells": [
+    "NOI_Projection!C10:C14",
+    "NOI_Projection!C17:C18",
+    "NOI_Projection!C22:C25",
+    "NOI_Projection!C28:C30"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "NOI_Projection!O39": 3127865.92363419,
+    "NOI_Projection!O35": 2810444.8,
+    "NOI_Projection!O36": 2886650.508,
+    "NOI_Projection!O37": 2964918.56993
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "NOI_Projection!C10",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 0.0275,
+    "perturbed_value": 0.030250000000000003,
+    "observed_output": "NOI_Projection!O39",
+    "output_before": 3127865.9236341906,
+    "output_after_in_golden": 3180301.0272011883,
+    "expected": "NOI_Projection!O39 must change"
+  },
+  "stats": {
+    "n_target_cells": 65,
+    "n_input_cells": 16,
+    "n_golden_input_cells": 14,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.631,
+    "key_outputs_cover_targets": 0.908,
+    "functions_used": [
+      "SUM"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 7
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/14_re_dcf/14_05_input.xlsx",
+    "golden": "Template/spreadsheet/14_re_dcf/14_05_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "65/65",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

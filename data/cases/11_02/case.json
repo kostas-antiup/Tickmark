@@ -1,0 +1,99 @@
+{
+  "id": "11_02",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "11_ma_model",
+  "domain": "ma_model",
+  "tier": "A",
+  "sheets": [
+    "PPA"
+  ],
+  "primary_sheet": "PPA",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in PPA!D13:D14, PPA!D16, PPA!D22:H24, PPA!D27:H29, PPA!D32:H34. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'PPA'!B2:I36",
+  "target_cells": [
+    "PPA!D13:D14",
+    "PPA!D16",
+    "PPA!D22:H24",
+    "PPA!D27:H29",
+    "PPA!D32:H34"
+  ],
+  "final_output": "PPA!H33",
+  "final_output_label": "Change / Year 5",
+  "key_outputs": [
+    "PPA!H33",
+    "PPA!D33",
+    "PPA!F33",
+    "PPA!D16"
+  ],
+  "input_cells": [
+    "PPA!D7",
+    "PPA!D9:D12",
+    "PPA!F13",
+    "PPA!I24",
+    "PPA!I29"
+  ],
+  "golden_input_cells": [
+    "PPA!D7",
+    "PPA!D9:D12",
+    "PPA!F13",
+    "PPA!I24",
+    "PPA!I29"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "PPA!H33": -9.38,
+    "PPA!D33": -9.38,
+    "PPA!F33": -9.38,
+    "PPA!D16": 1065.7
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "PPA!D11",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 145.0,
+    "perturbed_value": 159.5,
+    "observed_output": "PPA!H33",
+    "output_before": -9.379999999999995,
+    "output_after_in_golden": -9.786000000000001,
+    "expected": "PPA!H33 must change"
+  },
+  "stats": {
+    "n_target_cells": 48,
+    "n_input_cells": 8,
+    "n_golden_input_cells": 8,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.708,
+    "key_outputs_cover_targets": 0.917,
+    "functions_used": [],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 14
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/11_ma_model/11_02_input.xlsx",
+    "golden": "Template/spreadsheet/11_ma_model/11_02_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "48/48",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

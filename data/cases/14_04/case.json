@@ -1,0 +1,103 @@
+{
+  "id": "14_04",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "14_re_dcf",
+  "domain": "re_dcf",
+  "tier": "A",
+  "sheets": [
+    "OpEx_Projection"
+  ],
+  "primary_sheet": "OpEx_Projection",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in OpEx_Projection!D18:E22, OpEx_Projection!D25:E27, OpEx_Projection!C34:G39, OpEx_Projection!C42:G45, OpEx_Projection!C47:G47. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'OpEx_Projection'!B2:G47",
+  "target_cells": [
+    "OpEx_Projection!D18:E22",
+    "OpEx_Projection!D25:E27",
+    "OpEx_Projection!C34:G39",
+    "OpEx_Projection!C42:G45",
+    "OpEx_Projection!C47:G47"
+  ],
+  "final_output": "OpEx_Projection!G47",
+  "final_output_label": "TOTAL OPERATING EXPENSES / Year 5",
+  "key_outputs": [
+    "OpEx_Projection!G47",
+    "OpEx_Projection!C47",
+    "OpEx_Projection!D47",
+    "OpEx_Projection!E47",
+    "OpEx_Projection!F47",
+    "OpEx_Projection!D18"
+  ],
+  "input_cells": [
+    "OpEx_Projection!C6:C7",
+    "OpEx_Projection!C10:C13",
+    "OpEx_Projection!C18:C22",
+    "OpEx_Projection!C25:C27"
+  ],
+  "golden_input_cells": [
+    "OpEx_Projection!C6:C7",
+    "OpEx_Projection!C10:C13",
+    "OpEx_Projection!C18:C22",
+    "OpEx_Projection!C25:C27"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "OpEx_Projection!G47": 2186213.84737268,
+    "OpEx_Projection!C47": 1940212,
+    "OpEx_Projection!D47": 1998964.97,
+    "OpEx_Projection!E47": 2059512.489325,
+    "OpEx_Projection!F47": 2121909.79776856,
+    "OpEx_Projection!D18": 600
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "OpEx_Projection!C6",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 320.0,
+    "perturbed_value": 352.0,
+    "observed_output": "OpEx_Projection!G47",
+    "output_before": 2186213.847372677,
+    "output_after_in_golden": 2195601.1385393124,
+    "expected": "OpEx_Projection!G47 must change"
+  },
+  "stats": {
+    "n_target_cells": 71,
+    "n_input_cells": 14,
+    "n_golden_input_cells": 14,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.606,
+    "key_outputs_cover_targets": 0.789,
+    "functions_used": [
+      "SUM"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 1
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/14_re_dcf/14_04_input.xlsx",
+    "golden": "Template/spreadsheet/14_re_dcf/14_04_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "71/71",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

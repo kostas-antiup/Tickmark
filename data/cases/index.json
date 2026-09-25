@@ -1,0 +1,573 @@
+{
+  "source": "SpreadsheetBench 2 (local copy: spreadsheetbench-v2/Template)",
+  "n_cases": 35,
+  "tiers": {
+    "A": "Same profile as 14_07: blank targets only, every golden target is a live formula tracing to input constants.",
+    "B": "Same as A, plus a few cells the golden fixes at 0 (instructed or first-period); listed in allowed_hardcoded_cells and excluded from target_cells."
+  },
+  "cases": [
+    {
+      "id": "02_01",
+      "path": "data/cases/02_01",
+      "tier": "A",
+      "family": "02_cash_sweep",
+      "sheets": [
+        "Revenue_Analysis"
+      ],
+      "n_target_cells": 27,
+      "final_output": "Revenue_Analysis!F29",
+      "final_output_label": "Projected Revenue / Year 4",
+      "expected_final_value": 4975.66856086925,
+      "multi_sheet": false,
+      "array_formula_targets": 4,
+      "excel_verified": true
+    },
+    {
+      "id": "02_03",
+      "path": "data/cases/02_03",
+      "tier": "A",
+      "family": "02_cash_sweep",
+      "sheets": [
+        "DebtWaterfall",
+        "SharedData"
+      ],
+      "n_target_cells": 49,
+      "final_output": "DebtWaterfall!F25",
+      "final_output_label": "Ending Balance / Q4",
+      "expected_final_value": 1420,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "02_05",
+      "path": "data/cases/02_05",
+      "tier": "A",
+      "family": "02_cash_sweep",
+      "sheets": [
+        "DebtWaterfall"
+      ],
+      "n_target_cells": 72,
+      "final_output": "DebtWaterfall!E34",
+      "final_output_label": "Total interest expense / Year 4",
+      "expected_final_value": 16.2,
+      "multi_sheet": false,
+      "array_formula_targets": 16,
+      "excel_verified": true
+    },
+    {
+      "id": "02_06",
+      "path": "data/cases/02_06",
+      "tier": "A",
+      "family": "02_cash_sweep",
+      "sheets": [
+        "DebtWaterfall"
+      ],
+      "n_target_cells": 64,
+      "final_output": "DebtWaterfall!E31",
+      "final_output_label": "Interest expense / Year 4",
+      "expected_final_value": 68,
+      "multi_sheet": false,
+      "array_formula_targets": 12,
+      "excel_verified": true
+    },
+    {
+      "id": "04_04",
+      "path": "data/cases/04_04",
+      "tier": "A",
+      "family": "04_dcf_valuation",
+      "sheets": [
+        "FCF_Calc"
+      ],
+      "n_target_cells": 36,
+      "final_output": "FCF_Calc!G28",
+      "final_output_label": "Free Cash Flow / Q4 2025",
+      "expected_final_value": 33.827631424,
+      "multi_sheet": false,
+      "array_formula_targets": 4,
+      "excel_verified": true
+    },
+    {
+      "id": "06_02",
+      "path": "data/cases/06_02",
+      "tier": "A",
+      "family": "06_equity_forecast",
+      "sheets": [
+        "WC_Forecast"
+      ],
+      "n_target_cells": 44,
+      "final_output": "WC_Forecast!H32",
+      "final_output_label": "Total Change in Working Capital / Q2 2025E",
+      "expected_final_value": -68.2739726027403,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "06_03",
+      "path": "data/cases/06_03",
+      "tier": "A",
+      "family": "06_equity_forecast",
+      "sheets": [
+        "iPhone_Revenue_Build"
+      ],
+      "n_target_cells": 127,
+      "final_output": "iPhone_Revenue_Build!J46",
+      "final_output_label": "Total Revenue YoY Growth % / Q4'24",
+      "expected_final_value": 0.442502106482937,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "06_04",
+      "path": "data/cases/06_04",
+      "tier": "A",
+      "family": "06_equity_forecast",
+      "sheets": [
+        "DrugRevenue",
+        "SharedData"
+      ],
+      "n_target_cells": 26,
+      "final_output": "DrugRevenue!J17",
+      "final_output_label": "Total Vexira Revenue / FY2027",
+      "expected_final_value": 10063.632796,
+      "multi_sheet": true,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "06_05",
+      "path": "data/cases/06_05",
+      "tier": "A",
+      "family": "06_equity_forecast",
+      "sheets": [
+        "WorkingCapital"
+      ],
+      "n_target_cells": 24,
+      "final_output": "WorkingCapital!F27",
+      "final_output_label": "Change in Net Working Capital / 4Q25",
+      "expected_final_value": -39.3576841800041,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "06_12",
+      "path": "data/cases/06_12",
+      "tier": "A",
+      "family": "06_equity_forecast",
+      "sheets": [
+        "CashFlow_Build"
+      ],
+      "n_target_cells": 30,
+      "final_output": "CashFlow_Build!M14",
+      "final_output_label": "Cash from Operations / 2025E",
+      "expected_final_value": 203.000000000001,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "06_13",
+      "path": "data/cases/06_13",
+      "tier": "A",
+      "family": "06_equity_forecast",
+      "sheets": [
+        "CashFlowBuild"
+      ],
+      "n_target_cells": 127,
+      "final_output": "CashFlowBuild!J51",
+      "final_output_label": "Ending cash balance / Q4 2025",
+      "expected_final_value": 427.5,
+      "multi_sheet": false,
+      "array_formula_targets": 39,
+      "excel_verified": true
+    },
+    {
+      "id": "06_15",
+      "path": "data/cases/06_15",
+      "tier": "A",
+      "family": "06_equity_forecast",
+      "sheets": [
+        "WorkingCapital"
+      ],
+      "n_target_cells": 41,
+      "final_output": "WorkingCapital!D24",
+      "final_output_label": "Change in Working Capital / Q2 2023",
+      "expected_final_value": 95.2222222222235,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "06_18",
+      "path": "data/cases/06_18",
+      "tier": "A",
+      "family": "06_equity_forecast",
+      "sheets": [
+        "WorkingCapital_Forecast"
+      ],
+      "n_target_cells": 20,
+      "final_output": "WorkingCapital_Forecast!E21",
+      "final_output_label": "Change in Net Working Capital / Q2 FY24E",
+      "expected_final_value": 211.377777777779,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "06_21",
+      "path": "data/cases/06_21",
+      "tier": "A",
+      "family": "06_equity_forecast",
+      "sheets": [
+        "WorkingCapital"
+      ],
+      "n_target_cells": 27,
+      "final_output": "WorkingCapital!F32",
+      "final_output_label": "Cash Flow Impact (use of cash) / 2025E",
+      "expected_final_value": 98.6712328767126,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "06_24",
+      "path": "data/cases/06_24",
+      "tier": "A",
+      "family": "06_equity_forecast",
+      "sheets": [
+        "RevenueBuild"
+      ],
+      "n_target_cells": 39,
+      "final_output": "RevenueBuild!G32",
+      "final_output_label": "Total Revenue / FY 2023",
+      "expected_final_value": 3103.8075,
+      "multi_sheet": false,
+      "array_formula_targets": 6,
+      "excel_verified": true
+    },
+    {
+      "id": "08_01",
+      "path": "data/cases/08_01",
+      "tier": "A",
+      "family": "08_fin_model_basics",
+      "sheets": [
+        "DebtSchedule"
+      ],
+      "n_target_cells": 40,
+      "final_output": "DebtSchedule!G13",
+      "final_output_label": "Total Interest Expense / Year 5",
+      "expected_final_value": -68.3773753264091,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "09_03",
+      "path": "data/cases/09_03",
+      "tier": "A",
+      "family": "09_lbo_model",
+      "sheets": [
+        "Sheet"
+      ],
+      "n_target_cells": 73,
+      "final_output": "Sheet!H30",
+      "final_output_label": "Average Balance / Year 5",
+      "expected_final_value": 45,
+      "multi_sheet": false,
+      "array_formula_targets": 18,
+      "excel_verified": true
+    },
+    {
+      "id": "09_04",
+      "path": "data/cases/09_04",
+      "tier": "A",
+      "family": "09_lbo_model",
+      "sheets": [
+        "DebtSchedule"
+      ],
+      "n_target_cells": 97,
+      "final_output": "DebtSchedule!M25",
+      "final_output_label": "Ending Balance / Year 5",
+      "expected_final_value": 38.5,
+      "multi_sheet": false,
+      "array_formula_targets": 42,
+      "excel_verified": true
+    },
+    {
+      "id": "10_01",
+      "path": "data/cases/10_01",
+      "tier": "A",
+      "family": "10_ma_analysis",
+      "sheets": [
+        "EPS_Accretion"
+      ],
+      "n_target_cells": 25,
+      "final_output": "EPS_Accretion!C50",
+      "final_output_label": "Accretion/(Dilution) % / Year 1",
+      "expected_final_value": -0.104204100227791,
+      "multi_sheet": false,
+      "array_formula_targets": 6,
+      "excel_verified": true
+    },
+    {
+      "id": "10_02",
+      "path": "data/cases/10_02",
+      "tier": "A",
+      "family": "10_ma_analysis",
+      "sheets": [
+        "EPS_Accretion"
+      ],
+      "n_target_cells": 27,
+      "final_output": "EPS_Accretion!C40",
+      "final_output_label": "Accretion / (Dilution) % / FY1",
+      "expected_final_value": 0.169334397854577,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "11_01",
+      "path": "data/cases/11_01",
+      "tier": "A",
+      "family": "11_ma_model",
+      "sheets": [
+        "DebtSchedule"
+      ],
+      "n_target_cells": 49,
+      "final_output": "DebtSchedule!K15",
+      "final_output_label": "Interest expense / Year 7",
+      "expected_final_value": 13.0867920679309,
+      "multi_sheet": false,
+      "array_formula_targets": 15,
+      "excel_verified": true
+    },
+    {
+      "id": "11_02",
+      "path": "data/cases/11_02",
+      "tier": "A",
+      "family": "11_ma_model",
+      "sheets": [
+        "PPA"
+      ],
+      "n_target_cells": 48,
+      "final_output": "PPA!H33",
+      "final_output_label": "Change / Year 5",
+      "expected_final_value": -9.38,
+      "multi_sheet": false,
+      "array_formula_targets": 14,
+      "excel_verified": true
+    },
+    {
+      "id": "11_04",
+      "path": "data/cases/11_04",
+      "tier": "A",
+      "family": "11_ma_model",
+      "sheets": [
+        "PPA"
+      ],
+      "n_target_cells": 28,
+      "final_output": "PPA!H35",
+      "final_output_label": "Ending Balance / Q2 Year 2",
+      "expected_final_value": 105.56,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "14_02",
+      "path": "data/cases/14_02",
+      "tier": "A",
+      "family": "14_re_dcf",
+      "sheets": [
+        "OpEx_Projection"
+      ],
+      "n_target_cells": 83,
+      "final_output": "OpEx_Projection!L27",
+      "final_output_label": "TOTAL OPERATING EXPENSES / Year 5",
+      "expected_final_value": 1754402.98799425,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "14_03",
+      "path": "data/cases/14_03",
+      "tier": "A",
+      "family": "14_re_dcf",
+      "sheets": [
+        "NOI_Projection"
+      ],
+      "n_target_cells": 55,
+      "final_output": "NOI_Projection!C49",
+      "final_output_label": "Net Sale Proceeds / Year 2",
+      "expected_final_value": 67371399.2848124,
+      "multi_sheet": false,
+      "array_formula_targets": 1,
+      "excel_verified": true
+    },
+    {
+      "id": "14_04",
+      "path": "data/cases/14_04",
+      "tier": "A",
+      "family": "14_re_dcf",
+      "sheets": [
+        "OpEx_Projection"
+      ],
+      "n_target_cells": 71,
+      "final_output": "OpEx_Projection!G47",
+      "final_output_label": "TOTAL OPERATING EXPENSES / Year 5",
+      "expected_final_value": 2186213.84737268,
+      "multi_sheet": false,
+      "array_formula_targets": 1,
+      "excel_verified": true
+    },
+    {
+      "id": "14_05",
+      "path": "data/cases/14_05",
+      "tier": "A",
+      "family": "14_re_dcf",
+      "sheets": [
+        "NOI_Projection"
+      ],
+      "n_target_cells": 65,
+      "final_output": "NOI_Projection!O39",
+      "final_output_label": "Year 5 / Net Operating Income",
+      "expected_final_value": 3127865.92363419,
+      "multi_sheet": false,
+      "array_formula_targets": 7,
+      "excel_verified": true
+    },
+    {
+      "id": "14_06",
+      "path": "data/cases/14_06",
+      "tier": "A",
+      "family": "14_re_dcf",
+      "sheets": [
+        "OpEx_Projection",
+        "SharedData"
+      ],
+      "n_target_cells": 42,
+      "final_output": "OpEx_Projection!I34",
+      "final_output_label": "TOTAL / Total OpEx",
+      "expected_final_value": 25092705.0290616,
+      "multi_sheet": true,
+      "array_formula_targets": 2,
+      "excel_verified": true
+    },
+    {
+      "id": "14_07",
+      "path": "data/cases/14_07",
+      "tier": "A",
+      "family": "14_re_dcf",
+      "sheets": [
+        "RentRoll"
+      ],
+      "n_target_cells": 20,
+      "final_output": "RentRoll!G20",
+      "final_output_label": "Net Rental Revenue / TOTAL",
+      "expected_final_value": 9080487,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "14_08",
+      "path": "data/cases/14_08",
+      "tier": "A",
+      "family": "14_re_dcf",
+      "sheets": [
+        "OpEx_Projection"
+      ],
+      "n_target_cells": 141,
+      "final_output": "OpEx_Projection!G47",
+      "final_output_label": "Net Operating Income / Year 1 Total",
+      "expected_final_value": 5061975,
+      "multi_sheet": false,
+      "array_formula_targets": 10,
+      "excel_verified": true
+    },
+    {
+      "id": "16_01",
+      "path": "data/cases/16_01",
+      "tier": "A",
+      "family": "16_re_direct_cap",
+      "sheets": [
+        "DirectCap"
+      ],
+      "n_target_cells": 35,
+      "final_output": "DirectCap!D46",
+      "final_output_label": "Property Valuation / Annual Total",
+      "expected_final_value": 176060983.333333,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "16_04",
+      "path": "data/cases/16_04",
+      "tier": "A",
+      "family": "16_re_direct_cap",
+      "sheets": [
+        "RentRoll"
+      ],
+      "n_target_cells": 28,
+      "final_output": "RentRoll!O13",
+      "final_output_label": "TOTALS / Net Rental Revenue (Annual)",
+      "expected_final_value": 12150480,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "06_23",
+      "path": "data/cases/06_23",
+      "tier": "B",
+      "family": "06_equity_forecast",
+      "sheets": [
+        "WorkingCapital"
+      ],
+      "n_target_cells": 52,
+      "final_output": "WorkingCapital!E52",
+      "final_output_label": "Cash Flow from Operating Activities / 2023A",
+      "expected_final_value": 1580.01369863014,
+      "multi_sheet": false,
+      "array_formula_targets": 5,
+      "excel_verified": true
+    },
+    {
+      "id": "13_06",
+      "path": "data/cases/13_06",
+      "tier": "B",
+      "family": "13_nonrecurring",
+      "sheets": [
+        "FinancialNormalization"
+      ],
+      "n_target_cells": 73,
+      "final_output": "FinancialNormalization!I36",
+      "final_output_label": "Normalized Diluted EPS / 2025E",
+      "expected_final_value": 0.753327409992329,
+      "multi_sheet": false,
+      "array_formula_targets": 0,
+      "excel_verified": true
+    },
+    {
+      "id": "14_09",
+      "path": "data/cases/14_09",
+      "tier": "B",
+      "family": "14_re_dcf",
+      "sheets": [
+        "Revenue_Projection"
+      ],
+      "n_target_cells": 69,
+      "final_output": "Revenue_Projection!I46",
+      "final_output_label": "Sum / Total",
+      "expected_final_value": 37207664.7929452,
+      "multi_sheet": false,
+      "array_formula_targets": 5,
+      "excel_verified": true
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "id": "02_06",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "02_cash_sweep",
+  "domain": "cash_sweep",
+  "tier": "A",
+  "sheets": [
+    "DebtWaterfall"
+  ],
+  "primary_sheet": "DebtWaterfall",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in DebtWaterfall!C5:E5, DebtWaterfall!B6:E6, DebtWaterfall!B8:E8, DebtWaterfall!C13:E13, DebtWaterfall!B14:E15, DebtWaterfall!B17:E18, DebtWaterfall!C20:E20, DebtWaterfall!B21:E22, DebtWaterfall!B24:E25, DebtWaterfall!C27:E27, DebtWaterfall!B28:E29, DebtWaterfall!B31:E31. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'DebtWaterfall'!A1:E40",
+  "target_cells": [
+    "DebtWaterfall!C5:E5",
+    "DebtWaterfall!B6:E6",
+    "DebtWaterfall!B8:E8",
+    "DebtWaterfall!C13:E13",
+    "DebtWaterfall!B14:E15",
+    "DebtWaterfall!B17:E18",
+    "DebtWaterfall!C20:E20",
+    "DebtWaterfall!B21:E22",
+    "DebtWaterfall!B24:E25",
+    "DebtWaterfall!C27:E27",
+    "DebtWaterfall!B28:E29",
+    "DebtWaterfall!B31:E31"
+  ],
+  "final_output": "DebtWaterfall!E31",
+  "final_output_label": "Interest expense / Year 4",
+  "key_outputs": [
+    "DebtWaterfall!E31",
+    "DebtWaterfall!E17",
+    "DebtWaterfall!E24",
+    "DebtWaterfall!B17",
+    "DebtWaterfall!C17",
+    "DebtWaterfall!D17"
+  ],
+  "input_cells": [
+    "DebtWaterfall!B5",
+    "DebtWaterfall!B7:E7",
+    "DebtWaterfall!B10:E10",
+    "DebtWaterfall!B13",
+    "DebtWaterfall!B16:E16",
+    "DebtWaterfall!B20",
+    "DebtWaterfall!B23:E23",
+    "DebtWaterfall!B27",
+    "DebtWaterfall!B30:E30"
+  ],
+  "golden_input_cells": [
+    "DebtWaterfall!B5",
+    "DebtWaterfall!B7:E7",
+    "DebtWaterfall!B10:E10",
+    "DebtWaterfall!B13",
+    "DebtWaterfall!B16:E16",
+    "DebtWaterfall!B20",
+    "DebtWaterfall!B23:E23",
+    "DebtWaterfall!B27",
+    "DebtWaterfall!B30:E30"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "DebtWaterfall!E31": 68,
+    "DebtWaterfall!E17": 0,
+    "DebtWaterfall!E24": 93.9258666666667,
+    "DebtWaterfall!B17": 0,
+    "DebtWaterfall!C17": 0,
+    "DebtWaterfall!D17": 0
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "DebtWaterfall!B27",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 1500.0,
+    "perturbed_value": 1650.0000000000002,
+    "observed_output": "DebtWaterfall!E31",
+    "output_before": 68.0,
+    "output_after_in_golden": 74.80000000000003,
+    "expected": "DebtWaterfall!E31 must change"
+  },
+  "stats": {
+    "n_target_cells": 64,
+    "n_input_cells": 24,
+    "n_golden_input_cells": 24,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.797,
+    "key_outputs_cover_targets": 0.906,
+    "functions_used": [
+      "AVERAGE",
+      "MIN"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 12
+  },
+  "notes": [
+    "The 0.4%-of-sales minimum cash rule is stated only in the row label; the golden embeds 0.004 in the formula. Formulas still trace to input cells."
+  ],
+  "source_paths": {
+    "input": "Template/spreadsheet/02_cash_sweep/02_06_input.xlsx",
+    "golden": "Template/spreadsheet/02_cash_sweep/02_06_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "64/64",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

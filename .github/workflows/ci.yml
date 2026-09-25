@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint and type check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --dev --extra audit --frozen
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run ty check .
+
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --dev --extra audit --frozen
+      - run: uv run pytest tests -v
+
+  libreoffice:
+    name: LibreOffice engine
+    runs-on: ubuntu-latest
+    container: python:3.14-slim
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install LibreOffice Calc and uv
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends libreoffice-calc-nogui
+          pip install --no-cache-dir uv
+      - run: uv sync --dev --extra audit --frozen
+      - name: LibreOffice tests
+        run: uv run pytest tests -m libreoffice -v
+      - name: Reference self-test (every golden workbook passes its own case)
+        run: uv run python scripts/run_benchmark.py --case data/cases --golden --engine libreoffice --out /tmp/results
+      - name: Broken-workbook regression (every variant fails with the expected scores)
+        run: |
+          uv run python scripts/generate_malformed_outputs.py --case data/cases/14_07 data/cases/16_04 data/cases/02_05 --output-root /tmp/malformed
+          # run_benchmark exits 1 because every variant fails; 3 (could not grade) fails the build.
+          uv run python scripts/run_benchmark.py --case data/cases/14_07 data/cases/16_04 data/cases/02_05 --malformed-root /tmp/malformed --engine libreoffice --out /tmp/malformed_reports || [ $? -eq 1 ]
+          uv run python scripts/evaluate_malformed_results.py --malformed-root /tmp/malformed --reports-root /tmp/malformed_reports --engine libreoffice --max-failures 0
+          uv run python scripts/compare_graders.py --reports-root /tmp/malformed_reports --engine libreoffice

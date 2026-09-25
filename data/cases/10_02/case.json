@@ -1,0 +1,99 @@
+{
+  "id": "10_02",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "10_ma_analysis",
+  "domain": "ma_analysis",
+  "tier": "A",
+  "sheets": [
+    "EPS_Accretion"
+  ],
+  "primary_sheet": "EPS_Accretion",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in EPS_Accretion!E10, EPS_Accretion!C24:D25, EPS_Accretion!C28:D35, EPS_Accretion!C38:D40. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'EPS_Accretion'!B2:E42",
+  "target_cells": [
+    "EPS_Accretion!E10",
+    "EPS_Accretion!C24:D25",
+    "EPS_Accretion!C28:D35",
+    "EPS_Accretion!C38:D40"
+  ],
+  "final_output": "EPS_Accretion!C40",
+  "final_output_label": "Accretion / (Dilution) % / FY1",
+  "key_outputs": [
+    "EPS_Accretion!C40",
+    "EPS_Accretion!D40"
+  ],
+  "input_cells": [
+    "EPS_Accretion!C8:D8",
+    "EPS_Accretion!D9",
+    "EPS_Accretion!C10:D10",
+    "EPS_Accretion!D13:E14",
+    "EPS_Accretion!D17:D19",
+    "EPS_Accretion!C22:D23"
+  ],
+  "golden_input_cells": [
+    "EPS_Accretion!C8",
+    "EPS_Accretion!D9",
+    "EPS_Accretion!C10:D10",
+    "EPS_Accretion!D13:E14",
+    "EPS_Accretion!D17",
+    "EPS_Accretion!D19",
+    "EPS_Accretion!C22:D23"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "EPS_Accretion!C40": 0.169334397854577,
+    "EPS_Accretion!D40": 0.180101957334462
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "EPS_Accretion!C8",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 18.75,
+    "perturbed_value": 20.625,
+    "observed_output": "EPS_Accretion!C40",
+    "output_before": 0.16933439785457746,
+    "output_after_in_golden": 0.18772376157984205,
+    "expected": "EPS_Accretion!C40 must change"
+  },
+  "stats": {
+    "n_target_cells": 27,
+    "n_input_cells": 16,
+    "n_golden_input_cells": 14,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.481,
+    "key_outputs_cover_targets": 0.926,
+    "functions_used": [
+      "SUM"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 0
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/10_ma_analysis/10_02_input.xlsx",
+    "golden": "Template/spreadsheet/10_ma_analysis/10_02_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "27/27",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

@@ -1,0 +1,26 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.ty_cache/
+*.egg-info/
+.coverage
+coverage.xml
+htmlcov/
+
+# Downloaded third-party benchmarks and generated outputs
+data/bluefin/*
+!data/bluefin/README.md
+data/sheetcopilot/*
+!data/sheetcopilot/README.md
+results/*
+!results/.gitkeep
+
+# Excel lock files and local state
+~$*.xlsx
+.ipynb_checkpoints/
+.DS_Store
+.env
+.env.*
+!.env.example

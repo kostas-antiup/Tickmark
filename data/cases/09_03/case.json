@@ -1,0 +1,108 @@
+{
+  "id": "09_03",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "09_lbo_model",
+  "domain": "lbo_model",
+  "tier": "A",
+  "sheets": [
+    "Sheet"
+  ],
+  "primary_sheet": "Sheet",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in Sheet!D10:H12, Sheet!D15:H15, Sheet!E18:H18, Sheet!D19:H22, Sheet!D24:H24, Sheet!E27:H27, Sheet!D28:H30, Sheet!D32:H32. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'Sheet'!B2:H36",
+  "target_cells": [
+    "Sheet!D10:H12",
+    "Sheet!D15:H15",
+    "Sheet!E18:H18",
+    "Sheet!D19:H22",
+    "Sheet!D24:H24",
+    "Sheet!E27:H27",
+    "Sheet!D28:H30",
+    "Sheet!D32:H32"
+  ],
+  "final_output": "Sheet!H30",
+  "final_output_label": "Average Balance / Year 5",
+  "key_outputs": [
+    "Sheet!H30",
+    "Sheet!D22",
+    "Sheet!E22"
+  ],
+  "input_cells": [
+    "Sheet!D9:H9",
+    "Sheet!D13:H14",
+    "Sheet!D18",
+    "Sheet!D23:H23",
+    "Sheet!D27",
+    "Sheet!D31:H31",
+    "Sheet!D35:D36"
+  ],
+  "golden_input_cells": [
+    "Sheet!D9:H9",
+    "Sheet!D13:H14",
+    "Sheet!D18",
+    "Sheet!D23:H23",
+    "Sheet!D27",
+    "Sheet!D31:H31",
+    "Sheet!D35:D36"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "Sheet!H30": 45,
+    "Sheet!D22": 169.2,
+    "Sheet!E22": 144.7836
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "Sheet!D27",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 45.0,
+    "perturbed_value": 49.50000000000001,
+    "observed_output": "Sheet!H30",
+    "output_before": 45.0,
+    "output_after_in_golden": 49.50000000000001,
+    "expected": "Sheet!H30 must change"
+  },
+  "stats": {
+    "n_target_cells": 73,
+    "n_input_cells": 29,
+    "n_golden_input_cells": 29,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.877,
+    "key_outputs_cover_targets": 0.904,
+    "functions_used": [
+      "IF",
+      "MAX",
+      "MIN"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 18
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/09_lbo_model/09_03_input.xlsx",
+    "golden": "Template/spreadsheet/09_lbo_model/09_03_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "73/73",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "id": "13_06",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "13_nonrecurring",
+  "domain": "nonrecurring",
+  "tier": "B",
+  "sheets": [
+    "FinancialNormalization"
+  ],
+  "primary_sheet": "FinancialNormalization",
+  "instruction": "Normalize the financial statements for non-recurring items, calculate historical metrics, and forecast 2023E-2025E using normalized assumptions. Enter 0% for 2020 revenue growth. Fill in the empty cells in FinancialNormalization!G8:I8, FinancialNormalization!G14:I14, FinancialNormalization!D15:I15, FinancialNormalization!G21:I21, FinancialNormalization!D22:I22, FinancialNormalization!D24:I24, FinancialNormalization!D26:I26, FinancialNormalization!G32:I32, FinancialNormalization!D33:I33, FinancialNormalization!D36:I36, FinancialNormalization!E42:I42, FinancialNormalization!D43:J43, FinancialNormalization!D44:I44, FinancialNormalization!D45:J45. Use live formulas that reference the existing input cells; do not hardcode calculated results. Values that the instruction explicitly fixes may be entered directly.",
+  "source_instruction": "Normalize the financial statements for non-recurring items, calculate historical metrics, and forecast 2023E-2025E using normalized assumptions. Enter 0% for 2020 revenue growth.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'FinancialNormalization'!B2:K51",
+  "target_cells": [
+    "FinancialNormalization!G8:I8",
+    "FinancialNormalization!G14:I14",
+    "FinancialNormalization!D15:I15",
+    "FinancialNormalization!G21:I21",
+    "FinancialNormalization!D22:I22",
+    "FinancialNormalization!D24:I24",
+    "FinancialNormalization!D26:I26",
+    "FinancialNormalization!G32:I32",
+    "FinancialNormalization!D33:I33",
+    "FinancialNormalization!D36:I36",
+    "FinancialNormalization!E42:I42",
+    "FinancialNormalization!D43:J43",
+    "FinancialNormalization!D44:I44",
+    "FinancialNormalization!D45:J45"
+  ],
+  "final_output": "FinancialNormalization!I36",
+  "final_output_label": "Normalized Diluted EPS / 2025E",
+  "key_outputs": [
+    "FinancialNormalization!I36",
+    "FinancialNormalization!H36",
+    "FinancialNormalization!G36",
+    "FinancialNormalization!D36",
+    "FinancialNormalization!E36",
+    "FinancialNormalization!F36"
+  ],
+  "input_cells": [
+    "FinancialNormalization!D6:F6",
+    "FinancialNormalization!D8:F10",
+    "FinancialNormalization!D16:F17",
+    "FinancialNormalization!D23:I23",
+    "FinancialNormalization!D25:I25",
+    "FinancialNormalization!D27:F28",
+    "FinancialNormalization!D35:I35",
+    "FinancialNormalization!D40:F40",
+    "FinancialNormalization!D42"
+  ],
+  "golden_input_cells": [
+    "FinancialNormalization!D8:F10",
+    "FinancialNormalization!D16:F17",
+    "FinancialNormalization!D23:I23",
+    "FinancialNormalization!D25:I25",
+    "FinancialNormalization!D27:F28",
+    "FinancialNormalization!D35:I35"
+  ],
+  "allowed_hardcoded_cells": [
+    {
+      "cells": [
+        "FinancialNormalization!D42"
+      ],
+      "reason": "Instruction says 'Enter 0% for 2020 revenue growth'."
+    }
+  ],
+  "expected_outputs": {
+    "FinancialNormalization!I36": 0.753327409992329,
+    "FinancialNormalization!H36": 0.685546723629975,
+    "FinancialNormalization!G36": 0.623614407658337,
+    "FinancialNormalization!D36": 0.417777777777778,
+    "FinancialNormalization!E36": 0.564444444444444,
+    "FinancialNormalization!F36": 0.582222222222222
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "FinancialNormalization!D8",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 420.0,
+    "perturbed_value": 462.00000000000006,
+    "observed_output": "FinancialNormalization!I36",
+    "output_before": 0.7533274099923292,
+    "output_after_in_golden": 0.708666901324658,
+    "expected": "FinancialNormalization!I36 must change"
+  },
+  "stats": {
+    "n_target_cells": 73,
+    "n_input_cells": 46,
+    "n_golden_input_cells": 39,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.534,
+    "key_outputs_cover_targets": 0.849,
+    "functions_used": [
+      "AVERAGE"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 0
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/13_nonrecurring/13_06_input.xlsx",
+    "golden": "Template/spreadsheet/13_nonrecurring/13_06_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "73/73",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

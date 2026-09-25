@@ -1,0 +1,96 @@
+{
+  "id": "09_04",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "09_lbo_model",
+  "domain": "lbo_model",
+  "tier": "A",
+  "sheets": [
+    "DebtSchedule"
+  ],
+  "primary_sheet": "DebtSchedule",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in DebtSchedule!C16:M16, DebtSchedule!C19:M20, DebtSchedule!D23:M23, DebtSchedule!C24:M25, DebtSchedule!D28:M28, DebtSchedule!C29:M30. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'DebtSchedule'!B2:M35",
+  "target_cells": [
+    "DebtSchedule!C16:M16",
+    "DebtSchedule!C19:M20",
+    "DebtSchedule!D23:M23",
+    "DebtSchedule!C24:M25",
+    "DebtSchedule!D28:M28",
+    "DebtSchedule!C29:M30"
+  ],
+  "final_output": "DebtSchedule!M25",
+  "final_output_label": "Ending Balance / Year 5",
+  "key_outputs": [
+    "DebtSchedule!M25",
+    "DebtSchedule!M30"
+  ],
+  "input_cells": [
+    "DebtSchedule!C9:M14",
+    "DebtSchedule!C23",
+    "DebtSchedule!C28"
+  ],
+  "golden_input_cells": [
+    "DebtSchedule!C9:M14",
+    "DebtSchedule!C23",
+    "DebtSchedule!C28"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "DebtSchedule!M25": 38.5,
+    "DebtSchedule!M30": 35
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "DebtSchedule!C9",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 6.5,
+    "perturbed_value": 7.15,
+    "observed_output": "DebtSchedule!M25",
+    "output_before": 38.49999999999998,
+    "output_after_in_golden": 37.84999999999997,
+    "expected": "DebtSchedule!M25 must change"
+  },
+  "stats": {
+    "n_target_cells": 97,
+    "n_input_cells": 68,
+    "n_golden_input_cells": 68,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.557,
+    "key_outputs_cover_targets": 0.979,
+    "functions_used": [
+      "MIN"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 42
+  },
+  "notes": [
+    "Final output overridden to the Year 5 senior-debt ending balance (M25). The auto-picked sub-debt ending balance (M30) stays at 35 because the MIN-based waterfall repays senior debt first, so it barely responds to input changes."
+  ],
+  "source_paths": {
+    "input": "Template/spreadsheet/09_lbo_model/09_04_input.xlsx",
+    "golden": "Template/spreadsheet/09_lbo_model/09_04_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "97/97",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

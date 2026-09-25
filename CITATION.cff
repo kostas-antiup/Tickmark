@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use Tickmark, please cite it as below."
+type: software
+title: "Tickmark: Auditing Whether Spreadsheet Agents Build Real Financial Models"
+abstract: >-
+  Tickmark is a benchmark that checks whether AI spreadsheet agents build live,
+  auditable financial models rather than only producing the right numbers. It
+  recalculates each submitted workbook in Excel or LibreOffice, changes its inputs,
+  and audits formula coverage, traceability to declared inputs and hidden
+  hardcoded values against a reference model, on 35 financial-model cases.
+authors:
+  - given-names: Kostas
+    family-names: Ragauskas
+    affiliation: AAI Labs
+  - given-names: Jadrine
+    family-names: Kaburu
+    affiliation: AAI Labs
+  - given-names: Jeremiah
+    family-names: Abunga
+    affiliation: AAI Labs
+  - given-names: Jonas
+    family-names: Paulavičius
+    affiliation: AAI Labs
+  - given-names: Ugnė
+    family-names: Antanaitytė
+    affiliation: AAI Labs
+repository-code: "https://github.com/kostas-antiup/tickmark"
+url: "https://github.com/kostas-antiup/tickmark"
+license: MIT
+version: 0.1.0
+date-released: "2026-09-25"
+keywords:
+  - benchmark
+  - llm agents
+  - spreadsheets
+  - financial modeling
+  - evaluation

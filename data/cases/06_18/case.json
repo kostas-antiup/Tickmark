@@ -1,0 +1,88 @@
+{
+  "id": "06_18",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "06_equity_forecast",
+  "domain": "equity_forecast",
+  "tier": "A",
+  "sheets": [
+    "WorkingCapital_Forecast"
+  ],
+  "primary_sheet": "WorkingCapital_Forecast",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in WorkingCapital_Forecast!D16:G18, WorkingCapital_Forecast!D20:G21. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'WorkingCapital_Forecast'!A2:G24",
+  "target_cells": [
+    "WorkingCapital_Forecast!D16:G18",
+    "WorkingCapital_Forecast!D20:G21"
+  ],
+  "final_output": "WorkingCapital_Forecast!E21",
+  "final_output_label": "Change in Net Working Capital / Q2 FY24E",
+  "key_outputs": [
+    "WorkingCapital_Forecast!E21",
+    "WorkingCapital_Forecast!G21"
+  ],
+  "input_cells": [
+    "WorkingCapital_Forecast!B6:G6",
+    "WorkingCapital_Forecast!B10:G13"
+  ],
+  "golden_input_cells": [
+    "WorkingCapital_Forecast!C6:G6",
+    "WorkingCapital_Forecast!C10:G13"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "WorkingCapital_Forecast!E21": 211.377777777779,
+    "WorkingCapital_Forecast!G21": 175.822222222222
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "WorkingCapital_Forecast!D6",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 14000.0,
+    "perturbed_value": 15400.000000000002,
+    "observed_output": "WorkingCapital_Forecast!E21",
+    "output_before": 211.37777777777865,
+    "output_after_in_golden": -446.3111111111102,
+    "expected": "WorkingCapital_Forecast!E21 must change"
+  },
+  "stats": {
+    "n_target_cells": 20,
+    "n_input_cells": 30,
+    "n_golden_input_cells": 25,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.45,
+    "key_outputs_cover_targets": 0.9,
+    "functions_used": [],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 0
+  },
+  "notes": [
+    "Golden uses the literal 90 (days per quarter) for working-capital days."
+  ],
+  "source_paths": {
+    "input": "Template/spreadsheet/06_equity_forecast/06_18_input.xlsx",
+    "golden": "Template/spreadsheet/06_equity_forecast/06_18_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "20/20",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

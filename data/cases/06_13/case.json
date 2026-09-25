@@ -1,0 +1,111 @@
+{
+  "id": "06_13",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "06_equity_forecast",
+  "domain": "equity_forecast",
+  "tier": "A",
+  "sheets": [
+    "CashFlowBuild"
+  ],
+  "primary_sheet": "CashFlowBuild",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in CashFlowBuild!C13:J13, CashFlowBuild!C15:J15, CashFlowBuild!C17:J17, CashFlowBuild!C29:J33, CashFlowBuild!C38:J38, CashFlowBuild!C44:J44, CashFlowBuild!C46:J46, CashFlowBuild!D49:J49, CashFlowBuild!C50:J51, CashFlowBuild!C54:J55. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'CashFlowBuild'!B2:J55",
+  "target_cells": [
+    "CashFlowBuild!C13:J13",
+    "CashFlowBuild!C15:J15",
+    "CashFlowBuild!C17:J17",
+    "CashFlowBuild!C29:J33",
+    "CashFlowBuild!C38:J38",
+    "CashFlowBuild!C44:J44",
+    "CashFlowBuild!C46:J46",
+    "CashFlowBuild!D49:J49",
+    "CashFlowBuild!C50:J51",
+    "CashFlowBuild!C54:J55"
+  ],
+  "final_output": "CashFlowBuild!J51",
+  "final_output_label": "Ending cash balance / Q4 2025",
+  "key_outputs": [
+    "CashFlowBuild!J51",
+    "CashFlowBuild!C55",
+    "CashFlowBuild!D55"
+  ],
+  "input_cells": [
+    "CashFlowBuild!C9:J12",
+    "CashFlowBuild!C14:J14",
+    "CashFlowBuild!C16:J16",
+    "CashFlowBuild!C20:J24",
+    "CashFlowBuild!C36:J37",
+    "CashFlowBuild!C41:J43",
+    "CashFlowBuild!C49"
+  ],
+  "golden_input_cells": [
+    "CashFlowBuild!C9:J12",
+    "CashFlowBuild!C14:J14",
+    "CashFlowBuild!C16:J16",
+    "CashFlowBuild!C20:J24",
+    "CashFlowBuild!C36:J37",
+    "CashFlowBuild!C41:J43",
+    "CashFlowBuild!C49"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "CashFlowBuild!J51": 427.5,
+    "CashFlowBuild!C55": 0.228228228228228,
+    "CashFlowBuild!D55": 0.31800766283525
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "CashFlowBuild!C9",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 385.2,
+    "perturbed_value": 423.72,
+    "observed_output": "CashFlowBuild!J51",
+    "output_before": 427.50000000000006,
+    "output_after_in_golden": 466.0200000000001,
+    "expected": "CashFlowBuild!J51 must change"
+  },
+  "stats": {
+    "n_target_cells": 127,
+    "n_input_cells": 129,
+    "n_golden_input_cells": 129,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.874,
+    "key_outputs_cover_targets": 0.906,
+    "functions_used": [
+      "ABS",
+      "SUM"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 39
+  },
+  "notes": [
+    "Input B26 holds a hint note that the golden replaces with a section header; the cell is not a target."
+  ],
+  "source_paths": {
+    "input": "Template/spreadsheet/06_equity_forecast/06_13_input.xlsx",
+    "golden": "Template/spreadsheet/06_equity_forecast/06_13_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "127/127",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

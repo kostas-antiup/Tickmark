@@ -1,0 +1,100 @@
+{
+  "id": "08_01",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "08_fin_model_basics",
+  "domain": "fin_model_basics",
+  "tier": "A",
+  "sheets": [
+    "DebtSchedule"
+  ],
+  "primary_sheet": "DebtSchedule",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in DebtSchedule!C7:G9, DebtSchedule!C11:G13, DebtSchedule!C15:G15, DebtSchedule!C20:G20. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'DebtSchedule'!B2:N52",
+  "target_cells": [
+    "DebtSchedule!C7:G9",
+    "DebtSchedule!C11:G13",
+    "DebtSchedule!C15:G15",
+    "DebtSchedule!C20:G20"
+  ],
+  "final_output": "DebtSchedule!G13",
+  "final_output_label": "Total Interest Expense / Year 5",
+  "key_outputs": [
+    "DebtSchedule!G13",
+    "DebtSchedule!C13",
+    "DebtSchedule!D13",
+    "DebtSchedule!E13",
+    "DebtSchedule!F13",
+    "DebtSchedule!C9"
+  ],
+  "input_cells": [
+    "DebtSchedule!J3:J5",
+    "DebtSchedule!J8:J10",
+    "DebtSchedule!J13:N14",
+    "DebtSchedule!C17:G19"
+  ],
+  "golden_input_cells": [
+    "DebtSchedule!J3:J5",
+    "DebtSchedule!J8:J10",
+    "DebtSchedule!J13:N14",
+    "DebtSchedule!C17:G19"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "DebtSchedule!G13": -68.3773753264091,
+    "DebtSchedule!C13": -283.575732647815,
+    "DebtSchedule!D13": -255.964128838694,
+    "DebtSchedule!E13": -207.263308361705,
+    "DebtSchedule!F13": -134.988148423292,
+    "DebtSchedule!C9": 980
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "DebtSchedule!J3",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 0.055,
+    "perturbed_value": 0.060500000000000005,
+    "observed_output": "DebtSchedule!G13",
+    "output_before": -68.3773753264091,
+    "output_after_in_golden": -63.653024104259586,
+    "expected": "DebtSchedule!G13 must change"
+  },
+  "stats": {
+    "n_target_cells": 40,
+    "n_input_cells": 31,
+    "n_golden_input_cells": 31,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.675,
+    "key_outputs_cover_targets": 0.9,
+    "functions_used": [],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 0
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/08_fin_model_basics/08_01_input.xlsx",
+    "golden": "Template/spreadsheet/08_fin_model_basics/08_01_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "40/40",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

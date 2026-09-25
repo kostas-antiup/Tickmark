@@ -1,0 +1,114 @@
+{
+  "id": "02_05",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "02_cash_sweep",
+  "domain": "cash_sweep",
+  "tier": "A",
+  "sheets": [
+    "DebtWaterfall"
+  ],
+  "primary_sheet": "DebtWaterfall",
+  "instruction": "Complete the debt waterfall model. The company retains exactly its operating cash requirement as the ending cash balance each period, with remaining cash swept to debt repayment in priority order. Express repayment amounts as negative values. Fill in the empty cells in DebtWaterfall!D6:F6, DebtWaterfall!C9:F9, DebtWaterfall!D12:F12, DebtWaterfall!C13:F14, DebtWaterfall!C16:F17, DebtWaterfall!D19:F19, DebtWaterfall!C20:F21, DebtWaterfall!C23:F24, DebtWaterfall!D26:F26, DebtWaterfall!C27:F28, DebtWaterfall!C30:F30, DebtWaterfall!C33:F35. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the debt waterfall model. The company retains exactly its operating cash requirement as the ending cash balance each period, with remaining cash swept to debt repayment in priority order. Express repayment amounts as negative values.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'DebtWaterfall'!B2:F38",
+  "target_cells": [
+    "DebtWaterfall!D6:F6",
+    "DebtWaterfall!C9:F9",
+    "DebtWaterfall!D12:F12",
+    "DebtWaterfall!C13:F14",
+    "DebtWaterfall!C16:F17",
+    "DebtWaterfall!D19:F19",
+    "DebtWaterfall!C20:F21",
+    "DebtWaterfall!C23:F24",
+    "DebtWaterfall!D26:F26",
+    "DebtWaterfall!C27:F28",
+    "DebtWaterfall!C30:F30",
+    "DebtWaterfall!C33:F35"
+  ],
+  "final_output": "DebtWaterfall!E34",
+  "final_output_label": "Total interest expense / Year 4",
+  "key_outputs": [
+    "DebtWaterfall!E34",
+    "DebtWaterfall!F34",
+    "DebtWaterfall!C34",
+    "DebtWaterfall!D34"
+  ],
+  "input_cells": [
+    "DebtWaterfall!C6",
+    "DebtWaterfall!C7:F8",
+    "DebtWaterfall!C12",
+    "DebtWaterfall!C15:F15",
+    "DebtWaterfall!C19",
+    "DebtWaterfall!C22:F22",
+    "DebtWaterfall!C26",
+    "DebtWaterfall!C29:F29"
+  ],
+  "golden_input_cells": [
+    "DebtWaterfall!C6",
+    "DebtWaterfall!C7:F8",
+    "DebtWaterfall!C12",
+    "DebtWaterfall!C15:F15",
+    "DebtWaterfall!C19",
+    "DebtWaterfall!C22:F22",
+    "DebtWaterfall!C26",
+    "DebtWaterfall!C29:F29"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "DebtWaterfall!E34": 16.2,
+    "DebtWaterfall!F34": 0,
+    "DebtWaterfall!C34": 147.692,
+    "DebtWaterfall!D34": 67.542
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "DebtWaterfall!C6",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 450.0,
+    "perturbed_value": 495.00000000000006,
+    "observed_output": "DebtWaterfall!E34",
+    "output_before": 16.2,
+    "output_after_in_golden": 14.85,
+    "expected": "DebtWaterfall!E34 must change"
+  },
+  "stats": {
+    "n_target_cells": 72,
+    "n_input_cells": 24,
+    "n_golden_input_cells": 24,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 0.569,
+    "key_outputs_cover_targets": 0.931,
+    "functions_used": [
+      "MIN"
+    ],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 16
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/02_cash_sweep/02_05_input.xlsx",
+    "golden": "Template/spreadsheet/02_cash_sweep/02_05_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "72/72",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}

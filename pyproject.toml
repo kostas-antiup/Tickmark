@@ -1,0 +1,84 @@
+[project]
+name = "tickmark"
+version = "0.1.0"
+description = "Benchmark that checks whether spreadsheet agents build live, auditable financial models, not just the right numbers."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.14"
+authors = [
+    { name = "AAI Labs" },
+    { name = "Kostas Ragauskas" },
+    { name = "Jadrine Kaburu" },
+    { name = "Jeremiah Abunga" },
+    { name = "Jonas Paulavičius" },
+    { name = "Ugnė Antanaitytė" },
+]
+keywords = [
+    "benchmark",
+    "llm-agents",
+    "spreadsheets",
+    "excel",
+    "financial-modeling",
+    "evaluation",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Office/Business :: Financial :: Spreadsheet",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "openpyxl>=3.1,<4",
+]
+
+[project.urls]
+Repository = "https://github.com/kostas-antiup/tickmark"
+Issues = "https://github.com/kostas-antiup/tickmark/issues"
+
+[project.optional-dependencies]
+audit = [
+    # Excel recalculation engine (COM); LibreOffice engine needs no Python extras.
+    "pywin32>=311; sys_platform == 'win32'",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+testpaths = ["tests"]
+addopts = "-ra --cov=tickmark --cov-report=term-missing"
+markers = [
+    "libreoffice: recalculates with real LibreOffice; skipped when soffice is not installed",
+    "excel: recalculates with Microsoft Excel via COM; skipped without Windows, Excel, pywin32",
+]
+
+[tool.coverage.run]
+omit = [
+    "tests/*",
+    "*/tests/*",
+]
+
+[tool.ty.environment]
+extra-paths = ["src", "."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[dependency-groups]
+dev = [
+    "pyhamcrest>=2.1.0",
+    "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.15.11,<0.16.0",
+    "ty>=0.0.32",
+]

@@ -1,0 +1,94 @@
+{
+  "id": "02_01",
+  "source": "SpreadsheetBench 2",
+  "category": "Template",
+  "family": "02_cash_sweep",
+  "domain": "cash_sweep",
+  "tier": "A",
+  "sheets": [
+    "Revenue_Analysis"
+  ],
+  "primary_sheet": "Revenue_Analysis",
+  "instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct. Fill in the empty cells in Revenue_Analysis!D13:F13, Revenue_Analysis!C20:F20, Revenue_Analysis!C22:F23, Revenue_Analysis!C25:F25, Revenue_Analysis!C27:F27, Revenue_Analysis!C29:F29. Use live formulas that reference the existing input cells; do not hardcode calculated results.",
+  "source_instruction": "Complete the financial model based on the provided assumptions. Ensure that all formulas, references, and calculations are correct.",
+  "input_workbook": "input.xlsx",
+  "golden_workbook": "golden.xlsx",
+  "source_answer_position": "'Revenue_Analysis'!B2:F29",
+  "target_cells": [
+    "Revenue_Analysis!D13:F13",
+    "Revenue_Analysis!C20:F20",
+    "Revenue_Analysis!C22:F23",
+    "Revenue_Analysis!C25:F25",
+    "Revenue_Analysis!C27:F27",
+    "Revenue_Analysis!C29:F29"
+  ],
+  "final_output": "Revenue_Analysis!F29",
+  "final_output_label": "Projected Revenue / Year 4",
+  "key_outputs": [
+    "Revenue_Analysis!F29"
+  ],
+  "input_cells": [
+    "Revenue_Analysis!C8:F9",
+    "Revenue_Analysis!C11:F11",
+    "Revenue_Analysis!C13",
+    "Revenue_Analysis!C14:F14",
+    "Revenue_Analysis!C16"
+  ],
+  "golden_input_cells": [
+    "Revenue_Analysis!C8:F9",
+    "Revenue_Analysis!C11:F11",
+    "Revenue_Analysis!C13",
+    "Revenue_Analysis!C14:F14",
+    "Revenue_Analysis!C16"
+  ],
+  "allowed_hardcoded_cells": [],
+  "expected_outputs": {
+    "Revenue_Analysis!F29": 4975.66856086925
+  },
+  "value_tolerance": {
+    "abs": 1e-06,
+    "rel": 1e-06
+  },
+  "audit_checks": [
+    "value_correctness",
+    "formula_coverage",
+    "traceability",
+    "no_unexpected_hardcoded_values",
+    "no_fake_formulas",
+    "input_change_check"
+  ],
+  "input_change_check": {
+    "cell": "Revenue_Analysis!C8",
+    "operation": "increase_by_percent",
+    "value": 10,
+    "original_value": 0.025,
+    "perturbed_value": 0.027500000000000004,
+    "observed_output": "Revenue_Analysis!F29",
+    "output_before": 4975.668560869247,
+    "output_after_in_golden": 4987.733712568735,
+    "expected": "Revenue_Analysis!F29 must change"
+  },
+  "stats": {
+    "n_target_cells": 27,
+    "n_input_cells": 18,
+    "n_golden_input_cells": 18,
+    "golden_formula_coverage": 1.0,
+    "final_output_covers_targets": 1.0,
+    "key_outputs_cover_targets": 1.0,
+    "functions_used": [],
+    "multi_sheet": false,
+    "cross_sheet_target_formulas": 0,
+    "array_formula_targets": 4
+  },
+  "notes": [],
+  "source_paths": {
+    "input": "Template/spreadsheet/02_cash_sweep/02_01_input.xlsx",
+    "golden": "Template/spreadsheet/02_cash_sweep/02_01_golden.xlsx"
+  },
+  "verification": {
+    "engine": "Microsoft Excel (COM, CalculateFull) on a copy of golden.xlsx",
+    "golden_recalc_matches_cached_targets": "27/27",
+    "recalc_mismatches": [],
+    "input_change_check_verified": true
+  }
+}
