@@ -1,7 +1,8 @@
-"""Agent leaderboard: pilot-suite results per agent, and the tables shown in the docs.
+"""Agent leaderboards: results per agent on a fixed case set, and the tables and card.
 
-Entries live in ``leaderboard/entries.json``. Each is one agent (a tool, a model, or both)
-graded on the same pilot cases, so the rows compare like with like. ``real_models`` is
+Each board is a JSON file under ``leaderboard/`` (``hard.json``, the main board, and
+``pilot.json``) with its case ids and entries. An entry is one agent (a tool, a model, or
+both) graded on every case of its board, so the rows compare like with like. ``real_models`` is
 Tickmark's verdict (right numbers and every audit check); ``right_numbers`` is what a
 value-only benchmark would count, so the gap between them is the point of the table.
 
@@ -19,7 +20,9 @@ from html import escape
 from pathlib import Path
 from typing import Any
 
-PILOT_CASES = ("02_01", "06_18", "14_07")
+from .cases import CASE_SETS
+
+PILOT_CASES = CASE_SETS["pilot"]
 README_START = "<!-- leaderboard:start -->"
 README_END = "<!-- leaderboard:end -->"
 CHECKS = (
@@ -144,25 +147,31 @@ def _text(
     )
 
 
-def svg_card(entries: Iterable[Mapping[str, Any]], cases: Sequence[str], updated: str) -> str:
+def svg_card(
+    entries: Iterable[Mapping[str, Any]],
+    cases: Sequence[str],
+    updated: str,
+    subtitle: str | None = None,
+) -> str:
     """The ranked leaderboard as a self-contained SVG card for the README."""
 
     rows = ranked(entries)
-    width, top, row_h, bar_w = 1180, 138, 66, 104
+    width, top, row_h, bar_w = 1180, 138, 66, 92
     height = top + row_h * len(rows) + 76
     metrics = (
-        ("checks_passed", "CHECKS PASSED", 520),
-        ("value_correctness", "VALUES RIGHT", 654),
-        ("formula_coverage", "FORMULAS", 788),
-        ("traceability", "TRACEABLE", 922),
+        ("checks_passed", "CHECKS PASSED", 576),
+        ("value_correctness", "VALUES RIGHT", 692),
+        ("formula_coverage", "FORMULAS", 808),
+        ("traceability", "TRACEABLE", 924),
     )
+    subtitle = subtitle or f"AI agents on the pilot cases {', '.join(cases)}"
     out = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}" role="img" aria-label="Tickmark agent leaderboard">',
         f'<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="18" fill="#FFFFFF" '
         f'stroke="{_HAIR}"/>',
         _text(32, 46, "TICKMARK LEADERBOARD", 14, _BLUE, weight=600, family=_MONO, spacing=2.2),
-        _text(32, 76, f"AI agents on the pilot cases {', '.join(cases)}", 18, _INK, weight=600),
+        _text(32, 76, subtitle, 18, _INK, weight=600),
         _text(
             width - 32,
             46,
@@ -195,29 +204,7 @@ def svg_card(entries: Iterable[Mapping[str, Any]], cases: Sequence[str], updated
             out.append(_text(58, cy + 5.5, str(rank), 16, _GREY, weight=600, anchor="middle"))
         out.append(_text(92, cy - 3, label(e), 18, _INK, weight=600))
         out.append(_text(92, cy + 18, e["interface"], 13, _GREY))
-        for k in range(e["cases"]):
-            fill = _BLUE if k < e["real_models"] else _HAIR
-            out.append(f'<circle cx="{389 + k * 19}" cy="{cy - 7}" r="6.5" fill="{fill}"/>')
-        out.append(
-            _text(
-                389 + e["cases"] * 19 + 2,
-                cy - 1.5,
-                f"{e['real_models']}/{e['cases']}",
-                17,
-                _INK,
-                weight=700,
-            )
-        )
-        out.append(
-            _text(
-                382,
-                cy + 18,
-                f"right numbers {e['right_numbers']}/{e['cases']}",
-                12,
-                _GREY,
-                family=_MONO,
-            )
-        )
+        out += _real_models(e, cy)
         for key, _, x in metrics:
             value = float(e.get(key, 0.0))
             out.append(_text(x + bar_w, cy - 5, _pct(value), 16, _INK, weight=600, anchor="end"))
@@ -253,6 +240,31 @@ def svg_card(entries: Iterable[Mapping[str, Any]], cases: Sequence[str], updated
     )
     out.append("</svg>")
     return "\n".join(out) + "\n"
+
+
+def _real_models(e: Mapping[str, Any], cy: float) -> list[str]:
+    """Real models as one dot per case (up to five cases) or a segmented bar, plus counts."""
+
+    n, real, right = e["cases"], e["real_models"], e["right_numbers"]
+    out = []
+    if n <= 5:
+        for k in range(n):
+            fill = _BLUE if k < real else _HAIR
+            out.append(f'<circle cx="{389 + k * 19}" cy="{cy - 7}" r="6.5" fill="{fill}"/>')
+        out.append(_text(389 + n * 19 + 2, cy - 1.5, f"{real}/{n}", 17, _INK, weight=700))
+        out.append(_text(382, cy + 18, f"right numbers {right}/{n}", 12, _GREY, family=_MONO))
+        return out
+    span, gap = 170, 2
+    seg = (span - gap * (n - 1)) / n
+    for k in range(n):
+        fill = _BLUE if k < real else _HAIR
+        out.append(
+            f'<rect x="{382 + k * (seg + gap):.1f}" y="{cy - 16}" width="{seg:.1f}" '
+            f'height="10" rx="2" fill="{fill}"/>'
+        )
+    out.append(_text(382, cy + 13, f"{real}/{n}", 17, _INK, weight=700))
+    out.append(_text(436, cy + 12, f"right numbers {right}/{n}", 12, _GREY, family=_MONO))
+    return out
 
 
 def replace_between(text: str, block: str, start: str = README_START, end: str = README_END) -> str:

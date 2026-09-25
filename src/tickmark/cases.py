@@ -14,6 +14,28 @@ from .scenarios import Decision, extract_decisions
 from .workbook_audit import reachable_cells
 from .workbook_reader import read_workbook
 
+# Named case sets under data/cases. "pilot" is three small cases for a quick end-to-end run.
+# "hard" is the leaderboard set: the five cases whose reference formulas branch most (IF,
+# MIN, MAX in LBO, cash-sweep and debt-waterfall models), plus the largest and multi-sheet
+# models, one to three per family, covering 8 of the 10 model families.
+CASE_SETS: dict[str, tuple[str, ...]] = {
+    "pilot": ("02_01", "06_18", "14_07"),
+    "hard": (
+        "02_03",
+        "02_06",
+        "06_03",
+        "06_13",
+        "09_03",
+        "09_04",
+        "10_02",
+        "11_01",
+        "13_06",
+        "14_06",
+        "14_08",
+        "16_01",
+    ),
+}
+
 
 @dataclass(frozen=True)
 class InputChangeCheck:

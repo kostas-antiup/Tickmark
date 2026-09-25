@@ -19,6 +19,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import warnings
 import zipfile
 from collections.abc import Iterable, Mapping, Sequence
 from concurrent.futures import ThreadPoolExecutor
@@ -560,11 +561,23 @@ def available_engine() -> str:
     return "cached"
 
 
+NO_ENGINE_WARNING = (
+    "No Excel or LibreOffice found, so Tickmark reads the values saved in each file and skips "
+    "the input-change and perturbation checks. Workbooks saved by openpyxl have no saved "
+    "values and will fail the value check. Install LibreOffice for full grading."
+)
+
+
 def open_engine(name: str, stack: ExitStack) -> Recalculator:
-    """Create the engine called ``name`` (``auto`` picks the best available) on ``stack``."""
+    """Create the engine called ``name`` (``auto`` picks the best available) on ``stack``.
+
+    ``auto`` warns when it has to fall back to cached values.
+    """
 
     if name == "auto":
         name = available_engine()
+        if name == "cached":
+            warnings.warn(NO_ENGINE_WARNING, stacklevel=2)
     if name == "excel":
         return stack.enter_context(ExcelRecalculator())
     if name == "libreoffice":

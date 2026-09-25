@@ -69,8 +69,37 @@ ignored inputs: `F7`, `F10`, `F12`, `F14` and `F16`.
 
 ## Agents
 
-Every agent's pilot result (cases `02_01`, `06_18`, `14_07`) is on the
-[leaderboard](leaderboard.md). The runs behind it:
+The [leaderboard](leaderboard.md) has two boards: 12 hard cases (the main board) and the
+three-case pilot (`02_01`, `06_18`, `14_07`). The runs behind them:
+
+### Claude on the 12 hard cases
+
+The same setup as the Claude pilot below: each model ran as a Claude Code subagent with a
+fresh context, in one temporary folder per case outside the repository, holding only
+`TASK.md` and `input.xlsx`. The run transcripts show no file access outside each case
+folder. Graded with Excel.
+
+| Case | Model | Opus 5.5 | Sonnet 5 | Haiku 4.5 |
+|---|---|---|---|---|
+| `02_03` | cash sweep, quarterly debt waterfall | values only | fail | fail |
+| `02_06` | debt waterfall, three loans | pass | fail | fail |
+| `06_03` | revenue build, 127 targets | pass | pass | pass |
+| `06_13` | cash-flow statement, 127 targets | pass | pass | fail |
+| `09_03` | LBO debt schedule with a cash sweep | fail | fail | fail |
+| `09_04` | LBO senior and subordinated repayment | fail | fail | fail |
+| `10_02` | M&A accretion / dilution | pass | pass | fail |
+| `11_01` | M&A debt schedule with a balloon payment | fail | fail | fail |
+| `13_06` | earnings normalisation and forecast | pass | pass | fail |
+| `14_06` | real estate operating expenses, two sheets | pass | pass | pass |
+| `14_08` | real estate DCF, 141 targets | pass | pass | fail |
+| `16_01` | real estate direct capitalisation | fail | fail | fail |
+| **Real models** | | **7 / 12** | **6 / 12** | **2 / 12** |
+
+Opus's `02_03` is the case Tickmark was built for. Every value matches the reference, and
+both the SpreadsheetBench and SheetCopilot rules pass the workbook. But 21 of its targets
+stop matching the reference once the inputs change, so Tickmark fails it. None of the three
+models passed the two LBO debt schedules, the M&A debt schedule or the direct-cap
+valuation; on those four cases their values were already wrong.
 
 ### Qwen 2.5 7B, all 35 cases (local)
 

@@ -87,29 +87,24 @@ pasted number.
 
 ## Leaderboard
 
-AI agents on the three pilot cases. **Real models** counts the cases where every value was
-right and every check passed. **Right numbers** counts the cases where every value was
-right, which is all a value-only benchmark checks. To add an agent, see
-[docs/leaderboard.md](docs/leaderboard.md).
+AI agents on 12 hard cases: the LBO, cash-sweep and debt-waterfall models whose formulas
+branch the most, plus the largest and multi-sheet models. **Real models** counts the cases
+where every value was right and every check passed. **Right numbers** counts the cases where
+every value was right, which is all a value-only benchmark checks. The three-case pilot
+board, and how to add an agent: [docs/leaderboard.md](docs/leaderboard.md).
 
 <!-- leaderboard:start -->
-<p align="center"><img src="assets/leaderboard.svg" width="100%" alt="Tickmark leaderboard, real models on the pilot cases: Claude Opus 5.5 3/3, Claude Sonnet 5 3/3, Nemotron 3 Ultra 3/3. Full table below."></p>
+<p align="center"><img src="assets/leaderboard.svg" width="100%" alt="Tickmark leaderboard, real models on 12 hard cases: Claude Opus 5.5 7/12, Claude Sonnet 5 6/12, Claude Haiku 4.5 2/12. Full table below."></p>
 
 <details>
 <summary>Table view</summary>
 
 | # | Agent | Interface | Real models | Right numbers | Checks passed | Values right | Formulas | Traceable | Time per case |
 |---:|---|---|---:|---:|---:|---:|---:|---:|---:|
-| 1 | Claude Opus 5.5 | Coding agent · Claude Code | **3 / 3** | 3 / 3 | 100% | 100% | 100% | 100% | 80 s |
-| 1 | Claude Sonnet 5 | Coding agent · Claude Code | **3 / 3** | 3 / 3 | 100% | 100% | 100% | 100% | 146 s |
-| 1 | Nemotron 3 Ultra | Chat API · OpenRouter (free) | **3 / 3** | 3 / 3 | 100% | 100% | 100% | 100% | 24 s |
-| 1 | OpenCode · GLM-5.2 | Coding agent · OpenCode CLI | **3 / 3** | 3 / 3 | 100% | 100% | 100% | 100% | 90 s |
-| 1 | Qwen3.8 27B | Chat API · OpenRouter (free) | **3 / 3** | 3 / 3 | 100% | 100% | 100% | 100% | 343 s |
-| 6 | Nemotron 3 Super | Chat API · OpenRouter (free) | **2 / 3** | 2 / 3 | 90% | 98% | 100% | 100% | 36 s |
-| 7 | Ling 3.0 Flash Fin | Chat API · OpenRouter (free) | **2 / 3** | 2 / 3 | 86% | 90% | 100% | 100% | 9 s |
-| 7 | Nex N2.5 Pro | Chat API · OpenRouter (free) | **2 / 3** | 2 / 3 | 86% | 83% | 100% | 100% | 137 s |
-| 9 | Claude Haiku 4.5 | Coding agent · Claude Code | **1 / 3** | 1 / 3 | 71% | 71% | 100% | 100% | 34 s |
-| 10 | Qwen 2.5 7B | Chat API · Ollama (local) | **0 / 3** | 0 / 3 | 29% | 3% | 62% | 44% | 11 s |
+| 1 | Claude Opus 5.5 | Coding agent · Claude Code | **7 / 12** | 8 / 12 | 89% | 97% | 100% | 100% | 26 s |
+| 2 | Claude Sonnet 5 | Coding agent · Claude Code | **6 / 12** | 6 / 12 | 86% | 91% | 100% | 100% | 90 s |
+| 3 | Claude Haiku 4.5 | Coding agent · Claude Code | **2 / 12** | 2 / 12 | 65% | 67% | 99% | 92% | 92 s |
+| 4 | Qwen 2.5 7B | Chat API · Ollama (local) | **0 / 12** | 0 / 12 | 20% | 0% | 43% | 25% | 22 s |
 
 </details>
 <!-- leaderboard:end -->
@@ -141,8 +136,10 @@ under changed inputs. That needs a spreadsheet engine:
 - **LibreOffice** on any OS, with `soffice` on the `PATH`. CI uses Debian's
   `libreoffice-calc-nogui` package. LibreOffice reproduces Excel's values on all 35 cases.
 
-Most agents edit workbooks with openpyxl, which saves formulas without their values. The
-cached engine cannot grade those files.
+Most agents save workbooks with openpyxl, which stores each formula but not the number it
+calculates. Excel and LibreOffice recalculate those formulas; the cached engine only reads
+stored numbers, so it cannot grade such files. If neither Excel nor LibreOffice is installed,
+Tickmark falls back to cached values and warns you when the run starts.
 
 ```bash
 # Every reference workbook passes its own case (about 3 minutes with Excel)
@@ -193,10 +190,15 @@ uv run python scripts/run_agents.py --list
 ollama pull qwen2.5:7b
 cp .env.example .env    # then add OPENROUTER_API_KEY=...
 
-# 3. Run the three-case pilot, then open results/runs/first-run/report.html
+# 3. Run it, then open results/runs/<run-id>/report.html
 uv run python scripts/run_real_agent_suite.py --agents ollama-qwen --run-id first-run
-uv run python scripts/run_real_agent_suite.py --agents openrouter:z-ai/glm-5.2:free --run-id glm
+uv run python scripts/run_real_agent_suite.py --agents openrouter:z-ai/glm-5.2:free --set hard --run-id glm-hard
+uv run python scripts/run_real_agent_suite.py --agents ollama-qwen --set all --run-id qwen-full
 ```
+
+`--set` picks the cases: `pilot` (3 small cases, the default, a few minutes), `hard` (the
+12 leaderboard cases) or `all` (all 35). A stopped run continues where it left off when you
+repeat the same `--run-id`.
 
 | Type | How the agent works | Configured |
 |---|---|---|

@@ -35,7 +35,8 @@ Ollama model, and OpenAI, Gemini and Groq models ([below](#any-model-providermod
    uv run python scripts/run_real_agent_suite.py --agents ollama-qwen --run-id first-run
    ```
 
-   Results land in `results/runs/first-run/`; open `report.html` in a browser.
+   Results land in `results/runs/first-run/`; open `report.html` in a browser. Add
+   `--set hard` for the 12 leaderboard cases or `--set all` for all 35.
 
 ## Set up an agent
 
@@ -115,6 +116,10 @@ before a run starts and stops with the setup step if one is not ready.
 ```bash
 # The three-case pilot for one or more agents
 uv run python scripts/run_real_agent_suite.py --agents codex ollama-qwen --run-id pilot
+
+# The 12 leaderboard cases, or all 35
+uv run python scripts/run_real_agent_suite.py --agents codex --set hard --run-id hard
+uv run python scripts/run_real_agent_suite.py --agents codex --set all --run-id full
 
 # Chosen cases, or every case (the default is all 35)
 uv run python scripts/run_agents.py --agents codex --cases data/cases/14_07 data/cases/06_18 --run-id try

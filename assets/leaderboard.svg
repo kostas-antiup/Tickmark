@@ -1,241 +1,142 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="874" viewBox="0 0 1180 874" role="img" aria-label="Tickmark agent leaderboard">
-<rect x="0.5" y="0.5" width="1179" height="873" rx="18" fill="#FFFFFF" stroke="#E6E7EA"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="478" viewBox="0 0 1180 478" role="img" aria-label="Tickmark agent leaderboard">
+<rect x="0.5" y="0.5" width="1179" height="477" rx="18" fill="#FFFFFF" stroke="#E6E7EA"/>
 <text x="32.0" y="46.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="14" font-weight="600" fill="#0000F0" text-anchor="start" letter-spacing="2.2">TICKMARK LEADERBOARD</text>
-<text x="32.0" y="76.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="start">AI agents on the pilot cases 02_01, 06_18, 14_07</text>
+<text x="32.0" y="76.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="start">AI agents on 12 hard cases: LBO, debt waterfall, DCF, M&amp;A and more</text>
 <text x="1148.0" y="46.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="12" font-weight="400" fill="#929397" text-anchor="end" letter-spacing="1.5">UPDATED 2026-09-25</text>
 <text x="58.0" y="118.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="11" font-weight="400" fill="#929397" text-anchor="middle" letter-spacing="1.4">#</text>
 <text x="92.0" y="118.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="11" font-weight="400" fill="#929397" text-anchor="start" letter-spacing="1.4">AGENT</text>
 <text x="382.0" y="118.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="11" font-weight="400" fill="#929397" text-anchor="start" letter-spacing="1.4">REAL MODELS</text>
-<text x="624.0" y="118.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="11" font-weight="400" fill="#929397" text-anchor="end" letter-spacing="1.4">CHECKS PASSED</text>
-<text x="758.0" y="118.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="11" font-weight="400" fill="#929397" text-anchor="end" letter-spacing="1.4">VALUES RIGHT</text>
-<text x="892.0" y="118.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="11" font-weight="400" fill="#929397" text-anchor="end" letter-spacing="1.4">FORMULAS</text>
-<text x="1026.0" y="118.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="11" font-weight="400" fill="#929397" text-anchor="end" letter-spacing="1.4">TRACEABLE</text>
+<text x="668.0" y="118.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="11" font-weight="400" fill="#929397" text-anchor="end" letter-spacing="1.4">CHECKS PASSED</text>
+<text x="784.0" y="118.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="11" font-weight="400" fill="#929397" text-anchor="end" letter-spacing="1.4">VALUES RIGHT</text>
+<text x="900.0" y="118.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="11" font-weight="400" fill="#929397" text-anchor="end" letter-spacing="1.4">FORMULAS</text>
+<text x="1016.0" y="118.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="11" font-weight="400" fill="#929397" text-anchor="end" letter-spacing="1.4">TRACEABLE</text>
 <text x="1144.0" y="118.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="11" font-weight="400" fill="#929397" text-anchor="end" letter-spacing="1.4">TIME / CASE</text>
 <rect x="20" y="138" width="1140" height="66" rx="12" fill="#F8F9FA"/>
 <circle cx="58" cy="171.0" r="17" fill="#0000F0"/>
 <text x="58.0" y="176.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
 <text x="92.0" y="168.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="start">Claude Opus 5.5</text>
 <text x="92.0" y="189.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Coding agent · Claude Code</text>
-<circle cx="389" cy="164.0" r="6.5" fill="#0000F0"/>
-<circle cx="408" cy="164.0" r="6.5" fill="#0000F0"/>
-<circle cx="427" cy="164.0" r="6.5" fill="#0000F0"/>
-<text x="448.0" y="169.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#0A0A0A" text-anchor="start">3/3</text>
-<text x="382.0" y="189.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="12" font-weight="400" fill="#6B6C70" text-anchor="start">right numbers 3/3</text>
-<text x="624.0" y="166.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="520" y="177.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="520" y="177.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="758.0" y="166.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="654" y="177.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="654" y="177.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="892.0" y="166.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="788" y="177.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="788" y="177.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1026.0" y="166.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="922" y="177.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="922" y="177.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1144.0" y="176.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="400" fill="#6B6C70" text-anchor="end">80 s</text>
-<circle cx="58" cy="237.0" r="17" fill="#0000F0"/>
-<text x="58.0" y="242.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<rect x="382.0" y="155.0" width="12.3" height="10" rx="2" fill="#0000F0"/>
+<rect x="396.3" y="155.0" width="12.3" height="10" rx="2" fill="#0000F0"/>
+<rect x="410.7" y="155.0" width="12.3" height="10" rx="2" fill="#0000F0"/>
+<rect x="425.0" y="155.0" width="12.3" height="10" rx="2" fill="#0000F0"/>
+<rect x="439.3" y="155.0" width="12.3" height="10" rx="2" fill="#0000F0"/>
+<rect x="453.7" y="155.0" width="12.3" height="10" rx="2" fill="#0000F0"/>
+<rect x="468.0" y="155.0" width="12.3" height="10" rx="2" fill="#0000F0"/>
+<rect x="482.3" y="155.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="496.7" y="155.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="511.0" y="155.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="525.3" y="155.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="539.7" y="155.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<text x="382.0" y="184.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#0A0A0A" text-anchor="start">7/12</text>
+<text x="436.0" y="183.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="12" font-weight="400" fill="#6B6C70" text-anchor="start">right numbers 8/12</text>
+<text x="668.0" y="166.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">89%</text>
+<rect x="576" y="177.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="576" y="177.0" width="82.1" height="8" rx="4" fill="#3D3DF5"/>
+<text x="784.0" y="166.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">97%</text>
+<rect x="692" y="177.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="692" y="177.0" width="88.8" height="8" rx="4" fill="#3D3DF5"/>
+<text x="900.0" y="166.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
+<rect x="808" y="177.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="808" y="177.0" width="92.0" height="8" rx="4" fill="#0000F0"/>
+<text x="1016.0" y="166.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
+<rect x="924" y="177.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="924" y="177.0" width="92.0" height="8" rx="4" fill="#0000F0"/>
+<text x="1144.0" y="176.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="400" fill="#6B6C70" text-anchor="end">26 s</text>
+<circle cx="58" cy="237.0" r="17" fill="#3D3DF5"/>
+<text x="58.0" y="242.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
 <text x="92.0" y="234.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="start">Claude Sonnet 5</text>
 <text x="92.0" y="255.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Coding agent · Claude Code</text>
-<circle cx="389" cy="230.0" r="6.5" fill="#0000F0"/>
-<circle cx="408" cy="230.0" r="6.5" fill="#0000F0"/>
-<circle cx="427" cy="230.0" r="6.5" fill="#0000F0"/>
-<text x="448.0" y="235.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#0A0A0A" text-anchor="start">3/3</text>
-<text x="382.0" y="255.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="12" font-weight="400" fill="#6B6C70" text-anchor="start">right numbers 3/3</text>
-<text x="624.0" y="232.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="520" y="243.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="520" y="243.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="758.0" y="232.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="654" y="243.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="654" y="243.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="892.0" y="232.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="788" y="243.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="788" y="243.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1026.0" y="232.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="922" y="243.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="922" y="243.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1144.0" y="242.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="400" fill="#6B6C70" text-anchor="end">146 s</text>
+<rect x="382.0" y="221.0" width="12.3" height="10" rx="2" fill="#0000F0"/>
+<rect x="396.3" y="221.0" width="12.3" height="10" rx="2" fill="#0000F0"/>
+<rect x="410.7" y="221.0" width="12.3" height="10" rx="2" fill="#0000F0"/>
+<rect x="425.0" y="221.0" width="12.3" height="10" rx="2" fill="#0000F0"/>
+<rect x="439.3" y="221.0" width="12.3" height="10" rx="2" fill="#0000F0"/>
+<rect x="453.7" y="221.0" width="12.3" height="10" rx="2" fill="#0000F0"/>
+<rect x="468.0" y="221.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="482.3" y="221.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="496.7" y="221.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="511.0" y="221.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="525.3" y="221.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="539.7" y="221.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<text x="382.0" y="250.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#0A0A0A" text-anchor="start">6/12</text>
+<text x="436.0" y="249.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="12" font-weight="400" fill="#6B6C70" text-anchor="start">right numbers 6/12</text>
+<text x="668.0" y="232.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">86%</text>
+<rect x="576" y="243.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="576" y="243.0" width="78.9" height="8" rx="4" fill="#3D3DF5"/>
+<text x="784.0" y="232.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">91%</text>
+<rect x="692" y="243.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="692" y="243.0" width="83.5" height="8" rx="4" fill="#3D3DF5"/>
+<text x="900.0" y="232.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
+<rect x="808" y="243.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="808" y="243.0" width="92.0" height="8" rx="4" fill="#0000F0"/>
+<text x="1016.0" y="232.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
+<rect x="924" y="243.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="924" y="243.0" width="92.0" height="8" rx="4" fill="#0000F0"/>
+<text x="1144.0" y="242.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="400" fill="#6B6C70" text-anchor="end">90 s</text>
 <rect x="20" y="270" width="1140" height="66" rx="12" fill="#F8F9FA"/>
-<circle cx="58" cy="303.0" r="17" fill="#0000F0"/>
-<text x="58.0" y="308.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
-<text x="92.0" y="300.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="start">Nemotron 3 Ultra</text>
-<text x="92.0" y="321.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Chat API · OpenRouter (free)</text>
-<circle cx="389" cy="296.0" r="6.5" fill="#0000F0"/>
-<circle cx="408" cy="296.0" r="6.5" fill="#0000F0"/>
-<circle cx="427" cy="296.0" r="6.5" fill="#0000F0"/>
-<text x="448.0" y="301.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#0A0A0A" text-anchor="start">3/3</text>
-<text x="382.0" y="321.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="12" font-weight="400" fill="#6B6C70" text-anchor="start">right numbers 3/3</text>
-<text x="624.0" y="298.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="520" y="309.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="520" y="309.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="758.0" y="298.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="654" y="309.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="654" y="309.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="892.0" y="298.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="788" y="309.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="788" y="309.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1026.0" y="298.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="922" y="309.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="922" y="309.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1144.0" y="308.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="400" fill="#6B6C70" text-anchor="end">24 s</text>
-<circle cx="58" cy="369.0" r="17" fill="#0000F0"/>
-<text x="58.0" y="374.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
-<text x="92.0" y="366.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="start">OpenCode · GLM-5.2</text>
-<text x="92.0" y="387.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Coding agent · OpenCode CLI</text>
-<circle cx="389" cy="362.0" r="6.5" fill="#0000F0"/>
-<circle cx="408" cy="362.0" r="6.5" fill="#0000F0"/>
-<circle cx="427" cy="362.0" r="6.5" fill="#0000F0"/>
-<text x="448.0" y="367.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#0A0A0A" text-anchor="start">3/3</text>
-<text x="382.0" y="387.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="12" font-weight="400" fill="#6B6C70" text-anchor="start">right numbers 3/3</text>
-<text x="624.0" y="364.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="520" y="375.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="520" y="375.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="758.0" y="364.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="654" y="375.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="654" y="375.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="892.0" y="364.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="788" y="375.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="788" y="375.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1026.0" y="364.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="922" y="375.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="922" y="375.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1144.0" y="374.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="400" fill="#6B6C70" text-anchor="end">90 s</text>
-<rect x="20" y="402" width="1140" height="66" rx="12" fill="#F8F9FA"/>
-<circle cx="58" cy="435.0" r="17" fill="#0000F0"/>
-<text x="58.0" y="440.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
-<text x="92.0" y="432.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="start">Qwen3.8 27B</text>
-<text x="92.0" y="453.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Chat API · OpenRouter (free)</text>
-<circle cx="389" cy="428.0" r="6.5" fill="#0000F0"/>
-<circle cx="408" cy="428.0" r="6.5" fill="#0000F0"/>
-<circle cx="427" cy="428.0" r="6.5" fill="#0000F0"/>
-<text x="448.0" y="433.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#0A0A0A" text-anchor="start">3/3</text>
-<text x="382.0" y="453.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="12" font-weight="400" fill="#6B6C70" text-anchor="start">right numbers 3/3</text>
-<text x="624.0" y="430.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="520" y="441.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="520" y="441.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="758.0" y="430.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="654" y="441.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="654" y="441.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="892.0" y="430.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="788" y="441.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="788" y="441.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1026.0" y="430.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="922" y="441.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="922" y="441.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1144.0" y="440.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="400" fill="#6B6C70" text-anchor="end">343 s</text>
-<circle cx="58" cy="501.0" r="16.5" fill="#FFFFFF" stroke="#D5D6D9"/>
-<text x="58.0" y="506.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#6B6C70" text-anchor="middle">6</text>
-<text x="92.0" y="498.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="start">Nemotron 3 Super</text>
-<text x="92.0" y="519.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Chat API · OpenRouter (free)</text>
-<circle cx="389" cy="494.0" r="6.5" fill="#0000F0"/>
-<circle cx="408" cy="494.0" r="6.5" fill="#0000F0"/>
-<circle cx="427" cy="494.0" r="6.5" fill="#E6E7EA"/>
-<text x="448.0" y="499.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#0A0A0A" text-anchor="start">2/3</text>
-<text x="382.0" y="519.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="12" font-weight="400" fill="#6B6C70" text-anchor="start">right numbers 2/3</text>
-<text x="624.0" y="496.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">90%</text>
-<rect x="520" y="507.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="520" y="507.0" width="94.1" height="8" rx="4" fill="#3D3DF5"/>
-<text x="758.0" y="496.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">98%</text>
-<rect x="654" y="507.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="654" y="507.0" width="101.4" height="8" rx="4" fill="#3D3DF5"/>
-<text x="892.0" y="496.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="788" y="507.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="788" y="507.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1026.0" y="496.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="922" y="507.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="922" y="507.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1144.0" y="506.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="400" fill="#6B6C70" text-anchor="end">36 s</text>
-<rect x="20" y="534" width="1140" height="66" rx="12" fill="#F8F9FA"/>
-<circle cx="58" cy="567.0" r="16.5" fill="#FFFFFF" stroke="#D5D6D9"/>
-<text x="58.0" y="572.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#6B6C70" text-anchor="middle">7</text>
-<text x="92.0" y="564.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="start">Ling 3.0 Flash Fin</text>
-<text x="92.0" y="585.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Chat API · OpenRouter (free)</text>
-<circle cx="389" cy="560.0" r="6.5" fill="#0000F0"/>
-<circle cx="408" cy="560.0" r="6.5" fill="#0000F0"/>
-<circle cx="427" cy="560.0" r="6.5" fill="#E6E7EA"/>
-<text x="448.0" y="565.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#0A0A0A" text-anchor="start">2/3</text>
-<text x="382.0" y="585.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="12" font-weight="400" fill="#6B6C70" text-anchor="start">right numbers 2/3</text>
-<text x="624.0" y="562.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">86%</text>
-<rect x="520" y="573.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="520" y="573.0" width="89.1" height="8" rx="4" fill="#3D3DF5"/>
-<text x="758.0" y="562.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">90%</text>
-<rect x="654" y="573.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="654" y="573.0" width="93.7" height="8" rx="4" fill="#3D3DF5"/>
-<text x="892.0" y="562.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="788" y="573.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="788" y="573.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1026.0" y="562.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="922" y="573.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="922" y="573.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1144.0" y="572.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="400" fill="#6B6C70" text-anchor="end">9 s</text>
-<circle cx="58" cy="633.0" r="16.5" fill="#FFFFFF" stroke="#D5D6D9"/>
-<text x="58.0" y="638.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#6B6C70" text-anchor="middle">7</text>
-<text x="92.0" y="630.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="start">Nex N2.5 Pro</text>
-<text x="92.0" y="651.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Chat API · OpenRouter (free)</text>
-<circle cx="389" cy="626.0" r="6.5" fill="#0000F0"/>
-<circle cx="408" cy="626.0" r="6.5" fill="#0000F0"/>
-<circle cx="427" cy="626.0" r="6.5" fill="#E6E7EA"/>
-<text x="448.0" y="631.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#0A0A0A" text-anchor="start">2/3</text>
-<text x="382.0" y="651.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="12" font-weight="400" fill="#6B6C70" text-anchor="start">right numbers 2/3</text>
-<text x="624.0" y="628.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">86%</text>
-<rect x="520" y="639.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="520" y="639.0" width="89.1" height="8" rx="4" fill="#3D3DF5"/>
-<text x="758.0" y="628.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">83%</text>
-<rect x="654" y="639.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="654" y="639.0" width="86.7" height="8" rx="4" fill="#3D3DF5"/>
-<text x="892.0" y="628.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="788" y="639.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="788" y="639.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1026.0" y="628.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="922" y="639.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="922" y="639.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1144.0" y="638.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="400" fill="#6B6C70" text-anchor="end">137 s</text>
-<rect x="20" y="666" width="1140" height="66" rx="12" fill="#F8F9FA"/>
-<circle cx="58" cy="699.0" r="16.5" fill="#FFFFFF" stroke="#D5D6D9"/>
-<text x="58.0" y="704.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#6B6C70" text-anchor="middle">9</text>
-<text x="92.0" y="696.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="start">Claude Haiku 4.5</text>
-<text x="92.0" y="717.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Coding agent · Claude Code</text>
-<circle cx="389" cy="692.0" r="6.5" fill="#0000F0"/>
-<circle cx="408" cy="692.0" r="6.5" fill="#E6E7EA"/>
-<circle cx="427" cy="692.0" r="6.5" fill="#E6E7EA"/>
-<text x="448.0" y="697.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#0A0A0A" text-anchor="start">1/3</text>
-<text x="382.0" y="717.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="12" font-weight="400" fill="#6B6C70" text-anchor="start">right numbers 1/3</text>
-<text x="624.0" y="694.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">71%</text>
-<rect x="520" y="705.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="520" y="705.0" width="74.3" height="8" rx="4" fill="#3D3DF5"/>
-<text x="758.0" y="694.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">71%</text>
-<rect x="654" y="705.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="654" y="705.0" width="73.8" height="8" rx="4" fill="#3D3DF5"/>
-<text x="892.0" y="694.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="788" y="705.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="788" y="705.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1026.0" y="694.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">100%</text>
-<rect x="922" y="705.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="922" y="705.0" width="104.0" height="8" rx="4" fill="#0000F0"/>
-<text x="1144.0" y="704.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="400" fill="#6B6C70" text-anchor="end">34 s</text>
-<circle cx="58" cy="765.0" r="16.5" fill="#FFFFFF" stroke="#D5D6D9"/>
-<text x="58.0" y="770.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#6B6C70" text-anchor="middle">10</text>
-<text x="92.0" y="762.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="start">Qwen 2.5 7B</text>
-<text x="92.0" y="783.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Chat API · Ollama (local)</text>
-<circle cx="389" cy="758.0" r="6.5" fill="#E6E7EA"/>
-<circle cx="408" cy="758.0" r="6.5" fill="#E6E7EA"/>
-<circle cx="427" cy="758.0" r="6.5" fill="#E6E7EA"/>
-<text x="448.0" y="763.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#0A0A0A" text-anchor="start">0/3</text>
-<text x="382.0" y="783.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="12" font-weight="400" fill="#6B6C70" text-anchor="start">right numbers 0/3</text>
-<text x="624.0" y="760.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">29%</text>
-<rect x="520" y="771.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="520" y="771.0" width="29.7" height="8" rx="4" fill="#929397"/>
-<text x="758.0" y="760.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">3%</text>
-<rect x="654" y="771.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="654" y="771.0" width="8.0" height="8" rx="4" fill="#929397"/>
-<text x="892.0" y="760.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">62%</text>
-<rect x="788" y="771.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="788" y="771.0" width="64.7" height="8" rx="4" fill="#3D3DF5"/>
-<text x="1026.0" y="760.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">44%</text>
-<rect x="922" y="771.0" width="104" height="8" rx="4" fill="#F1F2F4"/>
-<rect x="922" y="771.0" width="45.8" height="8" rx="4" fill="#9B9BF9"/>
-<text x="1144.0" y="770.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="400" fill="#6B6C70" text-anchor="end">11 s</text>
-<text x="32.0" y="832.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Real models: every number right and every audit check passed. Ranked by real models, then checks passed, then right numbers.</text>
-<text x="32.0" y="852.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Time: median wall-clock seconds per case; free tiers include provider queueing.</text>
+<circle cx="58" cy="303.0" r="17" fill="#7B7BF8"/>
+<text x="58.0" y="308.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="92.0" y="300.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="start">Claude Haiku 4.5</text>
+<text x="92.0" y="321.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Coding agent · Claude Code</text>
+<rect x="382.0" y="287.0" width="12.3" height="10" rx="2" fill="#0000F0"/>
+<rect x="396.3" y="287.0" width="12.3" height="10" rx="2" fill="#0000F0"/>
+<rect x="410.7" y="287.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="425.0" y="287.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="439.3" y="287.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="453.7" y="287.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="468.0" y="287.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="482.3" y="287.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="496.7" y="287.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="511.0" y="287.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="525.3" y="287.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="539.7" y="287.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<text x="382.0" y="316.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#0A0A0A" text-anchor="start">2/12</text>
+<text x="436.0" y="315.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="12" font-weight="400" fill="#6B6C70" text-anchor="start">right numbers 2/12</text>
+<text x="668.0" y="298.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">65%</text>
+<rect x="576" y="309.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="576" y="309.0" width="60.2" height="8" rx="4" fill="#3D3DF5"/>
+<text x="784.0" y="298.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">67%</text>
+<rect x="692" y="309.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="692" y="309.0" width="61.7" height="8" rx="4" fill="#3D3DF5"/>
+<text x="900.0" y="298.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">99%</text>
+<rect x="808" y="309.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="808" y="309.0" width="90.7" height="8" rx="4" fill="#3D3DF5"/>
+<text x="1016.0" y="298.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">92%</text>
+<rect x="924" y="309.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="924" y="309.0" width="85.0" height="8" rx="4" fill="#3D3DF5"/>
+<text x="1144.0" y="308.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="400" fill="#6B6C70" text-anchor="end">92 s</text>
+<circle cx="58" cy="369.0" r="16.5" fill="#FFFFFF" stroke="#D5D6D9"/>
+<text x="58.0" y="374.5" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#6B6C70" text-anchor="middle">4</text>
+<text x="92.0" y="366.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#0A0A0A" text-anchor="start">Qwen 2.5 7B</text>
+<text x="92.0" y="387.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Chat API · Ollama (local)</text>
+<rect x="382.0" y="353.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="396.3" y="353.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="410.7" y="353.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="425.0" y="353.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="439.3" y="353.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="453.7" y="353.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="468.0" y="353.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="482.3" y="353.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="496.7" y="353.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="511.0" y="353.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="525.3" y="353.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<rect x="539.7" y="353.0" width="12.3" height="10" rx="2" fill="#E6E7EA"/>
+<text x="382.0" y="382.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#0A0A0A" text-anchor="start">0/12</text>
+<text x="436.0" y="381.0" font-family="'IBM Plex Mono',SFMono-Regular,Consolas,'Courier New',monospace" font-size="12" font-weight="400" fill="#6B6C70" text-anchor="start">right numbers 0/12</text>
+<text x="668.0" y="364.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">20%</text>
+<rect x="576" y="375.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="576" y="375.0" width="18.6" height="8" rx="4" fill="#929397"/>
+<text x="784.0" y="364.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">0%</text>
+<rect x="692" y="375.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="692" y="375.0" width="8.0" height="8" rx="4" fill="#929397"/>
+<text x="900.0" y="364.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">43%</text>
+<rect x="808" y="375.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="808" y="375.0" width="39.3" height="8" rx="4" fill="#9B9BF9"/>
+<text x="1016.0" y="364.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="600" fill="#0A0A0A" text-anchor="end">25%</text>
+<rect x="924" y="375.0" width="92" height="8" rx="4" fill="#F1F2F4"/>
+<rect x="924" y="375.0" width="22.8" height="8" rx="4" fill="#929397"/>
+<text x="1144.0" y="374.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="400" fill="#6B6C70" text-anchor="end">22 s</text>
+<text x="32.0" y="436.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Real models: every number right and every audit check passed. Ranked by real models, then checks passed, then right numbers.</text>
+<text x="32.0" y="456.0" font-family="'DM Sans','IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#6B6C70" text-anchor="start">Time: median wall-clock seconds per case; free tiers include provider queueing.</text>
 </svg>

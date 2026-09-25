@@ -105,6 +105,17 @@ def test_when_the_card_is_drawn_then_each_agent_gets_a_ranked_row() -> None:
         assert_that(svg, contains_string("UPDATED today"))
 
 
+def test_when_a_board_has_many_cases_then_the_card_draws_a_segmented_bar() -> None:
+    with when():
+        svg = svg_card([_entry("Agent", 7, 8, 0.9, cases=12)], ["c"] * 12, "today", "12 cases")
+
+    with then():
+        assert_that(svg, contains_string("12 cases"))
+        assert_that(svg, contains_string("7/12"))
+        assert_that(svg, contains_string("right numbers 8/12"))
+        assert_that(svg.count('height="10" rx="2"'), equal_to(12))
+
+
 def test_when_a_table_is_rendered_into_the_readme_then_only_the_marked_block_changes() -> None:
     with given() as context:
         context.text = "intro\n<!-- leaderboard:start -->\nold\n<!-- leaderboard:end -->\nend\n"
