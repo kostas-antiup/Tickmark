@@ -23,7 +23,7 @@ gets the same verdict.
 
 <p align="center">
   <img src="assets/demo.gif" width="100%" alt="Demo: two AI agents fill the same rent roll and get the same total, 9,080,487. Value-only grading passes both. Tickmark adds four 3-Bed units: the real model moves to the reference value 9,234,087, the hidden hardcode stays stuck 153,600 below. Across 245 broken workbooks Tickmark catches 100%, value-only graders 29%.">
-  <br><sub>24-second demo on case 14_07 · <a href="assets/demo.mp4">MP4 version</a></sub>
+  <br><sub>22-second demo on case 14_07 · <a href="assets/demo.mp4">MP4 version</a></sub>
 </p>
 
 ## Headline result
@@ -67,10 +67,21 @@ is all a value-only benchmark would check. Details, and how to add your agent:
 [docs/leaderboard.md](docs/leaderboard.md).
 
 <!-- leaderboard:start -->
-| # | Agent | Interface | Real models | Right numbers | Formulas | Traceable |
-|---:|---|---|---:|---:|---:|---:|
-| 1 | OpenCode · GLM-5.2 | Coding agent (CLI) | **3 / 3** | 3 / 3 | 100% | 100% |
-| 2 | Qwen 2.5 7B | Chat API (Ollama, local) | **0 / 3** | 0 / 3 | 62% | 44% |
+<p align="center"><img src="assets/leaderboard.svg" width="100%" alt="Tickmark leaderboard, real models on the pilot cases: Nemotron 3 Ultra 3/3, OpenCode · GLM-5.2 3/3, Nemotron 3 Super 2/3. Full table below."></p>
+
+<details>
+<summary>Table view</summary>
+
+| # | Agent | Interface | Real models | Right numbers | Checks passed | Values right | Formulas | Traceable | Time per case |
+|---:|---|---|---:|---:|---:|---:|---:|---:|---:|
+| 1 | Nemotron 3 Ultra | Chat API · OpenRouter (free) | **3 / 3** | 3 / 3 | 100% | 100% | 100% | 100% | 24 s |
+| 1 | OpenCode · GLM-5.2 | Coding agent · OpenCode CLI | **3 / 3** | 3 / 3 | 100% | 100% | 100% | 100% | 90 s |
+| 3 | Nemotron 3 Super | Chat API · OpenRouter (free) | **2 / 3** | 2 / 3 | 90% | 98% | 100% | 100% | 36 s |
+| 4 | Ling 3.0 Flash Fin | Chat API · OpenRouter (free) | **2 / 3** | 2 / 3 | 86% | 90% | 100% | 100% | 9 s |
+| 4 | Nex N2.5 Pro | Chat API · OpenRouter (free) | **2 / 3** | 2 / 3 | 86% | 83% | 100% | 100% | 137 s |
+| 6 | Qwen 2.5 7B | Chat API · Ollama (local) | **0 / 3** | 0 / 3 | 29% | 3% | 62% | 44% | 11 s |
+
+</details>
 <!-- leaderboard:end -->
 
 ## How it works
@@ -186,14 +197,20 @@ before inclusion. The agent sees only `input.xlsx` and the instruction; `golden.
 ## Compared with other spreadsheet benchmarks
 
 | | SpreadsheetBench | SheetCopilot | BlueFin | **Tickmark** |
-|---|---|---|---|---|
-| What is graded | Cell values in the answer range | Checklist of values and formatting | 3,225 rubric items | Values, formulas and their lineage |
-| Grader | Deterministic | Deterministic | LLM agent judge | Deterministic, zero API cost |
-| Catches pasted correct answers | No | No | Where a rubric item covers it | **Yes, always** |
-| Re-tests with new inputs | No¹ | No | Hand-written checks on chosen cells | **Every input and every target, against the reference** |
+|---|:-:|:-:|:-:|:-:|
+| Checks the numbers | <img src="assets/icons/yes.svg" width="20" alt="yes"> | <img src="assets/icons/yes.svg" width="20" alt="yes"> | <img src="assets/icons/yes.svg" width="20" alt="yes"> | <img src="assets/icons/yes.svg" width="20" alt="yes"> |
+| Checks the formulas | <img src="assets/icons/no.svg" width="20" alt="no"> | <img src="assets/icons/no.svg" width="20" alt="no"> | <img src="assets/icons/partly.svg" width="20" alt="partly">¹ | <img src="assets/icons/yes.svg" width="20" alt="yes"> |
+| Catches pasted correct answers | <img src="assets/icons/no.svg" width="20" alt="no"> | <img src="assets/icons/no.svg" width="20" alt="no"> | <img src="assets/icons/partly.svg" width="20" alt="partly">¹ | <img src="assets/icons/yes.svg" width="20" alt="yes"> |
+| Traces numbers back to the inputs | <img src="assets/icons/no.svg" width="20" alt="no"> | <img src="assets/icons/no.svg" width="20" alt="no"> | <img src="assets/icons/partly.svg" width="20" alt="partly">¹ | <img src="assets/icons/yes.svg" width="20" alt="yes"> |
+| Re-tests with new inputs | <img src="assets/icons/no.svg" width="20" alt="no">² | <img src="assets/icons/no.svg" width="20" alt="no"> | <img src="assets/icons/partly.svg" width="20" alt="partly">¹ | <img src="assets/icons/yes.svg" width="20" alt="yes"> |
+| Same verdict every run | <img src="assets/icons/yes.svg" width="20" alt="yes"> | <img src="assets/icons/yes.svg" width="20" alt="yes"> | <img src="assets/icons/no.svg" width="20" alt="no"> | <img src="assets/icons/yes.svg" width="20" alt="yes"> |
+| Free to grade, no API calls | <img src="assets/icons/yes.svg" width="20" alt="yes"> | <img src="assets/icons/yes.svg" width="20" alt="yes"> | <img src="assets/icons/no.svg" width="20" alt="no"> | <img src="assets/icons/yes.svg" width="20" alt="yes"> |
 
-¹ SpreadsheetBench re-runs code solutions on extra test spreadsheets. For agents that edit
-the workbook directly, its rule compares the values in the delivered file.
+<img src="assets/icons/yes.svg" width="20" alt="yes"> yes &nbsp; <img src="assets/icons/partly.svg" width="20" alt="partly"> partly &nbsp; <img src="assets/icons/no.svg" width="20" alt="no"> no
+
+¹ Only where a task's hand-written rubric item asks for it, judged by an LLM.
+² Re-runs code solutions on extra spreadsheets; for agents that edit the workbook directly,
+it compares the values in the delivered file.
 
 The same agents also run on BlueFin synthesis tasks, graded by BlueFin's own judge, and
 on SheetCopilot examples, graded against their checklists
