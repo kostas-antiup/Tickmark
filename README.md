@@ -1,5 +1,12 @@
 <p align="center">
-  <img src="assets/banner.png" width="100%" alt="Tickmark. Right numbers aren't a model. An open benchmark by AAI Labs that checks whether AI agents build live, auditable financial models in Excel.">
+  <img src="assets/logo/tickmark-app-icon.svg" width="180" alt="Tickmark logo: a tick lit up on a grid of dots">
+</p>
+
+<h1 align="center">Tickmark</h1>
+
+<p align="center">
+  <b>Right numbers aren't a model.</b><br>
+  An open benchmark by AAI Labs for AI agents that build financial models in Excel.
 </p>
 
 <p align="center">
@@ -8,7 +15,7 @@
   <img alt="35 financial models" src="https://img.shields.io/badge/cases-35_financial_models-0000F0?style=flat-square">
   <img alt="7 audit checks" src="https://img.shields.io/badge/audit_checks-7-0000F0?style=flat-square">
   <img alt="3,400+ models supported" src="https://img.shields.io/badge/models-3%2C400%2B_supported-0000F0?style=flat-square">
-  <img alt="Deterministic grading, no LLM judge" src="https://img.shields.io/badge/grading-deterministic-0A0A0A?style=flat-square">
+  <img alt="Deterministic grading" src="https://img.shields.io/badge/grading-deterministic-0A0A0A?style=flat-square">
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0A0A0A?style=flat-square"></a>
 </p>
 

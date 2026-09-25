@@ -8,10 +8,11 @@ and IBM Plex Mono for labels.
 |---|---|
 | `logo/tickmark-logo-{blue,black,white}.svg` | Primary lockup: dot-matrix tick, divider, wordmark. Blue or black on light backgrounds, white on blue or dark. |
 | `logo/tickmark-mark-{blue,black,white}.svg` | The tick on its own, square, for small spaces. |
-| `logo/tickmark-icon.png` | 512 px avatar: white tick on blue. |
+| `logo/tickmark-app-icon.svg` | The logo: the tick lit up on a 7 x 7 dot grid, blue with rounded corners. Top of the README. |
+| `logo/tickmark-icon.{svg,png}` | The same logo as a full-bleed square (PNG 1024 px) for avatars and uploads that crop their own corners. |
 | `logo/aai-labs-logo-{blue,black,white}.svg` | AAI Labs lockup for "created by" credits. |
-| `banner.png` | README header, 2560 x 880. |
-| `social-preview.png` | Repository social preview, 1280 x 640 (Settings > Social preview). |
+| `banner.png` | Wide header, 2560 x 880, for posts and pages. |
+| `social-preview.png` | Repository social preview, 1280 x 640: upload in Settings > General > Social preview. |
 | `how-it-works.png` | README figure. |
 | `demo.gif` | README demo, 1920 x 1080 at 50 fps. |
 | `demo.mp4` | The same demo as a 1080p, 60 fps video, for slides and posts. |
