@@ -156,7 +156,7 @@
       "engine": "excel",
       "date": "2026-09-25",
       "run": "openrouter-pilot",
-      "note": "Alibaba Qwen, openrouter:qwen/qwen3.8-27b:free. Free-tier rate limits inflated its time per case."
+      "note": "Alibaba Qwen, openrouter:qwen/qwen3.8-27b:free. Its time per case is mostly its own output: about 10,000 tokens on 02_01 and 14_07."
     },
     {
       "name": "Claude Haiku 4.5",

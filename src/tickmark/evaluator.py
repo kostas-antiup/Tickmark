@@ -428,17 +428,21 @@ def _sensitivity_remarks(sensitivity: list[dict[str, Any]], diverged: Iterable[s
     for target, inputs in triggers.items():
         groups.setdefault(tuple(sorted(inputs, key=_cell_order)), []).append(target)
     remarks = [
-        f"{_list(sorted(cells, key=_cell_order))} diverge from the reference when "
+        f"{_list(sorted(cells, key=_cell_order))} {_diverge(cells)} from the reference when "
         f"{_or_list(list(inputs))} changes alone."
         for inputs, cells in sorted(groups.items(), key=lambda item: _cell_order(item[1][0]))
     ]
     unexplained = [target for target in diverged if target not in triggers]
     if unexplained:
         remarks.append(
-            f"{_list(unexplained)} diverge only when several inputs change together "
-            "(for example a different branch of IF/MIN/MAX logic)."
+            f"{_list(unexplained)} {_diverge(unexplained)} only when several inputs change "
+            "together (for example a different branch of IF/MIN/MAX logic)."
         )
     return remarks
+
+
+def _diverge(cells: list[str]) -> str:
+    return "diverges" if len(cells) == 1 else "diverge"
 
 
 def _or_list(cells: list[str], limit: int = 8) -> str:

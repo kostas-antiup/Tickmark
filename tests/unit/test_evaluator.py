@@ -327,3 +327,27 @@ def test_when_sensitivity_is_on_then_the_inputs_behind_a_difference_are_named(tm
                 "Model!B10, Model!B11 diverge from the reference when Model!B3 changes alone."
             ),
         )
+
+
+def test_when_one_target_ignores_an_input_then_the_remark_names_it_in_the_singular(
+    tmp_path,
+) -> None:
+    with given() as context:
+        context.workbook = _submission(tmp_path, "=B2*(1+B3)", "=B2*2.4")  # B11 ignores B3
+        context.engine = SimulatedEngine(
+            lambda i: {
+                "Model!B10": i["Model!B2"] * (1 + i["Model!B3"]),
+                "Model!B11": i["Model!B2"] * 2.4,
+            }
+        )
+
+    with when():
+        context.report = evaluate_workbook(
+            _case(tmp_path), context.workbook, context.engine, sensitivity=True
+        )
+
+    with then():
+        assert_that(
+            context.report.remarks,
+            has_item("Model!B11 diverges from the reference when Model!B3 changes alone."),
+        )

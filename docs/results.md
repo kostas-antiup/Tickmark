@@ -1,9 +1,9 @@
 # Results
 
-All numbers on this page come from the commands under [Reproduce](#reproduce), run on
-Windows 11 with Microsoft Excel as the recalculation engine (25 September 2026). CI
-repeats the reference self-test and part of the broken-workbook regression with
-LibreOffice on every push.
+The reference self-test and broken-workbook numbers come from the commands under
+[Reproduce](#reproduce), run on Windows 11 with Microsoft Excel as the recalculation engine
+(25 September 2026). CI repeats the reference self-test and part of the broken-workbook
+regression with LibreOffice on every push. Each agent run below states its own engine.
 
 ## Reference self-test
 
@@ -38,9 +38,10 @@ the grader fails it.
 
 The existing rules catch only the variants with wrong numbers and miss all 175 whose
 numbers stay right; Tickmark catches all 245. The disagreement runs one way only: no
-workbook is caught by an existing rule and missed by Tickmark. Each variant's manifest also predicts its value, formula-coverage and
-traceability scores; all 245 reports matched those predictions on all three scores
-(`evaluate_malformed_results.py`). Grading the 245 workbooks took 12 min 12 s with Excel.
+workbook is caught by an existing rule and missed by Tickmark. Each variant's manifest also
+predicts its value, formula-coverage and traceability scores; all 245 reports matched those
+predictions on all three scores (`evaluate_malformed_results.py`). Grading the 245
+workbooks took 12 min 12 s with Excel.
 
 ## A hidden constant
 
@@ -92,15 +93,15 @@ code. Graded with Excel on 25 September 2026.
 | Model | `02_01` | `06_18` | `14_07` | Real models |
 |---|---|---|---|---:|
 | `nvidia/nemotron-3-ultra-550b-a55b:free` | pass | pass | pass | 3 / 3 |
+| `qwen/qwen3.8-27b:free` | pass | pass | pass | 3 / 3 |
 | `nvidia/nemotron-3-super-120b-a12b:free` | fail | pass | pass | 2 / 3 |
 | `inclusionai/ling-3.0-flash-fin:free` | fail | pass | pass | 2 / 3 |
 | `nex-agi/nex-n2.5-pro:free` | pass | pass | fail | 2 / 3 |
-| `qwen/qwen3.8-27b:free` | pass | pass | pass | 3 / 3 |
 
 Not on the leaderboard yet: `z-ai/glm-5.2:free` (1 pass, 1 fail, 1 case blocked by rate
 limits) and `google/gemma-4-31b-it:free` (all 3 blocked). The free pool is shared and often
-busy; re-running the same `--run-id` retries only the blocked cases. Qwen3.8 needed several
-such passes, which is why its median time per case is 343 s.
+busy; re-running the same `--run-id` retries only the blocked cases. Qwen3.8's 343 s median
+time per case is mostly its own output: about 10,000 tokens on `02_01` and `14_07`.
 `thinkingmachines/inkling:free` only serves coding-agent apps, so it cannot run in chat mode.
 
 ### Claude Opus 5.5, Sonnet 5 and Haiku 4.5 (pilot)

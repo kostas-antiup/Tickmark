@@ -78,7 +78,7 @@ more per input, changing that input alone (switches flipped, years +1, anything 
 +15%). The report then names the inputs a wrong cell ignores. For case `14_07` with
 `G20 = C20+D20+E20+1161600`:
 
-> RentRoll!G20 diverge from the reference when RentRoll!F7, RentRoll!F10, RentRoll!F12,
+> RentRoll!G20 diverges from the reference when RentRoll!F7, RentRoll!F10, RentRoll!F12,
 > RentRoll!F14 or RentRoll!F16 changes alone.
 
 Targets that diverge only when several inputs change together are reported as such

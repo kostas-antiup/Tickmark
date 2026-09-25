@@ -4,7 +4,7 @@
 Examples:
     # add one agent from a run folder (its pilot cases), then re-render
     python scripts/leaderboard.py add results/runs/pilot --agent codex \\
-        --name Codex --model GPT-5.4 --interface "Coding agent (CLI)"
+        --name Codex --model GPT-5.4 --interface "Coding agent · Codex CLI"
 
     # re-render assets/leaderboard.svg, README.md and docs/leaderboard.md
     python scripts/leaderboard.py render
@@ -47,7 +47,7 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
     add.add_argument("--agent", required=True, help="agent folder name inside the run")
     add.add_argument("--name", required=True, help="agent or product name, e.g. Codex")
     add.add_argument("--model", default="", help="model name, e.g. GLM-5.2")
-    add.add_argument("--interface", required=True, help='e.g. "Coding agent (CLI)"')
+    add.add_argument("--interface", required=True, help='e.g. "Coding agent · Codex CLI"')
     add.add_argument("--note", default="", help="optional note shown under the table")
     commands.add_parser("render", help="re-render the card, README.md and docs/leaderboard.md")
     return parser.parse_args(argv)
@@ -147,7 +147,7 @@ share a rank.
 
    ```bash
    uv run python scripts/leaderboard.py add results/runs/my-agent --agent <folder> \\
-       --name "<Agent>" --model "<Model>" --interface "Chat API (OpenRouter)"
+       --name "<Agent>" --model "<Model>" --interface "Chat API · OpenRouter"
    ```
 
    `<folder>` is the agent's folder inside the run, for example

@@ -49,7 +49,7 @@ share a rank.
 - **Claude Sonnet 5**: Anthropic frontier model, run as a Claude Code subagent with a fresh context in an isolated folder (no repo access).
 - **Nemotron 3 Ultra**: NVIDIA Nemotron 3 Ultra 550B (A55B), openrouter:nvidia/nemotron-3-ultra-550b-a55b:free.
 - **OpenCode · GLM-5.2**: Run by the AAI Labs team through a paid OpenCode Zen account.
-- **Qwen3.8 27B**: Alibaba Qwen, openrouter:qwen/qwen3.8-27b:free. Free-tier rate limits inflated its time per case.
+- **Qwen3.8 27B**: Alibaba Qwen, openrouter:qwen/qwen3.8-27b:free. Its time per case is mostly its own output: about 10,000 tokens on 02_01 and 14_07.
 - **Nemotron 3 Super**: NVIDIA Nemotron 3 Super 120B (A12B), openrouter:nvidia/nemotron-3-super-120b-a12b:free.
 - **Ling 3.0 Flash Fin**: inclusionAI's finance-tuned model, openrouter:inclusionai/ling-3.0-flash-fin:free.
 - **Nex N2.5 Pro**: Nex AGI, openrouter:nex-agi/nex-n2.5-pro:free.
@@ -69,7 +69,7 @@ share a rank.
 
    ```bash
    uv run python scripts/leaderboard.py add results/runs/my-agent --agent <folder> \
-       --name "<Agent>" --model "<Model>" --interface "Chat API (OpenRouter)"
+       --name "<Agent>" --model "<Model>" --interface "Chat API · OpenRouter"
    ```
 
    `<folder>` is the agent's folder inside the run, for example

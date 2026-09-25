@@ -171,10 +171,9 @@ uv run python scripts/run_real_agent_suite.py --agents openrouter:z-ai/glm-5.2:f
 
 Agents live in [`configs/agents.toml`](configs/agents.toml); API keys come from environment
 variables named there or a git-ignored `.env`, and a run checks that every agent can start
-before it begins. Every
-run writes a report per case, `summary.md`, and a self-contained `report.html` that puts
-value-only grading next to Tickmark's verdict. Add any CLI agent or OpenAI-compatible model
-with one table ([how](docs/agents.md#add-your-own-agent)).
+before it begins. Every run writes a report per case, `summary.md`, and a self-contained
+`report.html` that puts value-only grading next to Tickmark's verdict. Add any CLI agent or
+OpenAI-compatible model with one table ([how](docs/agents.md#add-your-own-agent)).
 
 ## The cases
 
@@ -244,7 +243,9 @@ scripts/             command-line entry points
 data/cases/          35 cases: input.xlsx, golden.xlsx, case.json
 examples/            a graded example submission
 configs/agents.toml  agent definitions
-docs/                methodology, results, agents, integrations
+leaderboard/         leaderboard entries, rendered by scripts/leaderboard.py
+docs/                methodology, results, agents, leaderboard, integrations
+assets/              logo, demo, figures
 tests/               unit and integration tests
 ```
 
