@@ -10,6 +10,10 @@ and a task, then grades the workbook it returns. Agents are defined in
 | `chat` | Any OpenAI-compatible `/chat/completions` API. The model receives the instruction and the workbook as text (one line per cell) and replies with JSON cell edits, which are written into a copy of `input.xlsx`. |
 | `manual` | For chat UIs. You get `TASK.md` and `input.xlsx` in a run folder, do the task yourself in ChatGPT or Excel Copilot, and save `output.xlsx` back there. |
 
+Besides the named agents, **any model** a provider serves runs as `<provider>:<model-id>`,
+with no configuration: 460+ models on OpenRouter, 3,400+ through a LiteLLM proxy, any
+Ollama model, and OpenAI, Gemini and Groq models ([below](#any-model-providermodel-id)).
+
 ## Quick start
 
 1. **See which agents can run on this machine.**
@@ -20,8 +24,10 @@ and a task, then grades the workbook it returns. Agents are defined in
 
    Each agent shows `ready` or `not ready` with the one-line setup step it still needs.
 
-2. **Set one up** with the table below. The quickest free option needs no account:
-   install [Ollama](https://ollama.com/download) and run `ollama pull qwen2.5:7b`.
+2. **Set one up** with the table below. Two free options: install
+   [Ollama](https://ollama.com/download) and run `ollama pull qwen2.5:7b` (no account), or
+   put a free [OpenRouter key](https://openrouter.ai/keys) in `.env` ([API keys](#api-keys))
+   and use any of its 20 free models.
 
 3. **Run the three-case pilot** (`02_01`, `06_18`, `14_07`) and open the report.
 
@@ -45,23 +51,64 @@ and a task, then grades the workbook it returns. Agents are defined in
 | `ollama-qwen` | chat | [Ollama](https://ollama.com/download), then `ollama pull qwen2.5:7b` (about 4.7 GB) | none; runs locally |
 | `chatgpt-manual`, `excel-copilot-manual` | manual | nothing | none; you do the task |
 
-The `npm` installs need [Node.js](https://nodejs.org). Set API keys in the terminal you run
-Tickmark from; they are read from the environment and never stored in the repository.
+The `npm` installs need [Node.js](https://nodejs.org).
+
+## Any model: `<provider>:<model-id>`
+
+Each `[providers.*]` table in `configs/agents.toml` turns every model that endpoint serves
+into an agent. Pass the provider name, a colon and the model id exactly as the provider
+lists it:
+
+| Provider | Models | Key |
+|---|---|---|
+| `openrouter` | 460+ models from 63 providers, 20 of them free ([list](https://openrouter.ai/models)) | `OPENROUTER_API_KEY` |
+| `litellm` | 3,400+ chat models from 130+ providers through a [LiteLLM proxy](https://docs.litellm.ai/docs/simple_proxy) ([list](https://models.litellm.ai)) | only if your proxy has one |
+| `ollama` | any model you pull ([library](https://ollama.com/library)) | none |
+| `openai` | OpenAI models | `OPENAI_API_KEY` |
+| `gemini` | Gemini models | `GEMINI_API_KEY` |
+| `groq` | models hosted by Groq | `GROQ_API_KEY` |
+
+```bash
+uv run python scripts/run_real_agent_suite.py --run-id compare \
+    --agents openrouter:z-ai/glm-5.2:free openrouter:google/gemma-4-31b-it:free ollama:qwen2.5:7b
+```
+
+Results for `openrouter:z-ai/glm-5.2:free` land in a folder named
+`openrouter-z-ai-glm-5.2-free`. For LiteLLM, start a proxy in front of the provider you
+want, with that provider's key in the environment, then name the same model:
+
+```bash
+uvx --from 'litellm[proxy]' litellm --model <provider>/<model>   # listens on port 4000
+uv run python scripts/run_real_agent_suite.py --agents litellm:<provider>/<model> --run-id mine
+```
+
+Another OpenAI-compatible server (vLLM, LM Studio, a company gateway) takes one more
+`[providers.<name>]` table with its `base_url` and `api_key_env`.
+
+## API keys
+
+Keys are read from the environment. The easiest way is a `.env` file in the repository
+folder, which the scripts read at start-up and Git ignores:
+
+```bash
+cp .env.example .env      # then fill in the keys you use, one KEY=value per line
+```
+
+A variable already set in your terminal wins over `.env`. On Windows, Notepad may save
+the file as `.env.txt`; turn on file-name extensions in Explorer and rename it to `.env`.
+To set a key for one terminal only:
 
 ```powershell
-# Windows PowerShell: this terminal only
-$env:GEMINI_API_KEY = "your-key"
-# ...or for every new terminal
-setx GEMINI_API_KEY "your-key"
+$env:OPENROUTER_API_KEY = "your-key"     # Windows PowerShell
 ```
 
 ```bash
-# macOS and Linux
-export GEMINI_API_KEY="your-key"
+export OPENROUTER_API_KEY="your-key"     # macOS and Linux
 ```
 
-Run `--list` again; the agent should now show `ready`. `run_agents.py` also checks every
-agent before a run starts and stops with the setup step if one is not ready.
+Run `--list` again; the agent or provider should now show `ready`, and `--list` names the
+keys it read from `.env` (never their values). `run_agents.py` also checks every agent
+before a run starts and stops with the setup step if one is not ready.
 
 ## Run
 
@@ -140,12 +187,16 @@ and `env` sets extra environment variables for the agent only.
 | Message | Fix |
 |---|---|
 | `not ready: <program> not found` | Install it, open a new terminal so `PATH` updates, or add its location to `fallback_paths`. |
-| `not ready: <KEY> is not set` | Set the key in the same terminal that runs Tickmark, then check `--list`. |
+| `not ready: <KEY> is not set` | Add it to `.env` ([API keys](#api-keys)) or set it in the same terminal, then check `--list`. |
+| Key in `.env.txt` is not picked up | Rename the file to `.env`; Notepad adds `.txt` when extensions are hidden. |
+| `HTTP 404` or `model not found` from a provider | Copy the model id exactly from the provider's list; ids change as models are retired. |
+| `HTTP 429` from OpenRouter free models | The free pool is shared and often busy, and free models allow about 50 requests a day without credits; re-run the same `--run-id` later to continue. |
+| `HTTP 403 ... only available on agentic harnesses` | Some free OpenRouter models only serve coding-agent apps; pick another model. |
 | `agent failed: Not logged in · Please run /login` | Run `claude` once and type `/login`. Other CLIs: sign in once as the table above shows. |
 | `HTTP 404 ... model ... not found` (Ollama) | `ollama pull qwen2.5:7b`. |
 | Large cases cut off with Ollama | Ollama picks the context length from GPU memory (4k tokens on 8 GB). Set `OLLAMA_CONTEXT_LENGTH=16384` and restart Ollama. |
 | `timed out after 900s` | Raise `timeout` for that agent in `configs/agents.toml`. |
-| `HTTP 429` | Rate limit: requests are retried with backoff; re-run the same `--run-id` later to continue. |
+| `HTTP 429` from other providers | Rate limit: requests are retried with backoff; re-run the same `--run-id` later to continue. |
 | No Excel and `soffice` not found | Install LibreOffice, or grade on a machine with Excel. |
 
 ## One-off solving

@@ -1,0 +1,39 @@
+{
+  "cases": [
+    "02_01",
+    "06_18",
+    "14_07"
+  ],
+  "entries": [
+    {
+      "name": "OpenCode",
+      "model": "GLM-5.2",
+      "interface": "Coding agent (CLI)",
+      "cases": 3,
+      "real_models": 3,
+      "right_numbers": 3,
+      "value_correctness": 1.0,
+      "formula_coverage": 1.0,
+      "traceability": 1.0,
+      "engine": "libreoffice",
+      "date": "2026-09-20",
+      "run": "opencode-real-agent-suite-clarified",
+      "note": "Run by the AAI Labs team through a paid OpenCode Zen account."
+    },
+    {
+      "name": "Qwen 2.5 7B",
+      "model": "",
+      "interface": "Chat API (Ollama, local)",
+      "cases": 3,
+      "real_models": 0,
+      "right_numbers": 0,
+      "value_correctness": 0.0333,
+      "formula_coverage": 0.6222,
+      "traceability": 0.4407,
+      "engine": "excel",
+      "date": "2026-09-25",
+      "run": "qwen2.5-7b",
+      "note": "Runs on a laptop GPU at no cost. On all 35 cases it built 0 real models: 50% of target cells held formulas, 2% of values were right."
+    }
+  ]
+}

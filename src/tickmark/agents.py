@@ -264,23 +264,29 @@ class ChatAgent:
         base_url: str,
         model: str,
         api_key_env: str | None = None,
+        api_key_optional: bool = False,
         timeout: float = 300.0,
         temperature: float | None = 0.0,
         repair_attempts: int = 1,
-        http_retries: int = 3,
+        http_retries: int = 5,
+        max_retry_wait: float = 60.0,
         extra_body: Mapping[str, Any] | None = None,
         transport: Transport | None = None,
+        sleep: Callable[[float], None] = time.sleep,
     ) -> None:
         self.name = name
         self.base_url = base_url.rstrip("/")
         self.model = model
         self.api_key_env = api_key_env
+        self.api_key_optional = api_key_optional
         self.timeout = timeout
         self.temperature = temperature
         self.repair_attempts = repair_attempts
         self.http_retries = http_retries
+        self.max_retry_wait = max_retry_wait
         self.extra_body = dict(extra_body or {})
         self._transport = transport or _post_json
+        self._sleep = sleep
 
     def _complete(self, messages: list[dict[str, str]], headers: dict[str, str]) -> dict[str, Any]:
         payload: dict[str, Any] = {"model": self.model, "messages": messages, **self.extra_body}
@@ -295,19 +301,33 @@ class ChatAgent:
                 if not retryable or attempt == self.http_retries:
                     body = error.read().decode("utf-8", errors="replace")[:2000]
                     raise RuntimeError(f"HTTP {error.code} from {url}: {body}") from error
-                time.sleep(2**attempt)
+                self._sleep(self._retry_wait(error, attempt))
         raise AssertionError("unreachable")
+
+    def _retry_wait(self, error: urllib.error.HTTPError, attempt: int) -> float:
+        """Seconds before the next try: the server's ``Retry-After``, else exponential.
+
+        Rate limits (429) start at 5 s, since free tiers often need tens of seconds;
+        server errors start at 1 s. Both are capped at ``max_retry_wait``.
+        """
+
+        retry_after = (error.headers or {}).get("Retry-After", "")
+        if str(retry_after).strip().isdigit():
+            return min(float(retry_after), self.max_retry_wait)
+        first = 5.0 if error.code == 429 else 1.0
+        return min(first * 2**attempt, self.max_retry_wait)
 
     def solve(self, task: AgentTask) -> AgentResult:
         task.workspace.mkdir(parents=True, exist_ok=True)
         headers: dict[str, str] = {}
         if self.api_key_env:
             key = os.environ.get(self.api_key_env)
-            if not key:
+            if key:
+                headers["Authorization"] = f"Bearer {key}"
+            elif not self.api_key_optional:
                 return AgentResult(
                     "failed", None, error=f"environment variable {self.api_key_env} is not set"
                 )
-            headers["Authorization"] = f"Bearer {key}"
 
         sheets = openpyxl.load_workbook(task.input_workbook, read_only=True).sheetnames
         messages = [
@@ -391,9 +411,12 @@ def build_agent(name: str, settings: Mapping[str, Any]) -> Agent:
             base_url=settings["base_url"],
             model=settings["model"],
             api_key_env=settings.get("api_key_env") or None,
+            api_key_optional=bool(settings.get("api_key_optional", False)),
             timeout=float(settings.get("timeout", 300)),
             temperature=settings.get("temperature", 0.0),
             repair_attempts=int(settings.get("repair_attempts", 1)),
+            http_retries=int(settings.get("http_retries", 5)),
+            max_retry_wait=float(settings.get("max_retry_wait", 60)),
             extra_body=settings.get("extra_body"),
         )
     if kind == "manual":
@@ -402,20 +425,102 @@ def build_agent(name: str, settings: Mapping[str, Any]) -> Agent:
 
 
 def load_agents(config: Path, names: Sequence[str] | None = None) -> list[Agent]:
-    """Build agents from a TOML file with one ``[agents.<name>]`` table per agent."""
+    """Build agents from a TOML file with one ``[agents.<name>]`` table per agent.
 
-    table = load_agent_table(config)
-    wanted = list(names) if names else list(table)
-    unknown = [name for name in wanted if name not in table]
-    if unknown:
-        raise ValueError(f"unknown agent(s) {unknown}; configured: {sorted(table)}")
-    return [build_agent(name, table[name]) for name in wanted]
+    A name may also be ``<provider>:<model>`` for any ``[providers.<provider>]`` table,
+    e.g. ``openrouter:z-ai/glm-5.2:free``; the agent is then named ``agent_slug(name)``.
+    """
+
+    settings = agent_settings(config, names or list(load_agent_table(config)))
+    return [build_agent(agent_slug(name), entry) for name, entry in settings.items()]
 
 
 def load_agent_table(config: Path) -> dict[str, dict[str, Any]]:
     """The ``[agents.<name>]`` tables of a config file, by agent name."""
 
     return tomllib.loads(config.read_text(encoding="utf-8")).get("agents", {})
+
+
+def load_providers(config: Path) -> dict[str, dict[str, Any]]:
+    """The ``[providers.<name>]`` tables: OpenAI-compatible endpoints serving many models."""
+
+    return tomllib.loads(config.read_text(encoding="utf-8")).get("providers", {})
+
+
+def agent_settings(config: Path, names: Sequence[str]) -> dict[str, dict[str, Any]]:
+    """Settings for each name: its ``[agents.<name>]`` table, or a chat agent for a
+    ``<provider>:<model>`` spec built from ``[providers.<provider>]``."""
+
+    agents, providers = load_agent_table(config), load_providers(config)
+    found: dict[str, dict[str, Any]] = {}
+    unknown = []
+    for name in names:
+        provider, _, model = name.partition(":")
+        if name in agents:
+            found[name] = agents[name]
+        elif model and provider in providers:
+            found[name] = provider_agent(providers[provider], model)
+        else:
+            unknown.append(name)
+    if unknown:
+        raise ValueError(
+            f"unknown agent(s) {unknown}; configured: {sorted(agents)}; "
+            f"or use <provider>:<model> with a provider from {sorted(providers)}"
+        )
+    return found
+
+
+def provider_agent(provider: Mapping[str, Any], model: str) -> dict[str, Any]:
+    """A chat agent's settings for ``model`` served by ``provider``."""
+
+    return {
+        "type": "chat",
+        "base_url": provider["base_url"],
+        "model": model,
+        "api_key_env": provider.get("api_key_env"),
+        "api_key_optional": provider.get("api_key_optional", False),
+        "timeout": provider.get("timeout", 600),
+        "setup": provider.get("setup"),
+    }
+
+
+def agent_slug(name: str) -> str:
+    """A folder-safe agent name.
+
+    ``openrouter:z-ai/glm-5.2:free`` becomes ``openrouter-z-ai-glm-5.2-free``.
+    """
+
+    return re.sub(r"[^A-Za-z0-9._-]+", "-", name).strip("-.") or "agent"
+
+
+def load_env_file(path: Path) -> list[str]:
+    """Set ``KEY=value`` lines from ``path`` unless the variable is already set.
+
+    Returns the names set (values are never shown). Blank lines, ``#`` comments and an
+    ``export`` prefix are allowed, and quotes around a value are removed. UTF-16 files, as
+    Windows PowerShell 5 writes with ``>``, are read too.
+    """
+
+    if not path.is_file():
+        return []
+    raw = path.read_bytes()
+    if raw.startswith((b"\xff\xfe", b"\xfe\xff")):
+        text = raw.decode("utf-16")
+    else:
+        text = raw.decode("utf-8-sig")
+    loaded = []
+    for line in text.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.removeprefix("export ").split("=", 1)
+        key, value = key.strip(), value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in "'\"":
+            value = value[1:-1]
+        if key and value and key not in os.environ:
+            os.environ[key] = value
+            loaded.append(key)
+    return loaded
 
 
 @dataclass(frozen=True)
@@ -445,7 +550,7 @@ def check_agent(settings: Mapping[str, Any]) -> Readiness:
         return Readiness(True, found, setup)
     if kind == "chat":
         key = settings.get("api_key_env")
-        if key and not os.environ.get(key):
+        if key and not os.environ.get(key) and not settings.get("api_key_optional"):
             return Readiness(False, f"{key} is not set", setup)
         return Readiness(True, f"{settings.get('model')} at {settings.get('base_url')}", setup)
     if kind == "manual":

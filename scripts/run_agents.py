@@ -9,6 +9,9 @@ Examples:
     python scripts/run_agents.py --agents claude-code gemini-flash \\
         --cases data/cases/14_07 data/cases/06_18 --run-id pilot
 
+    # any model from a provider in configs/agents.toml, as <provider>:<model-id>
+    python scripts/run_agents.py --agents openrouter:z-ai/glm-5.2:free --run-id glm
+
     # all 35 cases; re-running the same --run-id resumes where it stopped
     python scripts/run_agents.py --agents gemini-flash --cases data/cases --run-id full
 
@@ -30,7 +33,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from tickmark.agents import check_agent, load_agent_table, load_agents  # noqa: E402
+from tickmark.agents import (  # noqa: E402
+    Readiness,
+    agent_settings,
+    check_agent,
+    load_agent_table,
+    load_agents,
+    load_env_file,
+    load_providers,
+)
 from tickmark.benchmark_run import (  # noqa: E402
     collect_records,
     run_benchmark,
@@ -42,7 +53,11 @@ from tickmark.recalculation import open_engine  # noqa: E402
 
 def _parse_args(argv: list[str] | None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--agents", nargs="+", help="agent names from the config file")
+    parser.add_argument(
+        "--agents",
+        nargs="+",
+        help="agent names from the config file, or <provider>:<model-id> for any model",
+    )
     parser.add_argument(
         "--cases",
         nargs="+",
@@ -83,9 +98,10 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
 
 def main(argv: list[str] | None = None) -> int:
     args = _parse_args(argv)
+    from_env_file = load_env_file(ROOT / ".env")
 
     if args.list:
-        _print_agents(args.config)
+        _print_agents(args.config, from_env_file)
         return 0
 
     if args.summarize:
@@ -130,22 +146,33 @@ def main(argv: list[str] | None = None) -> int:
     return 0
 
 
-def _print_agents(config: Path) -> None:
+def _print_agents(config: Path, from_env_file: list[str]) -> None:
     print(f"Agents in {config} (ready = can start on this machine):\n")
     for name, settings in load_agent_table(config).items():
-        status = check_agent(settings)
-        state = "ready" if status.ready else "not ready"
-        print(f"  {name:22} {settings.get('type', '?'):7} {state:10} {status.detail}")
-        if not status.ready and status.setup:
-            print(f"  {'':41} setup: {status.setup}")
+        _print_status(name, settings.get("type", "?"), check_agent(settings))
+    providers = load_providers(config)
+    if providers:
+        print("\nAny model from these providers, as --agents <provider>:<model-id>:\n")
+        for name, provider in providers.items():
+            status = check_agent({"type": "chat", **provider})
+            ready = Readiness(status.ready, provider.get("models", ""), status.setup)
+            _print_status(name, "models", ready if status.ready else status)
+    if from_env_file:
+        print(f"\nRead from .env: {', '.join(from_env_file)}")
     print("\nSet-up steps for every agent: docs/agents.md")
+
+
+def _print_status(name: str, kind: str, status: Readiness) -> None:
+    state = "ready" if status.ready else "not ready"
+    print(f"  {name:22} {kind:7} {state:10} {status.detail}")
+    if not status.ready and status.setup:
+        print(f"  {'':41} setup: {status.setup}")
 
 
 def _agents_ready(config: Path, names: list[str]) -> bool:
     """Stop before a run when an agent cannot start, instead of failing every case."""
 
-    table = load_agent_table(config)
-    blocked = [(name, check_agent(table[name])) for name in names]
+    blocked = [(name, check_agent(entry)) for name, entry in agent_settings(config, names).items()]
     blocked = [(name, status) for name, status in blocked if not status.ready]
     for name, status in blocked:
         print(f"{name} is not ready: {status.detail}.", file=sys.stderr)

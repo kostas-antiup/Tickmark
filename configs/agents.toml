@@ -9,8 +9,12 @@
 #                    results/runs/<run>/<agent>/<case>/; re-run to grade it.
 #
 # `setup` is shown by `run_agents.py --list` for agents that are not ready yet.
-# Never put API keys in this file: `api_key_env` names the environment variable.
+# Never put API keys in this file: `api_key_env` names the environment variable, read
+# from the environment or from a git-ignored .env file (see .env.example).
 # Model ids below are examples; check each provider's current model list.
+#
+# Beyond these named agents, any model a [providers.*] table serves runs as
+#   --agents <provider>:<model-id>   e.g. openrouter:z-ai/glm-5.2:free, ollama:llama3.1:8b
 
 # --- Command-line coding agents --------------------------------------------------
 
@@ -110,7 +114,7 @@ OPENCODE_CONFIG_CONTENT = '''
 
 [agents.gemini-flash]
 type = "chat"
-setup = "create a free API key at https://aistudio.google.com/app/apikey and set GEMINI_API_KEY"
+setup = "create a free API key at https://aistudio.google.com/app/apikey and add GEMINI_API_KEY=... to .env"
 # Free tier available with an API key from Google AI Studio.
 base_url = "https://generativelanguage.googleapis.com/v1beta/openai"
 model = "gemini-2.5-flash"
@@ -118,22 +122,22 @@ api_key_env = "GEMINI_API_KEY"
 
 [agents.gemini-pro]
 type = "chat"
-setup = "create an API key at https://aistudio.google.com/app/apikey and set GEMINI_API_KEY"
+setup = "create an API key at https://aistudio.google.com/app/apikey and add GEMINI_API_KEY=... to .env"
 base_url = "https://generativelanguage.googleapis.com/v1beta/openai"
 model = "gemini-2.5-pro"
 api_key_env = "GEMINI_API_KEY"
 
 [agents.openrouter-free]
 type = "chat"
-setup = "create an API key at https://openrouter.ai/keys and set OPENROUTER_API_KEY"
+setup = "create an API key at https://openrouter.ai/keys and add OPENROUTER_API_KEY=... to .env"
 # OpenRouter lists free models with a ":free" suffix.
 base_url = "https://openrouter.ai/api/v1"
-model = "meta-llama/llama-3.3-70b-instruct:free"
+model = "z-ai/glm-5.2:free"
 api_key_env = "OPENROUTER_API_KEY"
 
 [agents.groq-llama]
 type = "chat"
-setup = "create an API key at https://console.groq.com/keys and set GROQ_API_KEY"
+setup = "create an API key at https://console.groq.com/keys and add GROQ_API_KEY=... to .env"
 base_url = "https://api.groq.com/openai/v1"
 model = "llama-3.3-70b-versatile"
 api_key_env = "GROQ_API_KEY"
@@ -145,6 +149,47 @@ setup = "install Ollama from https://ollama.com/download, then `ollama pull qwen
 base_url = "http://localhost:11434/v1"
 model = "qwen2.5:7b"
 timeout = 1800
+
+# --- Any model from a provider: --agents <provider>:<model-id> ----------------------
+# OpenAI-compatible endpoints that serve many models. `models` says where to find ids.
+
+[providers.openrouter]
+base_url = "https://openrouter.ai/api/v1"
+api_key_env = "OPENROUTER_API_KEY"
+models = "460+ models from 63 providers, 20 free: https://openrouter.ai/models"
+setup = "create an API key at https://openrouter.ai/keys and add OPENROUTER_API_KEY=... to .env"
+
+[providers.litellm]
+# A LiteLLM proxy in front of 130+ providers (Anthropic, OpenAI, Bedrock, Vertex, Azure...).
+base_url = "http://localhost:4000/v1"
+api_key_env = "LITELLM_API_KEY"
+api_key_optional = true
+models = "3,400+ chat models from 130+ providers: https://models.litellm.ai"
+setup = "start a LiteLLM proxy on port 4000 (https://docs.litellm.ai/docs/simple_proxy), e.g. uvx --from 'litellm[proxy]' litellm --model <provider>/<model>"
+
+[providers.ollama]
+base_url = "http://localhost:11434/v1"
+models = "any model you pull: https://ollama.com/library"
+setup = "install Ollama from https://ollama.com/download, then `ollama pull <model>`"
+timeout = 1800
+
+[providers.openai]
+base_url = "https://api.openai.com/v1"
+api_key_env = "OPENAI_API_KEY"
+models = "https://platform.openai.com/docs/models"
+setup = "create an API key at https://platform.openai.com/api-keys and add OPENAI_API_KEY=... to .env"
+
+[providers.gemini]
+base_url = "https://generativelanguage.googleapis.com/v1beta/openai"
+api_key_env = "GEMINI_API_KEY"
+models = "https://ai.google.dev/gemini-api/docs/models"
+setup = "create a free API key at https://aistudio.google.com/app/apikey and add GEMINI_API_KEY=... to .env"
+
+[providers.groq]
+base_url = "https://api.groq.com/openai/v1"
+api_key_env = "GROQ_API_KEY"
+models = "https://console.groq.com/docs/models"
+setup = "create an API key at https://console.groq.com/keys and add GROQ_API_KEY=... to .env"
 
 # --- People using chat UIs --------------------------------------------------------
 

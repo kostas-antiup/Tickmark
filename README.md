@@ -7,6 +7,7 @@
   <img alt="Python 3.14" src="https://img.shields.io/badge/python-3.14-0000F0?style=flat-square">
   <img alt="35 financial models" src="https://img.shields.io/badge/cases-35_financial_models-0000F0?style=flat-square">
   <img alt="7 audit checks" src="https://img.shields.io/badge/audit_checks-7-0000F0?style=flat-square">
+  <img alt="3,400+ models supported" src="https://img.shields.io/badge/models-3%2C400%2B_supported-0000F0?style=flat-square">
   <img alt="Deterministic grading, no LLM judge" src="https://img.shields.io/badge/grading-deterministic-0A0A0A?style=flat-square">
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0A0A0A?style=flat-square"></a>
 </p>
@@ -17,8 +18,13 @@ Spreadsheet benchmarks grade the values in the cells. An agent that pastes the e
 number passes the same check as one that builds a live formula chain, and the client who
 changes an assumption next quarter finds out the hard way. Tickmark recalculates every
 submitted workbook, changes its inputs, and audits how each number is built against a
-hidden reference model. No LLM judge, no API calls: the same workbook always gets the same
-verdict.
+hidden reference model. Grading is deterministic and free to run: the same workbook always
+gets the same verdict.
+
+<p align="center">
+  <img src="assets/demo.gif" width="100%" alt="Demo: two AI agents fill the same rent roll and get the same total, 9,080,487. Value-only grading passes both. Tickmark adds four 3-Bed units: the real model moves to the reference value 9,234,087, the hidden hardcode stays stuck 153,600 below. Across 245 broken workbooks Tickmark catches 100%, value-only graders 29%.">
+  <br><sub>24-second demo on case 14_07 · <a href="assets/demo.mp4">MP4 version</a></sub>
+</p>
 
 ## Headline result
 
@@ -53,6 +59,19 @@ with `--sensitivity` names the five 3-Bed inputs the cell ignores. Try it:
 ```bash
 uv run python scripts/run_benchmark.py --case data/cases/14_07 --workbook examples/14_07-hidden-constant.xlsx --sensitivity
 ```
+
+## Leaderboard
+
+AI agents on the three pilot cases. **Real models** is Tickmark's verdict; **right numbers**
+is all a value-only benchmark would check. Details, and how to add your agent:
+[docs/leaderboard.md](docs/leaderboard.md).
+
+<!-- leaderboard:start -->
+| # | Agent | Interface | Real models | Right numbers | Formulas | Traceable |
+|---:|---|---|---:|---:|---:|---:|
+| 1 | OpenCode · GLM-5.2 | Coding agent (CLI) | **3 / 3** | 3 / 3 | 100% | 100% |
+| 2 | Qwen 2.5 7B | Chat API (Ollama, local) | **0 / 3** | 0 / 3 | 62% | 44% |
+<!-- leaderboard:end -->
 
 ## How it works
 
@@ -113,21 +132,25 @@ Three steps. [docs/agents.md](docs/agents.md) has install and sign-in steps for 
 # 1. See which agents are ready on this machine, and what each one still needs
 uv run python scripts/run_agents.py --list
 
-# 2. Set one up. The quickest free option runs locally, no account needed:
+# 2. Set one up. Free options: a local model (no account), or a free OpenRouter key in .env
 ollama pull qwen2.5:7b
+cp .env.example .env    # then add OPENROUTER_API_KEY=...
 
 # 3. Run the three-case pilot, then open results/runs/first-run/report.html
 uv run python scripts/run_real_agent_suite.py --agents ollama-qwen --run-id first-run
+uv run python scripts/run_real_agent_suite.py --agents openrouter:z-ai/glm-5.2:free --run-id glm
 ```
 
 | Type | How the agent works | Configured |
 |---|---|---|
 | `cli` | Runs in an empty folder holding only `input.xlsx` and `TASK.md`, uses its own tools, saves `output.xlsx` | Claude Code, Codex, OpenCode, Gemini CLI |
-| `chat` | Any OpenAI-compatible API; reads the workbook as text and replies with JSON cell edits | Gemini 2.5 Flash and Pro, Llama 3.3 70B (OpenRouter, Groq), Qwen 2.5 7B (Ollama) |
+| `chat` | Any OpenAI-compatible API; reads the workbook as text and replies with JSON cell edits | Gemini 2.5 Flash and Pro, GLM 5.2 (OpenRouter), Llama 3.3 70B (Groq), Qwen 2.5 7B (Ollama) |
 | `manual` | You solve `TASK.md` in a chat UI and save `output.xlsx` back into the run folder | ChatGPT, Excel Copilot |
+| `<provider>:<model>` | Any model a provider serves, no config edit: `openrouter:z-ai/glm-5.2:free`, `ollama:llama3.1:8b`, `litellm:<model>` | 460+ on OpenRouter, 3,400+ via LiteLLM, any Ollama model, OpenAI, Gemini, Groq |
 
 Agents live in [`configs/agents.toml`](configs/agents.toml); API keys come from environment
-variables named there, and a run checks that every agent can start before it begins. Every
+variables named there or a git-ignored `.env`, and a run checks that every agent can start
+before it begins. Every
 run writes a report per case, `summary.md`, and a self-contained `report.html` that puts
 value-only grading next to Tickmark's verdict. Add any CLI agent or OpenAI-compatible model
 with one table ([how](docs/agents.md#add-your-own-agent)).
@@ -182,7 +205,7 @@ on SheetCopilot examples, graded against their checklists
 |---|---|
 | Reference self-test, 35 cases | 35 / 35 pass, Excel and LibreOffice |
 | Broken workbooks, 245 | 245 / 245 caught, each with the scores its manifest predicts |
-| OpenCode with GLM-5.2, pilot of 3 cases | 3 / 3 pass every check |
+| AI agents | see the [leaderboard](#leaderboard) |
 
 Commands, timings and details: [docs/results.md](docs/results.md).
 

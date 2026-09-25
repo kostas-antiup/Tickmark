@@ -22,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from tickmark.agents import AgentTask, load_agents  # noqa: E402
+from tickmark.agents import AgentTask, load_agents, load_env_file  # noqa: E402
 from tickmark.cases import load_case  # noqa: E402
 
 
@@ -56,6 +56,7 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
 
 def main(argv: list[str] | None = None) -> int:
     args = _parse_args(argv)
+    load_env_file(ROOT / ".env")
     case = load_case(args.case)
     agent = load_agents(args.config, [args.agent])[0]
     output = args.output or (case.directory / f"output.{agent.name}.xlsx")

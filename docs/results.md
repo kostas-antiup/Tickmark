@@ -68,6 +68,22 @@ ignored inputs: `F7`, `F10`, `F12`, `F14` and `F16`.
 
 ## Agents
 
+Every agent's pilot result (cases `02_01`, `06_18`, `14_07`) is on the
+[leaderboard](leaderboard.md). The runs behind it:
+
+### Qwen 2.5 7B, all 35 cases (local)
+
+Run through Ollama on a laptop GPU (RTX 4070, 8 GB), graded with Excel: 35 cases in 18
+minutes, no API cost.
+
+| Real models | Right numbers | Mean value correctness | Mean formula coverage | Mean traceability |
+|---:|---:|---:|---:|---:|
+| 0 / 35 | 0 / 35 | 2% | 50% | 30% |
+
+The typical failures: target cells left empty, formulas that point at text labels instead
+of numbers (so they return `#VALUE!` or text), and wrong row references. A small local
+model sets a floor well below the coding agents.
+
 ### OpenCode with GLM-5.2 (pilot)
 
 | Setting | Value |

@@ -36,6 +36,7 @@ from tickmark.agents import (  # noqa: E402
     AgentResult,
     AgentTask,
     load_agents,
+    load_env_file,
 )
 from tickmark.bluefin_cases import (  # noqa: E402
     BLUEFIN_DATASET_URL,
@@ -128,6 +129,7 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
 
 def main(argv: list[str] | None = None) -> int:
     args = _parse_args(argv)
+    load_env_file(ROOT / ".env")
     cases = load_bluefin_synthesis_cases(args.bluefin_root, case_ids=args.cases)
     if args.list:
         return _list_cases(cases, args.bluefin_root)

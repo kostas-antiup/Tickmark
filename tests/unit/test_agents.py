@@ -1,4 +1,5 @@
 import json
+import os
 import sys
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -17,9 +18,11 @@ from tickmark.agents import (
     ChatAgent,
     CliAgent,
     ManualAgent,
+    agent_slug,
     check_agent,
     load_agent_table,
     load_agents,
+    load_env_file,
     task_text,
 )
 
@@ -310,3 +313,134 @@ def test_when_shipped_config_is_read_then_every_agent_has_setup_steps() -> None:
     with then():
         missing = [name for name, settings in context_table.items() if not settings.get("setup")]
         assert_that(missing, equal_to([]))
+
+
+def test_when_env_file_is_loaded_then_only_unset_variables_are_set(tmp_path, monkeypatch) -> None:
+    with given() as context:
+        monkeypatch.setenv("TICKMARK_KEEP", "from-shell")
+        for name in ("TICKMARK_A", "TICKMARK_B", "TICKMARK_EMPTY"):
+            monkeypatch.delenv(name, raising=False)
+        context.path = tmp_path / ".env"
+        context.path.write_text(
+            '# keys\nTICKMARK_A=one\nexport TICKMARK_B = "two words"\n'
+            "TICKMARK_KEEP=from-file\nTICKMARK_EMPTY=\nnot a line\n",
+            encoding="utf-8",
+        )
+
+    with when():
+        context.loaded = load_env_file(context.path)
+
+    with then():
+        assert_that(context.loaded, equal_to(["TICKMARK_A", "TICKMARK_B"]))
+        assert_that(os.environ["TICKMARK_A"], equal_to("one"))
+        assert_that(os.environ["TICKMARK_B"], equal_to("two words"))
+        assert_that(os.environ["TICKMARK_KEEP"], equal_to("from-shell"))
+        assert_that(os.environ.get("TICKMARK_EMPTY"), none())
+
+
+def test_when_env_file_is_utf16_then_it_is_still_read(tmp_path, monkeypatch) -> None:
+    with given() as context:
+        monkeypatch.delenv("TICKMARK_UTF16", raising=False)
+        context.path = tmp_path / ".env"
+        context.path.write_bytes("TICKMARK_UTF16=yes\r\n".encode("utf-16"))  # starts with a BOM
+
+    with when():
+        context.loaded = load_env_file(context.path)
+
+    with then():
+        assert_that(context.loaded, equal_to(["TICKMARK_UTF16"]))
+        assert_that(os.environ["TICKMARK_UTF16"], equal_to("yes"))
+
+
+PROVIDER_CONFIG = (
+    '[agents.person]\ntype = "manual"\n'
+    '[providers.hub]\nbase_url = "http://hub/v1"\napi_key_env = "TICKMARK_HUB_KEY"\n'
+    '[providers.local]\nbase_url = "http://localhost:4000/v1"\n'
+    'api_key_env = "TICKMARK_LOCAL_KEY"\napi_key_optional = true\n'
+)
+
+
+def test_when_a_provider_model_is_named_then_a_chat_agent_is_built(tmp_path) -> None:
+    with given() as context:
+        context.config = tmp_path / "agents.toml"
+        context.config.write_text(PROVIDER_CONFIG, encoding="utf-8")
+
+    with when():
+        context.agents = load_agents(context.config, ["hub:vendor/model:free", "person"])
+
+    with then():
+        agent = context.agents[0]
+        assert isinstance(agent, ChatAgent)
+        assert_that(agent.name, equal_to("hub-vendor-model-free"))
+        assert_that(agent.model, equal_to("vendor/model:free"))
+        assert_that(agent.base_url, equal_to("http://hub/v1"))
+        assert_that(context.agents[1].kind, equal_to("manual"))
+        with pytest.raises(ValueError, match="provider from"):
+            load_agents(context.config, ["nowhere:model"])
+
+
+def test_when_a_provider_key_is_optional_then_the_agent_runs_without_it(
+    tmp_path, monkeypatch
+) -> None:
+    with given() as context:
+        monkeypatch.delenv("TICKMARK_LOCAL_KEY", raising=False)
+        context.config = tmp_path / "agents.toml"
+        context.config.write_text(PROVIDER_CONFIG, encoding="utf-8")
+        context.headers = {}
+
+        def transport(url, payload, headers, timeout):
+            context.headers = headers
+            reply = json.dumps({"cells": {"Model!B10": "=B2*2"}})
+            return {"choices": [{"message": {"content": reply}}]}
+
+        agent = load_agents(context.config, ["local:any-model"])[0]
+        assert isinstance(agent, ChatAgent)
+        agent._transport = transport
+        context.agent = agent
+
+    with when():
+        context.result = context.agent.solve(_task(tmp_path))
+
+    with then():
+        assert_that(context.result.status, equal_to("completed"))
+        assert_that(context.headers, equal_to({}))
+
+
+def test_when_names_are_made_folder_safe_then_the_model_stays_readable() -> None:
+    assert_that(agent_slug("ollama:qwen2.5:7b"), equal_to("ollama-qwen2.5-7b"))
+    assert_that(agent_slug("claude-code"), equal_to("claude-code"))
+
+
+def test_when_a_chat_api_rate_limits_then_the_agent_waits_longer_each_time(tmp_path) -> None:
+    import io
+    import urllib.error
+    from email.message import Message
+
+    with given() as context:
+        context.waits = []
+        context.calls = 0
+
+        def transport(url, payload, headers, timeout):
+            context.calls += 1
+            if context.calls <= 2:
+                raise urllib.error.HTTPError(url, 429, "Too Many Requests", Message(), None)
+            if context.calls == 3:
+                headers = Message()
+                headers["Retry-After"] = "7"
+                raise urllib.error.HTTPError(url, 503, "Unavailable", headers, io.BytesIO(b""))
+            return _reply('{"cells": {"Model!B10": "=B2*2"}}')
+
+        context.agent = ChatAgent(
+            "fake-chat",
+            base_url="https://example.test/v1",
+            model="m",
+            transport=transport,
+            sleep=context.waits.append,
+        )
+
+    with when():
+        context.result = context.agent.solve(_task(tmp_path))
+
+    with then():
+        assert_that(context.result.status, equal_to("completed"))
+        assert_that(context.waits, equal_to([5.0, 10.0, 7.0]))
