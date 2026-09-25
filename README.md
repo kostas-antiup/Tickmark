@@ -29,7 +29,7 @@ hidden reference model. Grading is deterministic and free to run: the same workb
 gets the same verdict.
 
 <p align="center">
-  <img src="assets/demo.gif" width="100%" alt="Demo: two AI agents fill the same rent roll and get the same total, 9,080,487. Value-only grading passes both. Tickmark adds four 3-Bed units: the real model moves to the reference value 9,234,087, the hidden hardcode stays stuck 153,600 below. Across 245 broken workbooks Tickmark catches 100%, value-only graders 29%.">
+  <img src="assets/demo.gif" width="100%" alt="Demo: two AI agents build the same rent roll in Excel and both show 9,080,487 in G20, so value-only grading passes both. Tickmark changes the 3-Bed units in F7 from 32 to 36: Agent A's =SUM(C20:F20) recalculates to the reference 9,234,087, while Agent B's =C20+D20+E20+1161600 stays at 9,080,487 because the 3-Bed total was pasted in. Across 245 broken workbooks Tickmark catches 100%, value-only graders 29%.">
 </p>
 
 ## Headline result
