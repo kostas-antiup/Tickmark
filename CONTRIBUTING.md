@@ -1,7 +1,8 @@
 # Contributing
 
 Issues and pull requests are welcome: new cases, agent adapters, grader improvements and
-bug reports.
+bug reports. Bug reports and case proposals have issue templates. Report security problems
+privately, as [SECURITY.md](SECURITY.md) describes.
 
 ## Setup
 

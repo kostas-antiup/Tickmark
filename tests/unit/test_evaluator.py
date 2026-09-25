@@ -351,3 +351,10 @@ def test_when_one_target_ignores_an_input_then_the_remark_names_it_in_the_singul
             context.report.remarks,
             has_item("Model!B11 diverges from the reference when Model!B3 changes alone."),
         )
+        assert_that(
+            context.report.remarks,
+            has_item(
+                "Correct only for the given inputs: Model!B11 stops matching the reference model "
+                "when inputs change (hidden hardcoded or input-independent logic)."
+            ),
+        )

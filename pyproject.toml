@@ -38,6 +38,10 @@ dependencies = [
 Repository = "https://github.com/kostas-antiup/Tickmark"
 Issues = "https://github.com/kostas-antiup/Tickmark/issues"
 
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
 [project.optional-dependencies]
 audit = [
     # Excel recalculation engine (COM); LibreOffice engine needs no Python extras.

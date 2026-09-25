@@ -428,21 +428,23 @@ def _sensitivity_remarks(sensitivity: list[dict[str, Any]], diverged: Iterable[s
     for target, inputs in triggers.items():
         groups.setdefault(tuple(sorted(inputs, key=_cell_order)), []).append(target)
     remarks = [
-        f"{_list(sorted(cells, key=_cell_order))} {_diverge(cells)} from the reference when "
-        f"{_or_list(list(inputs))} changes alone."
+        f"{_list(sorted(cells, key=_cell_order))} {_agree(cells, 'diverge')} from the reference "
+        f"when {_or_list(list(inputs))} changes alone."
         for inputs, cells in sorted(groups.items(), key=lambda item: _cell_order(item[1][0]))
     ]
     unexplained = [target for target in diverged if target not in triggers]
     if unexplained:
         remarks.append(
-            f"{_list(unexplained)} {_diverge(unexplained)} only when several inputs change "
-            "together (for example a different branch of IF/MIN/MAX logic)."
+            f"{_list(unexplained)} {_agree(unexplained, 'diverge')} only when several inputs "
+            "change together (for example a different branch of IF/MIN/MAX logic)."
         )
     return remarks
 
 
-def _diverge(cells: list[str]) -> str:
-    return "diverges" if len(cells) == 1 else "diverge"
+def _agree(cells: list[str], verb: str) -> str:
+    """``verb`` in agreement with the list of cells before it: one cell takes the -s form."""
+
+    return f"{verb}s" if len(cells) == 1 else verb
 
 
 def _or_list(cells: list[str], limit: int = 8) -> str:
@@ -581,8 +583,8 @@ def _remarks(
     stale = [key for key in perturbation.cells if key not in set(wrong_values)]
     if stale:
         remarks.append(
-            f"Correct only for the given inputs: {_list(stale)} stop matching the reference model "
-            "when inputs change (hidden hardcoded or input-independent logic)."
+            f"Correct only for the given inputs: {_list(stale)} {_agree(stale, 'stop')} matching "
+            "the reference model when inputs change (hidden hardcoded or input-independent logic)."
         )
     return remarks
 

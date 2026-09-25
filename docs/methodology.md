@@ -1,8 +1,8 @@
 # Methodology
 
-Tickmark grades the workbook an agent delivers, not only the numbers it shows. A
-target cell that holds the right constant is a construction failure; so is a formula
-that looks live but carries a pasted number, or logic that only fits the original
+Tickmark grades the workbook an agent delivers, not only the numbers it shows. A target
+cell that holds the right number as a typed constant fails. So does a formula that looks
+live but carries a pasted number, and so does logic that only works for the original
 inputs.
 
 ## Protocol
@@ -59,12 +59,13 @@ changed inputs ([`scenarios.py`](../src/tickmark/scenarios.py)).
 Amounts are deterministic, so reruns are comparable.
 
 **Branch-seeking scenarios.** Two formulas can agree on every fixed scenario and still
-differ on an `IF` branch none of them reaches. Tickmark finds every decision in the
-reference's target formulas (`IF`, two-argument `MIN`/`MAX`, `IFERROR`, `ABS`) and
-tries wider changes to flip each one: 16 random scenarios (inputs x0.4 to x1.9,
-switches flipped at random), then, for decisions still seen one way only, each input
-they depend on alone at x4 and x0.25. A scenario is kept only if it flips a decision
-not yet seen both ways, up to 10 kept scenarios.
+differ on an `IF` branch that none of those scenarios reaches. So Tickmark lists every
+decision in the reference's target formulas (`IF`, two-argument `MIN`/`MAX`, `IFERROR`,
+`ABS`) and tries to flip each one. It first tries 16 random scenarios, with inputs scaled
+by 0.4 to 1.9 and switches flipped at random. For decisions that still went only one way,
+it then scales each input they depend on by 4 and by 0.25, one input at a time. A scenario
+is kept only if it flips a decision that has not yet gone both ways, and at most 10 are
+kept.
 
 Scenarios and reference results are computed once per case and engine.
 `branch_coverage` in each report shows how many reference decisions were tested both
